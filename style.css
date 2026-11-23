@@ -2,7 +2,7 @@
    INSÉMA: palette presa dai post Instagram e dalle slide
    ========================================================= */
 :root {
-  /* Palette ufficiale (Brandbook Inséma, Favilla Studio) */
+  /* Palette ufficiale (Brandbook inséma, Favilla Studio) */
   --cream:   #fef0e7;  /* Rosa Pesca */
   --paper:   #fffdfb;  /* Bianco Perla */
   --plum:    #6f0f38;  /* Rosso Vino */
@@ -532,3 +532,6 @@ noscript { display: block; padding: 40px; text-align: center; }
 .form-alt a { color: var(--blush); }
 .form .btn[disabled] { opacity: .6; cursor: wait; }
 .page-hero .piano-illo { max-width: 600px; width: 100%; }
+
+/* il nome resta minuscolo anche nei titoli in maiuscolo */
+.nome { text-transform: none !important; }
