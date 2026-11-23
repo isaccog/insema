@@ -176,7 +176,7 @@ body.guida { font-size: 18px; }
   .guida a { text-decoration: none; }
 }
 /* base OpenStreetMap più tenue, per far risaltare le zone */
-.g-map .leaflet-tile-pane { filter: grayscale(1) sepia(.2) brightness(1.06) contrast(.85); }
+.g-map .leaflet-tile-pane { filter: sepia(.25); }
 
 /* stampa compatta: una scheda in un foglio A4 */
 @media print {

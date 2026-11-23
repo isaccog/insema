@@ -115,7 +115,7 @@ window.GUIDA = {
   mappa: {
     titolo: "Mappa dei quartieri",
     testo: "Le 9 ex circoscrizioni. Scegli cosa colorare, tocca una zona per aprire la sua scheda.",
-    fonteConfini: "Confini: ISTAT, Basi territoriali 2021, aree subcomunali (CC BY 4.0). Mappa © OpenStreetMap (ODbL).",
+    fonteConfini: "Confini: ISTAT, Basi territoriali 2021, aree subcomunali (CC BY 4.0). Base cartografica © Esri, HERE, Garmin, © OpenStreetMap.",
   },
 
   // Indicatori del selettore. «da» dice dove prendere il valore in ogni zona.

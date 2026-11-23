@@ -390,10 +390,11 @@
 
   if (window.L && GEO) {
     map = L.map("map", { scrollWheelZoom: false, zoomSnap: .25 });
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · confini ISTAT',
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 16,
+      attribution: 'Base © Esri, HERE, Garmin, © OpenStreetMap · confini ISTAT',
     }).addTo(map);
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", { maxZoom: 16, pane: "shadowPane" }).addTo(map);
     layer = L.geoJSON(GEO, {
       style: { weight: 1.5, color: "#6f0f38", fillOpacity: .78 },
       onEachFeature: (f, l) => {
