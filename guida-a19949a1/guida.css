@@ -204,3 +204,68 @@ body.guida { font-size: 18px; }
   .note { font-size: 8pt; }
   .badge { font-size: 6.5pt; padding: 1px 6px; }
 }
+
+/* =========================================================
+   TRE PAGINE
+   ========================================================= */
+/* barra delle pagine: tre schede uguali */
+.g-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; overflow: visible; }
+.g-tabs a { text-align: center; padding: 12px 6px; font-size: .95rem; }
+.g-why { font-size: 1.1rem; font-weight: 700; color: var(--magenta); margin: -6px 0 18px; max-width: 760px; }
+.g-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.g-jump a { font-weight: 700; font-size: .92rem; padding: 8px 14px; border-radius: 999px; border: 2px solid currentColor; text-decoration: none !important; }
+.g-switch { font-weight: 900; text-transform: uppercase; font-size: .9rem; letter-spacing: .03em; color: var(--magenta) !important; text-decoration: none !important; }
+
+/* ingresso: tre porte */
+.g-doors { display: grid; gap: 14px; margin-top: 18px; }
+.g-door { position: relative; display: grid; gap: 6px; background: var(--paper); color: var(--navy) !important; text-decoration: none !important; border-radius: var(--r); padding: 26px 24px 26px; border: 3px solid var(--navy); transition: transform .15s; }
+.g-door:hover { transform: translateY(-3px) rotate(-.5deg); }
+.g-door-i { font-size: 2rem; }
+.g-door strong { font-family: var(--f-title); font-weight: var(--w-title); text-transform: uppercase; font-size: 2rem; line-height: 1; color: var(--plum); }
+.g-door span:not(.g-door-i) { font-weight: 900; color: var(--magenta); }
+.g-door em { font-style: normal; }
+.g-door b { position: absolute; right: 22px; top: 22px; font-family: var(--f-title); font-size: 2rem; color: var(--magenta); }
+
+/* benvenuto: le 9 zone */
+.g-zones { display: grid; gap: 12px; align-items: start; }
+.g-zone { background: var(--cream); border-radius: 18px; padding: 16px; display: grid; gap: 10px; align-content: start; }
+.g-zone .ref { justify-items: start; }
+.g-zone .kicker { margin: 0; }
+.g-zone .ref { background: var(--paper); }
+
+/* strada */
+.g-where { width: 100%; font-size: 1.15rem; padding: 18px; margin-bottom: 12px; }
+.g-strada-pick { margin: 6px 0 8px; }
+.minimap { width: 100%; max-width: 520px; display: block; margin: 6px auto 0; }
+.mm-z path { fill: var(--paper); stroke: var(--plum); stroke-width: 3; cursor: pointer; transition: fill .15s; }
+.mm-z text { font-family: var(--f-title); font-size: 34px; fill: var(--plum); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+.mm-z:hover path { fill: var(--pinkish); }
+.mm-z.on path { fill: var(--magenta); }
+.mm-z.on text { fill: #fff; }
+#mm-me { fill: var(--navy); stroke: #fff; stroke-width: 5; }
+.zcard-s { background: var(--paper); }
+.zcard-s .zhead .h2 { margin-bottom: 0; }
+.g-say { display: grid; gap: 10px; }
+.g-say li { background: var(--cream); border-radius: 14px; padding: 14px 16px; }
+.g-say strong { display: block; font-family: var(--f-title); font-weight: var(--w-title); font-size: 1.7rem; line-height: 1.05; color: var(--magenta); }
+.g-say span { font-weight: 700; }
+.zmore { margin-top: 22px; }
+.g-kit summary { list-style: none; cursor: pointer; }
+.g-kit summary::-webkit-details-marker { display: none; }
+.g-kit summary h3 { display: flex; justify-content: space-between; margin: 0; }
+.g-kit summary h3::after { content: "+"; color: var(--magenta); }
+.g-kit[open] summary h3::after { content: "−"; }
+.g-kit[open] summary { margin-bottom: 6px; }
+
+/* dati */
+.g-total { margin-top: 14px; font-size: 1.05rem; background: var(--paper); border-radius: 14px; padding: 12px 16px; }
+
+@media (min-width: 760px) {
+  .g-doors { grid-template-columns: repeat(3, 1fr); }
+  .g-zones { grid-template-columns: repeat(3, 1fr); }
+  .g-say { grid-template-columns: repeat(3, 1fr); }
+  .g-where { width: auto; }
+  .g-strada-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+}
+
+.zcard-s .ref { background: var(--cream); }

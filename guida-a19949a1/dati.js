@@ -1,8 +1,14 @@
 /* =====================================================================
-   INSÉMA · GUIDA PER CHI FA INSÉMA — TUTTI I DATI E I TESTI
+   inséma · GUIDA PER CHI FA inséma — TUTTI I DATI E I TESTI
    =====================================================================
 
    Questo è l'unico file da toccare per aggiornare la guida.
+   La guida ha tre pagine, che leggono tutte da qui:
+     benvenuto.html  → prima accoglienza (a casa, con calma)
+     strada.html     → guida di strada (dal telefono, fuori)
+     dati.html       → dati e approfondimento (al computer)
+   Ogni blocco qui sotto dice in quale pagina compare.
+
    Le regole sono le stesse di testi.js:
      **grassetto**   *corsivo*   ==rosa==   [testo](link)
      riga vuota nei testi `...` → nuovo paragrafo
@@ -15,16 +21,20 @@
    il link al gruppo WhatsApp di zona.
 
    COME AGGIUNGERE UN REFERENTE
+   (compare in tutte e tre le pagine: elenco zone in Benvenuto,
+   scheda di zona in Strada e in Dati)
    Cercate la zona (es. id: "III"), poi il quartiere, e dentro
    referenti: [ ] aggiungete una riga così:
      { nome: "Giulia R.", whatsapp: "https://chat.whatsapp.com/…", nota: "Sente bene la sera" },
    Si possono mettere più referenti nello stesso quartiere.
 
    COME AGGIUNGERE UN LUOGO UTILE
+   (compare nella scheda di zona in Strada e in Dati; se ha lat e lon,
+   anche come punto sulla mappa di Dati)
    Dentro luoghi: [ ] della zona:
      { tipo: "Mercato", nome: "Mercato di Rebbio", indirizzo: "Piazza …", nota: "Martedì mattina", lat: 45.79, lon: 9.07 },
-   lat e lon (facoltativi) mettono il punto sulla mappa: su Google Maps
-   tenete premuto sul punto e copiate i due numeri.
+   lat e lon sono facoltativi: su Google Maps tenete premuto sul punto
+   e copiate i due numeri.
    ===================================================================== */
 
 window.GUIDA = {
@@ -32,7 +42,34 @@ window.GUIDA = {
   email: "insema.como@gmail.com",
 
   /* ------------------------------------------------------------------ */
-  /* 1. BENVENUTO                                                       */
+  /* LE TRE PAGINE (barra in alto e pagina d'ingresso index.html)       */
+  /* ------------------------------------------------------------------ */
+  pagine: {
+    ingresso: {
+      titolo: "Guida per chi fa inséma",
+      testo: "Tre pagine per tre momenti diversi. Scegli quella che ti serve adesso.",
+    },
+    benvenuto: {
+      nome: "Benvenuto",
+      aCosaServe: "Da leggere una volta, con calma, a casa: cos'è inséma e come puoi dare una mano.",
+      quando: "Sei appena entrata o entrato? Parti da qui.",
+    },
+    strada: {
+      nome: "Strada",
+      titolo: "Guida di strada",
+      aCosaServe: "Per quando sei fuori: dove sei, cosa dire, cosa fare.",
+      quando: "Volantinaggio, banchetto o incontro: aprila dal telefono.",
+    },
+    dati: {
+      nome: "Dati",
+      titolo: "Dati e approfondimento",
+      aCosaServe: "Per preparare un incontro o lavorare nei gruppi Territorio, Strategia e Programma: com'è fatta ogni zona e cosa non sappiamo ancora.",
+      quando: "Al computer, con calma: mappa, schede complete, numeri della città.",
+    },
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* PAGINA BENVENUTO · accoglienza                                                       */
   /* ------------------------------------------------------------------ */
   benvenuto: {
     titolo: "Ciao, sei dei nostri.",
@@ -44,7 +81,7 @@ window.GUIDA = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* 2. COME PARLIAMO                                                   */
+  /* PAGINA BENVENUTO · come parliamo (le FAQ e la regola dei numeri compaiono in STRADA)                                                   */
   /* Le 4 parole dello stile vengono da testi.js → manifesto.stile      */
   /* ------------------------------------------------------------------ */
   comeParliamo: {
@@ -93,7 +130,7 @@ window.GUIDA = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* 3. LA MISSIONE (il contatore viene da testi.js → fondatori)        */
+  /* PAGINA BENVENUTO · la missione (contatore da testi.js → fondatori)        */
   /* ------------------------------------------------------------------ */
   missione: {
     titolo: "La missione",
@@ -110,7 +147,7 @@ window.GUIDA = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* 4. MAPPA                                                           */
+  /* PAGINA DATI · mappa e indicatori                                                           */
   /* ------------------------------------------------------------------ */
   mappa: {
     titolo: "Mappa dei quartieri",
@@ -131,7 +168,7 @@ window.GUIDA = {
   ],
 
   /* ------------------------------------------------------------------ */
-  /* 5. LE 9 ZONE (ex circoscrizioni)                                   */
+  /* LE 9 ZONE · in tutte e tre le pagine (scheda ridotta in STRADA, completa in DATI)                                   */
   /* ------------------------------------------------------------------ */
   fonti: {
     residenti: "Anagrafe comunale, via La Provincia di Como, 3 agosto 2026",
@@ -356,7 +393,7 @@ window.GUIDA = {
   sezioni: [],
 
   /* ------------------------------------------------------------------ */
-  /* 6. COMO IN NUMERI                                                  */
+  /* PAGINA DATI · Como in numeri                                                  */
   /* ------------------------------------------------------------------ */
   comoInNumeri: [
     {
@@ -418,7 +455,7 @@ window.GUIDA = {
   ],
 
   /* ------------------------------------------------------------------ */
-  /* 7. KIT DI STRADA — BOZZA da far rivedere al gruppo Strada          */
+  /* PAGINA STRADA · kit di strada (BOZZA da far rivedere al gruppo Strada)          */
   /* ------------------------------------------------------------------ */
   kit: {
     titolo: "Kit di strada",
@@ -452,16 +489,16 @@ window.GUIDA = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* 9. MATERIALI                                                       */
+  /* PAGINA BENVENUTO · materiali                                                       */
   /* ------------------------------------------------------------------ */
   materiali: {
     loghi: [
       { nome: "Logo magenta", file: "../img/logo/logo-magenta.svg" },
       { nome: "Logo vino", file: "../img/logo/logo-vino.svg" },
       { nome: "Logo blu", file: "../img/logo/logo-blu.svg" },
-      { nome: "Logo perla (per fondi scuri)", file: "../img/logo/logo-perla.svg" },
+      { nome: "Logo perla (per fondi scuri)", file: "../img/logo/logo-perla.svg", scuro: true },
       { nome: "Logo esteso magenta", file: "../img/logo/logo-esteso-magenta.svg" },
-      { nome: "Logo esteso perla", file: "../img/logo/logo-esteso-perla.svg" },
+      { nome: "Logo esteso perla", file: "../img/logo/logo-esteso-perla.svg", scuro: true },
       { nome: "Pittogramma", file: "../img/logo/pittogramma-blu.svg" },
     ],
     illustrazioni: [
@@ -482,8 +519,16 @@ window.GUIDA = {
   },
 
   /* ------------------------------------------------------------------ */
-  /* 10. DATI CHE CI MANCANO                                            */
+  /* PAGINA DATI · dati che ci mancano                                            */
   /* ------------------------------------------------------------------ */
+  // PAGINA DATI · fonti e metodo
+  metodo: [
+    { titolo: "I confini delle zone", testo: "Sono le 9 ex circoscrizioni del Comune, prese da ISTAT, Basi territoriali 2021, aree subcomunali (licenza CC BY 4.0). Le abbiamo semplificate di pochi metri per farle caricare in fretta. L'elenco dei quartieri dentro ogni zona va verificato con chi ci abita." },
+    { titolo: "Perché i dati sociali sono del 2011", testo: "Età, stranieri, laureati, famiglie in affitto e disoccupazione per zona vengono dal censimento ISTAT 2011: è l'ultimo dato pubblicato con questo dettaglio. ISTAT li dà per 6 aree di censimento, che accorpano alcune zone: per questo zone diverse possono avere gli stessi valori. I residenti, invece, sono di agosto 2026." },
+    { titolo: "Cosa vuol dire «indicativo»", testo: "I prezzi di immobiliare.it sono i prezzi richiesti negli annunci, non quelli delle compravendite, e le sue zone non coincidono con le circoscrizioni: a ogni circoscrizione abbiamo collegato la zona di immobiliare.it più simile. Usateli per capire l'ordine di grandezza, non come dato preciso." },
+    { titolo: "Il voto del 2022", testo: "Abbiamo i risultati del ballottaggio solo per alcuni gruppi di sezioni, non per ogni zona. Quando avremo i dati delle 74 sezioni con le loro vie, la mappa del voto diventerà via per via." },
+  ],
+
   datiMancanti: [
     { dato: "Risultati per sezione: comunali 2017 e 2022, politiche 2022, europee 2024", dove: "Sito elettorale del Comune (halley.comune.como.it), Eligendo", perche: "Mappa del voto via per via, 74 sezioni" },
     { dato: "Iscritti per sezione con età e sesso, e vie di ogni sezione", dove: "Ufficio elettorale del Comune", perche: "Capire dove si vota meno" },
