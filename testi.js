@@ -53,6 +53,7 @@ window.TESTI = {
       { testo: "Chi siamo", link: "chi-siamo.html" },
       { testo: "Manifesto", link: "manifesto.html" },
       { testo: "Programma", link: "programma.html" },
+      { testo: "Il piano", link: "piano.html" },
     ],
     bottoneMenu: { testo: "Unisciti ai 100", link: "aiutaci.html#modulo" },
 
@@ -150,6 +151,14 @@ window.TESTI = {
       testo: "Siamo comaschi che hanno smesso di aspettare. Partiamo dai dati, ascoltiamo le persone e costruiamo proposte di buon senso. ==Inséma==.",
       bottone1: { testo: "Unisciti a noi", link: "aiutaci.html" },
       bottone2: { testo: "Leggi il programma", link: "programma.html" },
+    },
+
+    // fascia che rimanda alla pagina «Il nostro piano»
+    piano: {
+      sopratitolo: "Il nostro piano",
+      titolo: "100 → 1.000 → 15.000",
+      testo: "Senza giornali e TV si vince così: 100 pionieri, 1.000 esploratori, 15.000 voti. Un piccolo passo per un uomo, un grande passo per una città.",
+      link: { testo: "Scopri il piano →", link: "piano.html" },
     },
 
     comoOggi: {
@@ -552,6 +561,114 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
         ],
       },
     ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* IL NOSTRO PIANO                                                    */
+  /* ------------------------------------------------------------------ */
+  piano: {
+    titoloPagina: "Il nostro piano · Inséma",
+
+    hero: {
+      sopratitolo: "Il nostro piano · Missione Como 2027",
+      titolo: "Un piccolo passo per un uomo.",
+      titolo2: "Un grande passo per una città.",
+      testo: "Gli altri hanno giornali, TV e partiti. Noi abbiamo le persone. **100 pionieri, 1.000 esploratori, 15.000 voti**: ecco come si arriva sulla luna partendo da Como.",
+      bottone: { testo: "Parti con noi", link: "aiutaci.html#modulo" },
+      bottone2: { testo: "Come funziona", link: "#percorso" },
+    },
+
+    percorso: {
+      dialetto: { frase: "Andèm!", traduzione: "andiamo!" },
+      titolo: "Tre tappe per arrivare sulla luna",
+      tappe: [
+        {
+          fase: "Il lancio",
+          numero: "100",
+          nome: "Pionieri",
+          quando: "Entro il 31 dicembre 2026",
+          testo: "I fondatori del movimento. Scrivono il programma, scelgono la lista e accendono i motori. Ognuno porta con sé **10 esploratori**.",
+        },
+        {
+          fase: "L'orbita",
+          numero: "1.000",
+          nome: "Esploratori",
+          quando: "Entro marzo 2027",
+          testo: "Ognuno ha una missione sola: convincere **15 persone** attorno a sé che oggi non voterebbero Inséma.",
+        },
+        {
+          fase: "L'allunaggio",
+          numero: "15.000",
+          nome: "Voti",
+          quando: "Maggio 2027",
+          testo: "Il giorno delle elezioni. Quanto basta per cambiare Como.",
+        },
+      ],
+      siamoQui: "Siamo qui",
+    },
+
+    conti: {
+      titolo: "La matematica è semplice",
+      righe: [
+        ["100", "pionieri", "× 10"],
+        ["1.000", "esploratori", "× 15"],
+        ["15.000", "voti", ""],
+      ],
+    },
+
+    // Numeri del 2022 (da verificare su elezionistorico.interno.gov.it)
+    perche: {
+      titolo: "Perché proprio 15.000?",
+      testo: `Perché a Como si vince con molti meno voti di quanto si pensi.
+
+Nel 2022 al primo turno ha votato **meno di un comasco su due**. Al ballottaggio il sindaco è stato eletto con **circa 13.000 voti**.
+
+La maggioranza della città non sceglie nessuno. È lì che possiamo fare la differenza: non dobbiamo strappare voti agli altri, dobbiamo convincere chi oggi è rimasto a casa.`,
+      numeri: [
+        { valore: "45%", testo: "l'affluenza al primo turno del 2022: più della metà dei comaschi non ha votato.", fonte: "Elezioni comunali di Como, giugno 2022" },
+        { valore: "~13.000", testo: "i voti con cui è stato eletto il sindaco al ballottaggio.", fonte: "Stima sui risultati del ballottaggio 2022" },
+      ],
+    },
+
+    missione: {
+      sopratitolo: "La missione, se vuoi esplorare con noi",
+      titolo: "Convinci 15 persone attorno a te che oggi non voterebbero Inséma.",
+      testo: "Non i tuoi amici che sono già d'accordo: quelli valgono, ma non spostano niente. Pensa a chi non vota più, a chi vota sempre uguale, a chi dice «tanto sono tutti uguali».",
+      istruzioni: "Tocca una persona quando l'hai convinta. La lista resta solo sul tuo telefono.",
+      contatore: "convinte su 15",
+      completata: "Missione compiuta. Un piccolo passo per te, un grande passo per Como. ✦",
+      azzera: "Ricomincia",
+      chi: {
+        titolo: "A chi pensare",
+        lista: [
+          "Chi non vota più da anni",
+          "Il collega che dice «tanto sono tutti uguali»",
+          "La zia che vota lo stesso partito da sempre",
+          "Il vicino che si lamenta del bus",
+          "L'amica che paga mezzo stipendio di affitto",
+          "Chi lavora nel turismo e d'inverno non lavora",
+          "Il nonno che si ricorda com'era Como",
+          "Lo studente che pensa di andarsene",
+        ],
+      },
+      come: {
+        titolo: "Come si fa",
+        passi: [
+          { titolo: "Ascolta", testo: "Prima di parlare, chiedi: cosa non va a Como, per te?" },
+          { titolo: "Parla di cose vere", testo: "Casa, bus, lavoro, soldi del Comune. Usa il [programma](programma.html), non gli slogan." },
+          { titolo: "Portala dal vivo", testo: "A un evento, a un incontro di quartiere, a un caffè con noi. Di persona si convince." },
+        ],
+        regola: "Una regola: mai litigare. Le città non si governano contro qualcuno, ma per qualcuno.",
+      },
+      condividi: "Sono un esploratore di Inséma: la mia missione è convincere 15 persone a cambiare Como. Tu sei una di queste 😉 ",
+      bottoneCondividi: "Manda il piano su WhatsApp",
+    },
+
+    chiusura: {
+      titolo: "Ogni missione parte da un pioniere.",
+      testo: "Il razzo parte con 100 persone a bordo. C'è ancora posto.",
+      bottone: { testo: "Diventa uno dei 100", link: "aiutaci.html#modulo" },
+    },
   },
 
   /* ------------------------------------------------------------------ */

@@ -137,6 +137,74 @@
       </div>
     </section>`;
 
+
+  /* ---------- illustrazioni disegnate (pagina «Il nostro piano») ---------- */
+  // Como di notte: la luna sopra Brunate, la funicolare, il faro, il lago
+  const moonArt = () => {
+    const stars = [[40,60],[110,140],[190,40],[260,110],[330,30],[380,170],[90,250],[300,230],[420,80],[700,40],[760,120],[730,330],[20,180],[230,300]]
+      .map(([x, y], k) => k % 3 ? `<circle cx="${x}" cy="${y}" r="${k % 2 ? 2 : 3}" fill="#fef0e7"/>`
+        : `<path d="M${x} ${y - 9}L${x + 2.5} ${y - 2.5}L${x + 9} ${y}L${x + 2.5} ${y + 2.5}L${x} ${y + 9}L${x - 2.5} ${y + 2.5}L${x - 9} ${y}L${x - 2.5} ${y - 2.5}Z" fill="#fcdf6c"/>`).join("");
+    const cols = ["#f6b8ca", "#fcdf6c", "#7ea3d6", "#fef0e7", "#4bbecf", "#f8c8d7"];
+    let x = 0, houses = "";
+    [34, 52, 40, 28, 46, 36, 30, 50, 38, 44, 32].forEach((h, k) => {
+      const w = [30, 36, 26, 32][k % 4];
+      if (k === 5) { // il Duomo
+        houses += `<rect x="${x}" y="${430 - 62}" width="50" height="62" fill="#fef0e7"/><path d="M${x + 6} ${430 - 62}a19 19 0 0 1 38 0z" fill="#4bbecf"/><rect x="${x + 22}" y="${430 - 92}" width="6" height="12" fill="#fef0e7"/><rect x="${x + 18}" y="${430 - 40}" width="14" height="22" rx="7" fill="#6f0f38"/>`;
+        x += 50; return;
+      }
+      houses += `<rect x="${x}" y="${430 - h}" width="${w}" height="${h}" fill="${cols[k % cols.length]}"/><rect x="${x + 7}" y="${430 - h + 9}" width="6" height="8" fill="#e6007e" opacity=".75"/>${w > 28 ? `<rect x="${x + w - 13}" y="${430 - h + 9}" width="6" height="8" fill="#274798" opacity=".6"/>` : ""}`;
+      x += w;
+    });
+    const refl = [[140, .9], [112, .8], [92, .7], [70, .55], [52, .45], [34, .35], [20, .25]]
+      .map(([w, o], k) => `<rect x="${560 - w / 2 + (k % 2 ? 8 : -6)}" y="${446 + k * 20}" width="${w}" height="7" rx="3.5" fill="#fef0e7" opacity="${o}"/>`).join("");
+    return `<svg class="moon-art" viewBox="0 0 800 620" role="img" aria-label="La luna piena sopra Brunate, la funicolare che sale e il lago di Como">
+      ${stars}
+      <circle cx="560" cy="170" r="150" fill="#fef0e7" opacity=".08"/>
+      <circle cx="560" cy="170" r="118" fill="#fef0e7"/>
+      <g fill="#f8c8d7"><circle cx="520" cy="140" r="22"/><circle cx="604" cy="205" r="16"/><circle cx="588" cy="118" r="10"/><circle cx="526" cy="214" r="12"/><circle cx="626" cy="158" r="8"/></g>
+      <line x1="482" y1="86" x2="474" y2="26" stroke="#6f0f38" stroke-width="4" stroke-linecap="round"/>
+      <path d="M474 26 Q497 22 520 32 L522 58 Q499 48 477 52 Z" fill="#e6007e"/>
+      <text x="497" y="49" text-anchor="middle" font-family="Bowlby One, Impact, sans-serif" font-size="22" fill="#fff">é</text>
+      <path d="M0 362 C80 330 160 318 240 348 C285 365 325 392 360 430 L0 430Z" fill="#6f0f38" opacity=".55"/>
+      <path d="M300 430 C360 400 420 340 500 300 C560 270 620 250 700 246 C740 244 780 250 800 256 L800 430Z" fill="#6f0f38"/>
+      <circle cx="777.5" cy="211" r="16" fill="#fcdf6c" opacity=".25"/>
+      <rect x="772" y="214" width="11" height="36" fill="#fef0e7"/><rect x="772" y="226" width="11" height="6" fill="#e6007e"/><circle cx="777.5" cy="211" r="6" fill="#fcdf6c"/>
+      <g fill="#fcdf6c"><circle cx="652" cy="258" r="3"/><circle cx="668" cy="254" r="3"/><circle cx="684" cy="258" r="3"/><circle cx="742" cy="256" r="3"/><circle cx="758" cy="260" r="3"/></g>
+      <line x1="430" y1="432" x2="720" y2="247" stroke="#f6b8ca" stroke-width="10" stroke-dasharray="3 9"/>
+      <line x1="430" y1="432" x2="720" y2="247" stroke="#fef0e7" stroke-width="3"/>
+      <rect x="414" y="418" width="30" height="14" fill="#fef0e7"/><path d="M410 418h38l-6-8h-26z" fill="#e6007e"/>
+      <rect x="706" y="234" width="30" height="14" fill="#fef0e7"/><path d="M702 234h38l-6-8h-26z" fill="#e6007e"/>
+      <g class="cabin"><g>
+        <rect x="-24" y="-22" width="48" height="20" rx="4" fill="#e6007e"/>
+        <rect x="-18" y="-17" width="9" height="8" rx="2" fill="#fef0e7"/><rect x="-5" y="-17" width="9" height="8" rx="2" fill="#fef0e7"/><rect x="8" y="-17" width="9" height="8" rx="2" fill="#fef0e7"/>
+        <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" path="M430 432 L720 247" keyPoints="0;1;1;0;0" keyTimes="0;.42;.5;.92;1" calcMode="linear"/>
+      </g></g>
+      <rect x="0" y="430" width="800" height="190" fill="#0b6780"/>
+      ${houses}
+      ${refl}
+      <g stroke="#4bbecf" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M60 480h40M150 540h30M340 470h36M420 580h44M680 500h30M720 560h40M300 600h28"/></g>
+      <g transform="translate(250 512)"><path d="M-40 0 Q0 16 40 0 L34 9 Q0 22 -34 9Z" fill="#fef0e7"/><path d="M-22 0a10 12 0 0 1 20 0M0 0a10 12 0 0 1 20 0" fill="none" stroke="#fef0e7" stroke-width="2.5"/></g>
+    </svg>`;
+  };
+
+  // 15 persone attorno a una
+  const person = (x, y, s, cls, attrs = "") => `<g class="${cls}" transform="translate(${x} ${y}) scale(${s})"${attrs}>
+      <circle cx="0" cy="-16" r="15"/><path d="M-24 28 Q-24 2 0 2 Q24 2 24 28Z"/></g>`;
+  const orbit = (state) => {
+    const R = 150, out = [], lines = [];
+    for (let k = 0; k < 15; k++) {
+      const a = (k * 24 - 90) * Math.PI / 180;
+      const x = (R * Math.cos(a)).toFixed(1), y = (R * Math.sin(a)).toFixed(1);
+      lines.push(`<line x1="0" y1="0" x2="${x}" y2="${y}" class="ray${state[k] ? " on" : ""}"/>`);
+      out.push(person(x, y, .78, `p15 c${k % 5}${state[k] ? " on" : ""}`, ` data-k="${k}" role="checkbox" tabindex="0" aria-checked="${!!state[k]}" aria-label="Persona ${k + 1}"`));
+    }
+    return `<svg class="orbit" viewBox="-200 -200 400 400" aria-label="Una persona al centro e 15 persone attorno">
+      <circle r="${R}" class="ring"/>${lines.join("")}
+      <circle r="44" class="halo"/>${person(0, 4, 1.25, "p-tu")}
+      <text y="74" class="tu-label" text-anchor="middle">tu</text>
+      ${out.join("")}</svg>`;
+  };
+
   /* =================================================================
      PAGINE
      ================================================================= */
@@ -163,6 +231,18 @@
     </section>
     ${ticker()}
     ${wallSection()}
+
+    <section class="sec s-navy piano-band">
+      <div class="wrap piano-band-grid">
+        <div>
+          <p class="kicker">${H.piano.sopratitolo}</p>
+          <h2 class="h2 h2-cream">${H.piano.titolo}</h2>
+          <p class="lead">${md(H.piano.testo)}</p>
+          <a class="btn" href="${H.piano.link.link}">${H.piano.link.testo}</a>
+        </div>
+        ${moonArt()}
+      </div>
+    </section>
 
     <section class="sec s-paper">
       <div class="wrap">
@@ -410,6 +490,92 @@
     </section>`;
   };
 
+
+  /* ---------------- IL NOSTRO PIANO ---------------- */
+  pages.piano = () => {
+    const P = T.piano, M = P.missione;
+    const pct = Math.min(100, FO.attuali / FO.obiettivo * 100);
+    return `
+    <section class="page-hero s-navy piano-hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="kicker">${P.hero.sopratitolo}</p>
+          <h1 class="h-hero h-cream">${P.hero.titolo}</h1>
+          <p class="h-hero pink">${P.hero.titolo2}</p>
+          <p class="lead">${md(P.hero.testo)}</p>
+          <div class="ctas">${btn(P.hero.bottone)}${btn(P.hero.bottone2, "btn-ghost")}</div>
+        </div>
+        ${moonArt()}
+      </div>
+    </section>
+
+    <section class="sec s-cream" id="percorso">
+      <div class="wrap">
+        <div class="sec-head">${dial(P.percorso.dialetto)}<h2 class="h2">${P.percorso.titolo}</h2></div>
+        <ol class="tappe">${P.percorso.tappe.map((t, k) => `
+          <li class="tappa tappa-${k}">
+            <div class="planet"><span>${t.numero}</span></div>
+            <p class="kicker">${two(k)} · ${t.fase}</p>
+            <h3>${t.numero} ${t.nome}</h3>
+            <p class="tappa-when">${t.quando}</p>
+            <p>${md(t.testo)}</p>
+            ${k === 0 ? `<div class="here"><strong>${P.percorso.siamoQui}</strong> ${FO.attuali}/${FO.obiettivo}<div class="counter-bar"><div style="width:${pct}%"></div></div></div>` : ""}
+          </li>`).join("")}
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec s-yellow conti-sec">
+      <div class="wrap">
+        <h2 class="h2">${P.conti.titolo}</h2>
+        <div class="conti">${P.conti.righe.map(([n, l, op]) => `<div><strong>${n}</strong><span>${l}</span></div>${op ? `<b>${op}</b>` : ""}`).join("")}</div>
+      </div>
+    </section>
+
+    <section class="sec s-paper">
+      <div class="wrap prob-grid">
+        <div class="prose"><h2 class="h2 h-navy">${P.perche.titolo}</h2>${paras(P.perche.testo)}</div>
+        <div class="stats stats-col">${P.perche.numeri.map(stat).join("")}</div>
+      </div>
+    </section>
+
+    <section class="sec s-blush" id="missione">
+      <div class="wrap missione">
+        <div>
+          <p class="kicker">${M.sopratitolo}</p>
+          <h2 class="h2">${M.titolo}</h2>
+          <p class="intro">${md(M.testo)}</p>
+          <p class="note">${M.istruzioni}</p>
+          <p class="m-count"><strong id="m-n">0</strong> ${M.contatore} <button type="button" class="m-reset" id="m-reset">${M.azzera}</button></p>
+          <p class="m-done" id="m-done" hidden>${M.completata}</p>
+        </div>
+        <div id="orbit-box"></div>
+      </div>
+      <div class="wrap m-cols">
+        <div class="m-card">
+          <h3>${M.chi.titolo}</h3>
+          <ul class="m-chips">${M.chi.lista.map((x) => `<li>${md(x)}</li>`).join("")}</ul>
+        </div>
+        <div class="m-card">
+          <h3>${M.come.titolo}</h3>
+          <ol class="m-steps">${M.come.passi.map((x) => `<li><span><strong>${x.titolo}</strong>${md(x.testo)}</span></li>`).join("")}</ol>
+          <p class="m-rule">${md(M.come.regola)}</p>
+        </div>
+      </div>
+      <div class="wrap center-row ctas">
+        <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(M.condividi + shareUrl() + "piano.html")}">${M.bottoneCondividi}</a>
+      </div>
+    </section>
+
+    <section class="sec s-magenta">
+      <div class="wrap center">
+        <h2 class="h-hero h-cream">${P.chiusura.titolo}</h2>
+        <p class="lead">${md(P.chiusura.testo)}</p>
+        <div class="ctas center-row">${btn(P.chiusura.bottone, "btn-navy")}</div>
+      </div>
+    </section>`;
+  };
+
   /* ---------------- AIUTACI ---------------- */
   pages.aiutaci = () => {
     const A = T.aiutaci, F = A.modulo;
@@ -554,6 +720,26 @@
         show(F.grazieMail);
       }
     });
+  }
+
+
+  /* missione: 15 persone (salvate solo nel browser) */
+  const ob = document.getElementById("orbit-box");
+  if (ob) {
+    const KEY = "insema-missione-15";
+    let st; try { st = JSON.parse(localStorage.getItem(KEY)) || []; } catch (_) { st = []; }
+    const draw = () => {
+      ob.innerHTML = orbit(st);
+      const n = st.filter(Boolean).length;
+      document.getElementById("m-n").textContent = n;
+      document.getElementById("m-done").hidden = n < 15;
+      try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (_) {}
+    };
+    const toggle = (el) => { const k = +el.dataset.k; st[k] = !st[k]; draw(); const f = ob.querySelector(`[data-k="${k}"]`); if (f) f.focus(); };
+    ob.addEventListener("click", (e) => { const g = e.target.closest(".p15"); if (g) toggle(g); });
+    ob.addEventListener("keydown", (e) => { const g = e.target.closest(".p15"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggle(g); } });
+    document.getElementById("m-reset").addEventListener("click", () => { st = []; draw(); });
+    draw();
   }
 
   /* ancore (#modulo ecc.) dopo il montaggio */
