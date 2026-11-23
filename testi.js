@@ -29,8 +29,8 @@ window.TESTI = {
   /* DATI GENERALI (menu, contatti, footer)                              */
   /* ------------------------------------------------------------------ */
   sito: {
-    nome: "Inséma",
-    descrizione: "Inséma: per una Como che cresce, senza lasciare indietro nessuno. Verso le elezioni comunali di maggio 2027.",
+    nome: "inséma",
+    descrizione: "inséma: per una Como che cresce, senza lasciare indietro nessuno. Verso le elezioni comunali di maggio 2027.",
     email: "insema.como@gmail.com",
     instagram: "https://www.instagram.com/insema_como/",
     instagramNome: "@insema_como",
@@ -80,7 +80,7 @@ window.TESTI = {
     bottoneMenu: { testo: "Unisciti ai 100", link: "aiutaci.html#modulo" },
 
     // Le parole che scorrono nella fascia colorata
-    fascia: ["Inséma", "Ghe la fèm", "Una cà per tücc", "Nissün resta indree", "Andèm", "Sem chì"],
+    fascia: ["inséma", "Ghe la fèm", "Una cà per tücc", "Nissün resta indree", "Andèm", "Sem chì"],
 
     footer: {
       motto: "Una Como che cresce senza lasciare indietro nessuno.",
@@ -112,7 +112,7 @@ window.TESTI = {
     scadenzaTesto: "entro il 31 dicembre",
 
     sopratitolo: "Per una Como che cresce, senza lasciare indietro nessuno",
-    titolo: "Diventa uno dei 100 fondatori di Inséma.",
+    titolo: "Diventa uno dei 100 fondatori di inséma.",
     domanda: "",
     testo: "Non vogliamo decidere il futuro di Como, vogliamo costruirlo assieme. Agiamo, convinciamo chi ci sta attorno, riappropriamoci della nostra città.",
     bottone: { testo: "Sì, ci sto", link: "aiutaci.html#modulo" },
@@ -153,7 +153,7 @@ window.TESTI = {
     condividi: {
       titolo: "Ora porta qualcuno con te",
       testo: "Se ognuno porta un'altra persona, a 100 ci arriviamo in un attimo.",
-      messaggio: "Sono entrato/a in Inséma: cercano 100 persone per fondare un movimento per Como entro fine anno. Ci stai anche tu? ",
+      messaggio: "Sono entrato/a in inséma: cercano 100 persone per fondare un movimento per Como entro fine anno. Ci stai anche tu? ",
       bottone: "Mandalo su WhatsApp",
     },
 
@@ -164,13 +164,13 @@ window.TESTI = {
   /* HOME                                                               */
   /* ------------------------------------------------------------------ */
   home: {
-    titoloPagina: "Inséma · Per una Como che cresce",
+    titoloPagina: "inséma · Per una Como che cresce",
 
     hero: {
       sopratitolo: "Como · elezioni comunali di maggio 2027",
       titolo: "Per una Como che cresce*",
       sottotitolo: "*senza lasciare indietro nessuno",
-      testo: "Siamo comaschi che hanno smesso di aspettare. Partiamo dai dati, ascoltiamo le persone e costruiamo proposte di buon senso. ==Inséma==.",
+      testo: "Siamo comaschi che hanno smesso di aspettare. Partiamo dai dati, ascoltiamo le persone e costruiamo proposte di buon senso. ==inséma==.",
       bottone1: { testo: "Unisciti a noi", link: "aiutaci.html" },
       bottone2: { testo: "Leggi il programma", link: "programma.html" },
     },
@@ -196,7 +196,7 @@ window.TESTI = {
     },
 
     valori: {
-      sopratitolo: "Ok, ma che cos'è Inséma?",
+      sopratitolo: "Ok, ma che cos'è inséma?",
       titolo: "I nostri valori",
       // le parole grandi vengono dal Manifesto
       link: { testo: "Leggi il manifesto →", link: "manifesto.html" },
@@ -222,7 +222,7 @@ window.TESTI = {
       titolo: "Siamo folli.<br>Non stupidi.",
       testo: "Per vincere ci servi tu. Nessun obbligo: ogni aiuto conta.",
       azioni: [
-        { titolo: "Diventa uno dei 100", testo: "Fonda Inséma con noi, entro il 31 dicembre.", link: "aiutaci.html#modulo", bottone: "Ci sto" },
+        { titolo: "Diventa uno dei 100", testo: "Fonda inséma con noi, entro il 31 dicembre.", link: "aiutaci.html#modulo", bottone: "Ci sto" },
         { titolo: "Raccontaci la tua Como", testo: "Un problema nel tuo quartiere, un'idea, una storia di affitti impossibili.", link: "aiutaci.html#modulo", bottone: "Scrivici" },
         { titolo: "Passaparola", testo: "Seguici e condividi i nostri contenuti con chi conosci.", link: "https://www.instagram.com/insema_como/", bottone: "@insema_como" },
       ],
@@ -233,7 +233,7 @@ window.TESTI = {
   /* CHI SIAMO                                                          */
   /* ------------------------------------------------------------------ */
   chiSiamo: {
-    titoloPagina: "Chi siamo · Inséma",
+    titoloPagina: "Chi siamo · inséma",
 
     hero: {
       titolo: "Ci sono delle persone vere.",
@@ -258,7 +258,7 @@ window.TESTI = {
 
     storia: {
       titolo: "La nostra storia",
-      testo: `Inséma è nata il 16 ottobre 2026, con un post su Instagram. Volevamo parlare di Como in un modo diverso: partendo dai numeri e andando per strada, al mercato e nei quartieri a chiedere alle persone come vivono la città.
+      testo: `inséma è nata il 16 ottobre 2026, con un post su Instagram. Volevamo parlare di Como in un modo diverso: partendo dai numeri e andando per strada, al mercato e nei quartieri a chiedere alle persone come vivono la città.
 
 Tornando a Como dopo anni passati altrove, l'abbiamo trovata cambiata. Una città dove sembrava che la politica si fosse arresa, e con lei tanti cittadini, rassegnati a un destino votato sempre più al turismo.
 
@@ -266,7 +266,7 @@ Noi non ci rassegniamo. Un mese dopo il primo post ci siamo trovati per la prima
     },
 
     nome: {
-      titolo: "Perché «Inséma»?",
+      titolo: "Perché «inséma»?",
       testo: "In dialetto comasco vuol dire ==insieme==. E dice molto del tono che abbiamo scelto: positivo, fresco, accogliente, perfino giocoso. Perché le città non si governano *contro* qualcuno, ma **per** qualcuno.",
     },
 
@@ -287,10 +287,10 @@ Noi non ci rassegniamo. Un mese dopo il primo post ci siamo trovati per la prima
   /* MANIFESTO                                                          */
   /* ------------------------------------------------------------------ */
   manifesto: {
-    titoloPagina: "Manifesto · Inséma",
+    titoloPagina: "Manifesto · inséma",
 
     hero: {
-      sopratitolo: "Ok, ma che cos'è Inséma?",
+      sopratitolo: "Ok, ma che cos'è inséma?",
       titolo: "Manifesto",
       testo: "Cinque parole per dire chi siamo e come vogliamo governare Como.",
     },
@@ -344,7 +344,7 @@ Noi non ci rassegniamo. Un mese dopo il primo post ci siamo trovati per la prima
   /* PROGRAMMA                                                          */
   /* ------------------------------------------------------------------ */
   programma: {
-    titoloPagina: "Programma · Inséma",
+    titoloPagina: "Programma · inséma",
 
     hero: {
       sopratitolo: "Il programma",
@@ -410,7 +410,7 @@ Lo sentiamo in ogni intervista: Como costa sempre di più e spinge fuori i suoi 
           numeri: [
             { valore: "3.320 €", testo: "al metro quadro: il prezzo medio richiesto per comprare casa. Solo Milano è più cara in Lombardia.", fonte: "Immobiliare.it, settembre 2026" },
             { valore: "+26%", testo: "rispetto alla media dei capoluoghi lombardi.", fonte: "Immobiliare.it, settembre 2026" },
-            { valore: "400 € → 1.000 €", testo: "lo stesso appartamento in via Garibaldi: prima 400 € al mese in affitto, oggi 1.000 € a settimana su Airbnb.", fonte: "Testimonianza raccolta da Inséma" },
+            { valore: "400 € → 1.000 €", testo: "lo stesso appartamento in via Garibaldi: prima 400 € al mese in affitto, oggi 1.000 € a settimana su Airbnb.", fonte: "Testimonianza raccolta da inséma" },
           ],
           grafico: {
             tipo: "classifica",
@@ -499,7 +499,7 @@ Una città che vive di una sola cosa è una città fragile.`,
               { titolo: "Reddito medio annuo", a: ["turismo", 17709, "17.709 €"], b: ["media", 27200, "circa 27.200 €"], nota: "il 35% in meno" },
               { titolo: "Produzione per addetto", a: ["turismo", 99015, "99.015 €"], b: ["media", 141839, "141.839 €"], nota: "il 30% in meno" },
             ],
-            fonte: "Dati Italia. Fonte: Istat, CST 2023. La media del reddito è una stima Inséma a partire dal −35% indicato da Istat.",
+            fonte: "Dati Italia. Fonte: Istat, CST 2023. La media del reddito è una stima inséma a partire dal −35% indicato da Istat.",
           },
         },
 
@@ -589,7 +589,7 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
   /* IL NOSTRO PIANO                                                    */
   /* ------------------------------------------------------------------ */
   piano: {
-    titoloPagina: "Il nostro piano · Inséma",
+    titoloPagina: "Il nostro piano · inséma",
 
     hero: {
       sopratitolo: "Il nostro piano · Missione Como 2027",
@@ -604,7 +604,7 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
     invito: {
       etichetta: "La tua missione",
       titolo: "Trova le 15 persone attorno a te.",
-      testo: "Quindici persone che conosci e che oggi non voterebbero Inséma. Il tuo compito è convincerle, una alla volta, da qui a maggio 2027.",
+      testo: "Quindici persone che conosci e che oggi non voterebbero inséma. Il tuo compito è convincerle, una alla volta, da qui a maggio 2027.",
       dettagli: [
         ["Esploratore", "tu"],
         ["Obiettivo", "15 persone"],
@@ -630,7 +630,7 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
           numero: "1.000",
           nome: "Esploratori",
           quando: "Entro marzo 2027",
-          testo: "Ognuno ha una missione sola: convincere **15 persone** attorno a sé che oggi non voterebbero Inséma.",
+          testo: "Ognuno ha una missione sola: convincere **15 persone** attorno a sé che oggi non voterebbero inséma.",
         },
         {
           fase: "L'allunaggio",
@@ -696,7 +696,7 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
         ],
         regola: "Una regola: mai litigare. Le città non si governano contro qualcuno, ma per qualcuno.",
       },
-      condividi: "Sono un esploratore di Inséma: la mia missione è convincere 15 persone a cambiare Como. Tu sei una di queste 😉 ",
+      condividi: "Sono un esploratore di inséma: la mia missione è convincere 15 persone a cambiare Como. Tu sei una di queste 😉 ",
       bottoneCondividi: "Manda il piano su WhatsApp",
     },
 
@@ -711,7 +711,7 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
   /* AIUTACI                                                            */
   /* ------------------------------------------------------------------ */
   aiutaci: {
-    titoloPagina: "Aiutaci · Inséma",
+    titoloPagina: "Aiutaci · inséma",
 
     hero: {
       sopratitolo: "Siamo folli. Non stupidi.",
@@ -750,7 +750,7 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
       email: "Email",
       telefono: "Telefono / WhatsApp *",
       quartiere: "Quartiere o paese *",
-      fonte: "Chi ti ha parlato di Inséma?",
+      fonte: "Chi ti ha parlato di inséma?",
       messaggio: "Raccontaci qualcosa: un'idea, un problema del tuo quartiere, una storia…",
       // I testi delle opzioni qui sotto devono essere IDENTICI al Google Form
       esserci: {
@@ -779,10 +779,10 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
         domanda: "Vuoi comparire nel ponte dei 100 sul sito? *",
         opzioni: ["Sì", "No, preferisco di no"],
       },
-      privacy: "Acconsento al trattamento dei miei dati personali per essere ricontattato/a da Inséma.",
+      privacy: "Acconsento al trattamento dei miei dati personali per essere ricontattato/a da inséma.",
       bottone: "Invia",
       invio: "Invio in corso…",
-      grazie: "Ci sei! Entro 48 ore ti scriviamo su WhatsApp. Benvenuto/a in Inséma. ✦",
+      grazie: "Ci sei! Entro 48 ore ti scriviamo su WhatsApp. Benvenuto/a in inséma. ✦",
       linkGoogle: "Problemi con il modulo? [Compilalo su Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd6VHLFVD1uKX4RG5EZM5__KqEbWXgp0ICdydTYcFML3_R7hA/viewform)",
       grazieMail: "Si sta aprendo la tua app di posta con il messaggio già scritto: premi «Invia» e ci siamo.",
       errore: "Qualcosa non ha funzionato. Scrivici a",

@@ -26,6 +26,21 @@
 
   const stat = (n) => `<div class="stat"><strong>${n.valore}</strong><p>${md(n.testo)}</p>${n.fonte ? `<small>${n.fonte}</small>` : ""}</div>`;
 
+
+  /* il nome si scrive sempre «inséma», tutto minuscolo, anche nei titoli in maiuscolo */
+  const brand = (root) => {
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), hits = [];
+    while (w.nextNode()) {
+      const n = w.currentNode;
+      if (/inséma/i.test(n.nodeValue) && !n.parentNode.closest("option, textarea, script, style, .nome")) hits.push(n);
+    }
+    hits.forEach((n) => {
+      const t = document.createElement("span");
+      t.innerHTML = n.nodeValue.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/inséma/gi, '<span class="nome">inséma</span>');
+      n.replaceWith(...t.childNodes);
+    });
+  };
+
   /* ---------- layout comune ---------- */
   function header() {
     const here = location.pathname.split("/").pop() || "index.html";
@@ -505,7 +520,7 @@
           <p class="lead">${md(P.hero.testo)}</p>
           <div class="ctas">${btn(P.hero.bottone)}${btn(P.hero.bottone2, "btn-ghost")}</div>
         </div>
-        <img class="hero-illo piano-illo" src="img/ill/luna-vino.webp?v=202611231934" alt="La luna con la bandiera di Inséma sopra Brunate, la funicolare e il lago di Como">
+        <img class="hero-illo piano-illo" src="img/ill/luna-vino.webp?v=202611231934" alt="La luna con la bandiera di inséma sopra Brunate, la funicolare e il lago di Como">
       </div>
     </section>
 
@@ -695,6 +710,7 @@
   const bar = page === "aiutaci" ? "" : `<a class="mobile-bar" href="aiutaci.html#modulo"><span>${FO.attuali}/${FO.obiettivo}</span>${FO.barraMobile}</a>`;
   document.getElementById("app").innerHTML = header() + `<main>${(pages[page] || pages.home)()}</main>` + footer() + bar;
   if (bar) body.classList.add("has-bar");
+  brand(document.getElementById("app"));
 
   /* menu mobile */
   const burger = document.querySelector(".burger");
@@ -723,7 +739,7 @@
     const F = T.aiutaci.modulo;
     const msg = form.querySelector(".form-msg");
     const after = form.querySelector(".after");
-    const show = (t, ok = true) => { msg.innerHTML = t; msg.hidden = false; if (ok) after.hidden = false; };
+    const show = (t, ok = true) => { msg.innerHTML = t; brand(msg); msg.hidden = false; if (ok) after.hidden = false; };
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -762,7 +778,7 @@
           `Ponte dei 100: ${d.get("ponte")}`,
           d.get("messaggio") ? `\n${d.get("messaggio")}` : null,
         ].filter((x) => x !== null).join("\n");
-        location.href = `mailto:${S.email}?subject=${encodeURIComponent("Voglio essere uno dei 100 fondatori di Inséma")}&body=${encodeURIComponent(lines)}`;
+        location.href = `mailto:${S.email}?subject=${encodeURIComponent("Voglio essere uno dei 100 fondatori di inséma")}&body=${encodeURIComponent(lines)}`;
         show(F.grazieMail);
       }
     });
