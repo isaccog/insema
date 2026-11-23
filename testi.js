@@ -43,6 +43,12 @@ window.TESTI = {
     // Link alla pagina per le donazioni. Se vuoto, il bottone non compare.
     linkDonazioni: "",
 
+    // FONT DEI TITOLI. Il brandbook usa Poleno, che è un font Adobe.
+    // Se avete un abbonamento Adobe Creative Cloud: fonts.adobe.com →
+    // «Web project» con Poleno Bold, aggiungete il dominio del sito e
+    // incollate qui l'ID del progetto (es. "abc1def"). Vuoto = font simile gratuito.
+    adobeFontsKit: "",
+
     menu: [
       { testo: "Chi siamo", link: "chi-siamo.html" },
       { testo: "Manifesto", link: "manifesto.html" },
@@ -83,9 +89,9 @@ window.TESTI = {
     scadenzaTesto: "entro il 31 dicembre",
 
     sopratitolo: "Per una Como che cresce, senza lasciare indietro nessuno",
-    titolo: "Cerchiamo 100 persone per fondare Inséma.",
-    domanda: "Vuoi essere una di loro?",
-    testo: "Gli altri hanno partiti, giornali e televisioni. Noi abbiamo le persone. Entro fine anno vogliamo essere in 100: le fondatrici e i fondatori del movimento che porterà Como al voto di maggio.",
+    titolo: "Diventa uno dei 100 fondatori di Inséma.",
+    domanda: "",
+    testo: "Non vogliamo decidere il futuro di Como, vogliamo costruirlo assieme. Agiamo, convinciamo chi ci sta attorno, riappropriamoci della nostra città.",
     bottone: { testo: "Sì, ci sto", link: "aiutaci.html#modulo" },
     bottone2: { testo: "Prima voglio capire", link: "programma.html" },
 
@@ -107,12 +113,12 @@ window.TESTI = {
       punti: [
         "Decidi con noi il programma e la lista.",
         "Puoi candidarti, o dare una mano dove preferisci.",
-        "Il tuo nome nel muro dei fondatori, se vuoi.",
+        "Il tuo nome nel ponte dei 100, se vuoi.",
       ],
     },
 
     muro: {
-      titolo: "Il muro dei 100",
+      titolo: "Il ponte dei 100",
       nota: "Ogni cerchio è una persona. Quelli vuoti aspettano qualcuno.",
       // Chi entra e accetta di comparire: aggiungete qui nome e iniziale.
       // (i 5 promotori di «Chi siamo» sono già contati)
@@ -356,6 +362,7 @@ Noi pensiamo che si possa fare diversamente. Con proposte che non sono radicali,
       /* ============ 01 CASA ============ */
       {
         id: "casa",
+        illustrazione: "img/ill/cittaq-vino.webp",
         pagina: "programma-casa.html",
         numero: "01",
         colore: "crema",
@@ -402,6 +409,7 @@ Lo sentiamo in ogni intervista: Como costa sempre di più e spinge fuori i suoi 
       /* ============ 02 SERVIZI ============ */
       {
         id: "servizi",
+        illustrazione: "img/ill/persone-blu.webp",
         pagina: "programma-servizi.html",
         numero: "02",
         colore: "rosa",
@@ -435,6 +443,7 @@ Sono i servizi a fare la differenza tra una città dove si sopravvive e una dove
       /* ============ 03 LAVORO ============ */
       {
         id: "lavoro",
+        illustrazione: "img/ill/merca-blu.webp",
         pagina: "programma-lavoro.html",
         numero: "03",
         colore: "bianco",
@@ -475,6 +484,7 @@ Una città che vive di una sola cosa è una città fragile.`,
       /* ============ 04 SVILUPPO ============ */
       {
         id: "sviluppo",
+        illustrazione: "img/ill/persone-oceano.webp",
         pagina: "programma-sviluppo.html",
         numero: "04",
         colore: "giallo",
@@ -511,6 +521,7 @@ Crescere vuol dire anche energia pulita e più economica, spazi restituiti ai qu
       /* ============ 05 CONTI E TRASPARENZA ============ */
       {
         id: "conti",
+        illustrazione: "img/ill/media-perla.webp",
         pagina: "programma-conti.html",
         numero: "05",
         colore: "blu",
@@ -584,7 +595,7 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
       nome: "Nome e cognome",
       email: "Email",
       telefono: "Telefono / WhatsApp",
-      muro: "Voglio comparire nel muro dei 100 (solo nome e iniziale del cognome).",
+      muro: "Voglio comparire nel ponte dei 100 (solo nome e iniziale del cognome).",
       quartiere: "Quartiere o paese",
       gruppi: "Gruppi che ti interessano",
       messaggio: "Raccontaci qualcosa: un'idea, un problema del tuo quartiere, una storia…",

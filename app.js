@@ -35,7 +35,7 @@
       return `<a href="${m.link}"${on ? ' class="on"' : ""}>${m.testo}</a>`;
     }).join("");
     return `<header class="nav">
-      <a href="index.html" class="nav-logo"><img src="img/logo-magenta.png" alt="${S.nome}: home"></a>
+      <a href="index.html" class="nav-logo"><img src="img/logo/logo-magenta.svg" alt="${S.nome}: home"></a>
       <button class="burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
       <nav>${links}<a href="${S.bottoneMenu.link}" class="btn btn-small">${S.bottoneMenu.testo}</a></nav>
     </header>`;
@@ -50,7 +50,7 @@
     const F = S.footer;
     return `<footer class="footer"><div class="wrap footer-grid">
       <div>
-        <img src="img/logo-cream.png" alt="${S.nome}" class="footer-logo">
+        <img src="img/logo/logo-esteso-perla.svg" alt="${S.nome}" class="footer-logo">
         <p class="footer-motto">${F.motto}</p>
         <p class="footer-contacts"><a href="mailto:${S.email}">${S.email}</a><br><a href="${S.instagram}" target="_blank" rel="noopener">Instagram ${S.instagramNome}</a></p>
       </div>
@@ -130,7 +130,7 @@
   const wallSection = (bg = "s-paper") => `
     <section class="sec ${bg}" id="muro">
       <div class="wrap">
-        <div class="wall-head"><div><h2 class="h2 h-navy">${FO.muro.titolo}</h2><p class="note">${FO.muro.nota}</p></div><p class="wall-count"><strong>${FO.attuali}</strong>/${FO.obiettivo}</p></div>
+        <div class="wall-head"><img class="wall-illo" src="img/ill/mani-blu.webp" alt=""><div><h2 class="h2 h-navy">${FO.muro.titolo}</h2><p class="note">${FO.muro.nota}</p></div><p class="wall-count"><strong>${FO.attuali}</strong>/${FO.obiettivo}</p></div>
         ${wall()}
         ${deal()}
         <div class="ctas center-row">${btn(FO.bottone)}</div>
@@ -151,12 +151,12 @@
         <div>
           <p class="kicker">${FO.sopratitolo}</p>
           <h1 class="h-hero">${FO.titolo}</h1>
-          <p class="hero-sub">${FO.domanda}</p>
+          ${FO.domanda ? `<p class="hero-sub">${FO.domanda}</p>` : ""}
           <p class="lead">${md(FO.testo)}</p>
           <div class="ctas">${btn(FO.bottone)}${btn(FO.bottone2, "btn-ghost")}</div>
         </div>
         <div class="hero-side">
-          <img class="hero-illo" src="img/alura-magenta.png" alt="">
+          <img class="hero-illo" src="img/ill/citta-vino.webp" alt="Persone che salgono insieme una scalinata sul lago di Como">
           ${counter()}
         </div>
       </div>
@@ -230,9 +230,14 @@
     return `
     <section class="page-hero s-cream">
       <div class="wrap">
-        <h1 class="h-hero h-navy">${C.hero.titolo}</h1>
-        <p class="h-hero pink">${C.hero.titolo2}</p>
-        <div class="ctas">${btn(C.hero.bottone)}</div>
+        <div class="hero-grid">
+          <div>
+            <h1 class="h-hero h-navy">${C.hero.titolo}</h1>
+            <p class="h-hero pink">${C.hero.titolo2}</p>
+            <div class="ctas">${btn(C.hero.bottone)}</div>
+          </div>
+          <img class="hero-illo" src="img/ill/persone-blu.webp" alt="Persone che guardano insieme la mappa di Como">
+        </div>
       </div>
     </section>
 
@@ -285,8 +290,10 @@
 
     <section class="sec s-navy">
       <div class="wrap">
-        <h2 class="h2 h2-cream">${M.stile.titolo}</h2>
-        <p class="intro">${md(M.stile.testo)}</p>
+        <div class="stile-head">
+          <div><h2 class="h2 h2-cream">${M.stile.titolo}</h2><p class="intro">${md(M.stile.testo)}</p></div>
+          <img src="img/ill/media-perla.webp" alt="">
+        </div>
         <div class="stile">${M.stile.punti.map((p) => `<div><h3>${p.titolo}</h3><p>${md(p.testo)}</p></div>`).join("")}</div>
       </div>
     </section>
@@ -325,7 +332,7 @@
           <div class="sec-head">${dial(P.racconto.dialetto)}<h2 class="h2">${P.racconto.titolo}</h2></div>
           ${paras(P.racconto.testo)}
         </div>
-        <img class="side-illo" src="img/alura-navy.png" alt="">
+        <img class="side-illo" src="img/ill/cittaq-vino.webp" alt="Una città che cresce senza lasciare indietro nessuno">
       </div>
     </section>
 
@@ -362,7 +369,10 @@
             <h1 class="h-hero">${t.slogan}</h1>
             <p class="claim">${md(t.claim)}</p>
           </div>
-          ${dial(t.dialetto, "dial-lg")}
+          <div class="thero-side">
+            ${t.illustrazione ? `<img class="thero-illo" src="${t.illustrazione}" alt="">` : ""}
+            ${dial(t.dialetto, "dial-lg")}
+          </div>
         </div>
       </div>
     </section>
@@ -406,10 +416,15 @@
     return `
     <section class="page-hero s-navy">
       <div class="wrap">
-        <p class="oval">${A.hero.sopratitolo}</p>
-        <h1 class="h-hero h-cream">${A.hero.titolo}</h1>
-        <p class="lead">${md(A.hero.testo)}</p>
-        ${counter("counter-dark")}
+        <div class="hero-grid">
+          <div>
+            <p class="oval">${A.hero.sopratitolo}</p>
+            <h1 class="h-hero h-cream">${A.hero.titolo}</h1>
+            <p class="lead">${md(A.hero.testo)}</p>
+            ${counter("counter-dark")}
+          </div>
+          <img class="hero-illo" src="img/ill/mani-perla.webp" alt="Tante mani una sull'altra">
+        </div>
       </div>
     </section>
     <section class="sec s-blush" id="modulo">
@@ -473,6 +488,12 @@
   /* =================================================================
      MONTAGGIO
      ================================================================= */
+  if (S.adobeFontsKit) {
+    const l = document.createElement("link");
+    l.rel = "stylesheet"; l.href = `https://use.typekit.net/${S.adobeFontsKit}.css`;
+    document.head.appendChild(l);
+    document.documentElement.classList.add("poleno");
+  }
   const key = page === "chi-siamo" ? "chiSiamo" : page;
   if (T[key] && T[key].titoloPagina) document.title = T[key].titoloPagina;
   const meta = document.querySelector('meta[name="description"]');
@@ -526,7 +547,7 @@
           `Nome: ${d.get("nome")}`, `Email: ${d.get("email")}`, `Telefono: ${d.get("telefono")}`,
           d.get("quartiere") ? `Quartiere: ${d.get("quartiere")}` : null,
           gruppi ? `Gruppi: ${gruppi}` : null,
-          `Muro dei 100: ${d.get("muro") ? "sì" : "no"}`,
+          `Ponte dei 100: ${d.get("muro") ? "sì" : "no"}`,
           d.get("messaggio") ? `\n${d.get("messaggio")}` : null,
         ].filter((x) => x !== null).join("\n");
         location.href = `mailto:${S.email}?subject=${encodeURIComponent("Voglio essere uno dei 100 fondatori di Inséma")}&body=${encodeURIComponent(lines)}`;
