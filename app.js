@@ -93,6 +93,50 @@
       <p>${md(t.anteprima)}</p>
       <span class="tgo" aria-hidden="true">→</span></a>`;
 
+  /* ---------- i 100 fondatori ---------- */
+  const FO = T.fondatori;
+  const daysLeft = () => Math.ceil((new Date(FO.scadenza + "T23:59:59") - new Date()) / 86400000);
+  const counter = (cls = "") => {
+    const d = daysLeft();
+    const pct = Math.min(100, FO.attuali / FO.obiettivo * 100);
+    return `<div class="counter ${cls}">
+      <div class="counter-n"><strong>${FO.attuali}</strong><span>${FO.contatore} ${FO.obiettivo}</span></div>
+      <div class="counter-bar"><div style="width:${pct}%"></div></div>
+      ${d > 0 ? `<p class="counter-d"><strong>${d}</strong> ${FO.giorni}</p>` : ""}
+    </div>`;
+  };
+  const wall = () => {
+    const named = T.chiSiamo.persone.lista.map((p) => p.nome).concat(FO.muro.nomi);
+    const n = Math.min(FO.attuali, FO.obiettivo);
+    const filled = shuffle(named.slice(0, n));
+    while (filled.length < n) filled.push("");
+    let html = filled.map((nm, k) => `<span class="dot on c${k % 5}" title="${nm}">${nm ? initials(nm) : "✓"}</span>`).join("");
+    for (let k = n; k < FO.obiettivo; k++) {
+      html += k === n
+        ? `<a class="dot you" href="aiutaci.html#modulo" title="${FO.postoLibero}">tu</a>`
+        : `<span class="dot"></span>`;
+    }
+    return `<div class="wall" aria-label="${FO.attuali} ${FO.contatore} ${FO.obiettivo}">${html}</div>`;
+  };
+  const deal = () => `<div class="deal">
+      <div><h3>${FO.chiediamo.titolo}</h3><ol>${FO.chiediamo.punti.map((p) => `<li><span>${md(p)}</span></li>`).join("")}</ol></div>
+      <div><h3>${FO.ottieni.titolo}</h3><ol>${FO.ottieni.punti.map((p) => `<li><span>${md(p)}</span></li>`).join("")}</ol></div>
+    </div>`;
+  const shareUrl = () => location.href.split("#")[0].replace(/[^/]*$/, "");
+  const share = () => `<div class="share">
+      <h3>${FO.condividi.titolo}</h3><p>${md(FO.condividi.testo)}</p>
+      <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(FO.condividi.messaggio + shareUrl())}">${FO.condividi.bottone}</a>
+    </div>`;
+  const wallSection = (bg = "s-paper") => `
+    <section class="sec ${bg}" id="muro">
+      <div class="wrap">
+        <div class="wall-head"><div><h2 class="h2 h-navy">${FO.muro.titolo}</h2><p class="note">${FO.muro.nota}</p></div><p class="wall-count"><strong>${FO.attuali}</strong>/${FO.obiettivo}</p></div>
+        ${wall()}
+        ${deal()}
+        <div class="ctas center-row">${btn(FO.bottone)}</div>
+      </div>
+    </section>`;
+
   /* =================================================================
      PAGINE
      ================================================================= */
@@ -105,16 +149,20 @@
     <section class="hero s-cream">
       <div class="wrap hero-grid">
         <div>
-          <p class="kicker">${H.hero.sopratitolo}</p>
-          <h1 class="h-hero">${H.hero.titolo}</h1>
-          <p class="hero-sub">${H.hero.sottotitolo}</p>
-          <p class="lead">${md(H.hero.testo)}</p>
-          <div class="ctas">${btn(H.hero.bottone1)}${btn(H.hero.bottone2, "btn-ghost")}</div>
+          <p class="kicker">${FO.sopratitolo}</p>
+          <h1 class="h-hero">${FO.titolo}</h1>
+          <p class="hero-sub">${FO.domanda}</p>
+          <p class="lead">${md(FO.testo)}</p>
+          <div class="ctas">${btn(FO.bottone)}${btn(FO.bottone2, "btn-ghost")}</div>
         </div>
-        <img class="hero-illo" src="img/alura-magenta.png" alt="">
+        <div class="hero-side">
+          <img class="hero-illo" src="img/alura-magenta.png" alt="">
+          ${counter()}
+        </div>
       </div>
     </section>
     ${ticker()}
+    ${wallSection()}
 
     <section class="sec s-paper">
       <div class="wrap">
@@ -195,6 +243,7 @@
       </div>
     </section>
     ${ticker()}
+    ${wallSection()}
 
     <section class="sec s-paper">
       <div class="wrap two-col">
@@ -360,6 +409,42 @@
         <p class="oval">${A.hero.sopratitolo}</p>
         <h1 class="h-hero h-cream">${A.hero.titolo}</h1>
         <p class="lead">${md(A.hero.testo)}</p>
+        ${counter("counter-dark")}
+      </div>
+    </section>
+    <section class="sec s-blush" id="modulo">
+      <div class="wrap form-wrap">
+        <form class="form" id="join-form" novalidate>
+          <h2>${F.titolo}</h2>
+          <div class="form-row">
+            <input type="text" name="nome" placeholder="${F.nome}" required>
+            <input type="email" name="email" placeholder="${F.email}" required>
+          </div>
+          <div class="form-row">
+            <input type="tel" name="telefono" placeholder="${F.telefono}" required>
+            <input type="text" name="quartiere" placeholder="${F.quartiere}">
+          </div>
+          <fieldset><legend>${F.gruppi}</legend>
+            <div class="chips">${A.gruppi.lista.map((g) => `<label class="chip"><input type="checkbox" name="gruppi" value="${g.nome}"><span>${g.nome}</span></label>`).join("")}</div>
+          </fieldset>
+          <textarea name="messaggio" rows="4" placeholder="${F.messaggio}"></textarea>
+          <label class="check"><input type="checkbox" name="muro" value="sì"> <span>${F.muro}</span></label>
+          <label class="check"><input type="checkbox" name="privacy" required> <span>${F.privacy}</span></label>
+          <button type="submit" class="btn">${F.bottone}</button>
+          <p class="form-msg" role="status" hidden></p>
+          <div class="after" hidden>${share()}</div>
+        </form>
+        <aside class="side-cards">
+          <div class="side-card">
+            <h3>${A.fondi.titolo}</h3>
+            <p>${md(A.fondi.testo)}</p>
+            ${S.linkDonazioni ? `<a class="btn btn-navy" href="${S.linkDonazioni}"${ext(S.linkDonazioni)}>${A.fondi.bottone}</a>` : `<p class="small">${md(A.fondi.senzaLink)}</p>`}
+          </div>
+          <div class="side-card">
+            <h3>Contatti</h3>
+            <p><a href="mailto:${S.email}">${S.email}</a><br><a href="${S.instagram}" target="_blank" rel="noopener">${S.instagramNome}</a></p>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -382,39 +467,7 @@
       </div>
     </section>
 
-    <section class="sec s-blush" id="modulo">
-      <div class="wrap form-wrap">
-        <form class="form" id="join-form" novalidate>
-          <h2>${F.titolo}</h2>
-          <div class="form-row">
-            <input type="text" name="nome" placeholder="${F.nome}" required>
-            <input type="email" name="email" placeholder="${F.email}" required>
-          </div>
-          <div class="form-row">
-            <input type="tel" name="telefono" placeholder="${F.telefono}">
-            <input type="text" name="quartiere" placeholder="${F.quartiere}">
-          </div>
-          <fieldset><legend>${F.gruppi}</legend>
-            <div class="chips">${A.gruppi.lista.map((g) => `<label class="chip"><input type="checkbox" name="gruppi" value="${g.nome}"><span>${g.nome}</span></label>`).join("")}</div>
-          </fieldset>
-          <textarea name="messaggio" rows="4" placeholder="${F.messaggio}"></textarea>
-          <label class="check"><input type="checkbox" name="privacy" required> <span>${F.privacy}</span></label>
-          <button type="submit" class="btn">${F.bottone}</button>
-          <p class="form-msg" role="status" hidden></p>
-        </form>
-        <aside class="side-cards">
-          <div class="side-card">
-            <h3>${A.fondi.titolo}</h3>
-            <p>${md(A.fondi.testo)}</p>
-            ${S.linkDonazioni ? `<a class="btn btn-navy" href="${S.linkDonazioni}"${ext(S.linkDonazioni)}>${A.fondi.bottone}</a>` : `<p class="small">${md(A.fondi.senzaLink)}</p>`}
-          </div>
-          <div class="side-card">
-            <h3>Contatti</h3>
-            <p><a href="mailto:${S.email}">${S.email}</a><br><a href="${S.instagram}" target="_blank" rel="noopener">${S.instagramNome}</a></p>
-          </div>
-        </aside>
-      </div>
-    </section>`;
+`;
   };
 
   /* =================================================================
@@ -425,7 +478,9 @@
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.content = S.descrizione;
 
-  document.getElementById("app").innerHTML = header() + `<main>${(pages[page] || pages.home)()}</main>` + footer();
+  const bar = page === "aiutaci" ? "" : `<a class="mobile-bar" href="aiutaci.html#modulo"><span>${FO.attuali}/${FO.obiettivo}</span>${FO.barraMobile}</a>`;
+  document.getElementById("app").innerHTML = header() + `<main>${(pages[page] || pages.home)()}</main>` + footer() + bar;
+  if (bar) body.classList.add("has-bar");
 
   /* menu mobile */
   const burger = document.querySelector(".burger");
@@ -453,7 +508,8 @@
   if (form) {
     const F = T.aiutaci.modulo;
     const msg = form.querySelector(".form-msg");
-    const show = (t) => { msg.innerHTML = t; msg.hidden = false; };
+    const after = form.querySelector(".after");
+    const show = (t, ok = true) => { msg.innerHTML = t; msg.hidden = false; if (ok) after.hidden = false; };
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -464,15 +520,16 @@
           const r = await fetch(S.moduloEndpoint, { method: "POST", body: d, headers: { Accept: "application/json" } });
           if (!r.ok) throw new Error();
           form.reset(); sync(); show(F.grazie);
-        } catch (_) { show(`${F.errore} <a href="mailto:${S.email}">${S.email}</a>`); }
+        } catch (_) { show(`${F.errore} <a href="mailto:${S.email}">${S.email}</a>`, false); }
       } else {
         const lines = [
-          `Nome: ${d.get("nome")}`, `Email: ${d.get("email")}`,
-          d.get("telefono") ? `Telefono: ${d.get("telefono")}` : "",
-          d.get("quartiere") ? `Quartiere: ${d.get("quartiere")}` : "",
-          gruppi ? `Gruppi: ${gruppi}` : "", "", d.get("messaggio") || "",
-        ].filter((x, k) => x !== "" || k === 5).join("\n");
-        location.href = `mailto:${S.email}?subject=${encodeURIComponent("Voglio dare una mano a Inséma")}&body=${encodeURIComponent(lines)}`;
+          `Nome: ${d.get("nome")}`, `Email: ${d.get("email")}`, `Telefono: ${d.get("telefono")}`,
+          d.get("quartiere") ? `Quartiere: ${d.get("quartiere")}` : null,
+          gruppi ? `Gruppi: ${gruppi}` : null,
+          `Muro dei 100: ${d.get("muro") ? "sì" : "no"}`,
+          d.get("messaggio") ? `\n${d.get("messaggio")}` : null,
+        ].filter((x) => x !== null).join("\n");
+        location.href = `mailto:${S.email}?subject=${encodeURIComponent("Voglio essere uno dei 100 fondatori di Inséma")}&body=${encodeURIComponent(lines)}`;
         show(F.grazieMail);
       }
     });

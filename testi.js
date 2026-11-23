@@ -48,7 +48,7 @@ window.TESTI = {
       { testo: "Manifesto", link: "manifesto.html" },
       { testo: "Programma", link: "programma.html" },
     ],
-    bottoneMenu: { testo: "Aiutaci", link: "aiutaci.html" },
+    bottoneMenu: { testo: "Unisciti ai 100", link: "aiutaci.html#modulo" },
 
     // Le parole che scorrono nella fascia colorata
     fascia: ["Inséma", "Ghe la fèm", "Una cà per tücc", "Nissün resta indree", "Andèm", "Sem chì"],
@@ -68,6 +68,67 @@ window.TESTI = {
         ["tüchetin", "pezzettino"],
       ],
     },
+  },
+
+  /* ------------------------------------------------------------------ */
+  /* I 100 FONDATORI (compare in home, chi siamo e aiutaci)             */
+  /* ------------------------------------------------------------------ */
+  fondatori: {
+    obiettivo: 100,
+
+    // >>> AGGIORNATE QUESTO NUMERO A MANO ogni volta che entra qualcuno <<<
+    attuali: 5,
+
+    scadenza: "2026-12-31",          // formato anno-mese-giorno
+    scadenzaTesto: "entro il 31 dicembre",
+
+    sopratitolo: "Per una Como che cresce, senza lasciare indietro nessuno",
+    titolo: "Cerchiamo 100 persone per fondare Inséma.",
+    domanda: "Vuoi essere una di loro?",
+    testo: "Gli altri hanno partiti, giornali e televisioni. Noi abbiamo le persone. Entro fine anno vogliamo essere in 100: le fondatrici e i fondatori del movimento che porterà Como al voto di maggio.",
+    bottone: { testo: "Sì, ci sto", link: "aiutaci.html#modulo" },
+    bottone2: { testo: "Prima voglio capire", link: "programma.html" },
+
+    contatore: "fondatori su",       // es. «5 fondatori su 100»
+    giorni: "giorni alla fine dell'anno",
+    postoLibero: "Questo posto può essere tuo",
+
+    // Proposta: decidetela insieme e modificatela qui
+    chiediamo: {
+      titolo: "Cosa ti chiediamo",
+      punti: [
+        "Condividi il nostro [manifesto](manifesto.html).",
+        "Vieni all'assemblea dei fondatori di dicembre.",
+        "Porta con te almeno un'altra persona.",
+      ],
+    },
+    ottieni: {
+      titolo: "Cosa ottieni",
+      punti: [
+        "Decidi con noi il programma e la lista.",
+        "Puoi candidarti, o dare una mano dove preferisci.",
+        "Il tuo nome nel muro dei fondatori, se vuoi.",
+      ],
+    },
+
+    muro: {
+      titolo: "Il muro dei 100",
+      nota: "Ogni cerchio è una persona. Quelli vuoti aspettano qualcuno.",
+      // Chi entra e accetta di comparire: aggiungete qui nome e iniziale.
+      // (i 5 promotori di «Chi siamo» sono già contati)
+      nomi: [
+        // "Giulia R.",
+      ],
+    },
+
+    condividi: {
+      titolo: "Ora porta qualcuno con te",
+      testo: "Se ognuno porta un'altra persona, a 100 ci arriviamo in un attimo.",
+      messaggio: "Sono entrato/a in Inséma: cercano 100 persone per fondare un movimento per Como entro fine anno. Ci stai anche tu? ",
+      bottone: "Mandalo su WhatsApp",
+    },
+
+    barraMobile: "Diventa uno dei 100 →",
   },
 
   /* ------------------------------------------------------------------ */
@@ -124,7 +185,7 @@ window.TESTI = {
       titolo: "Siamo folli.<br>Non stupidi.",
       testo: "Per vincere ci servi tu. Nessun obbligo: ogni aiuto conta.",
       azioni: [
-        { titolo: "Dai una mano", testo: "Strada, eventi, social, programma: scegli tu dove.", link: "aiutaci.html#gruppi", bottone: "Partecipa" },
+        { titolo: "Diventa uno dei 100", testo: "Fonda Inséma con noi, entro il 31 dicembre.", link: "aiutaci.html#modulo", bottone: "Ci sto" },
         { titolo: "Raccontaci la tua Como", testo: "Un problema nel tuo quartiere, un'idea, una storia di affitti impossibili.", link: "aiutaci.html#modulo", bottone: "Scrivici" },
         { titolo: "Passaparola", testo: "Seguici e condividi i nostri contenuti con chi conosci.", link: "https://www.instagram.com/insema_como/", bottone: "@insema_como" },
       ],
@@ -490,7 +551,7 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
 
     hero: {
       sopratitolo: "Siamo folli. Non stupidi.",
-      titolo: "Per vincere ci servi tu.",
+      titolo: "Cerchiamo 100 fondatori. Ci servi tu.",
       testo: "Sappiamo che da soli non ce la facciamo. Nessun obbligo: partecipare è totalmente volontario e ogni aiuto conta. Anche solo venire alle riunioni è preziosissimo.",
     },
 
@@ -519,16 +580,17 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
     },
 
     modulo: {
-      titolo: "Ci sto!",
+      titolo: "Diventa uno dei 100",
       nome: "Nome e cognome",
       email: "Email",
-      telefono: "Telefono (facoltativo)",
+      telefono: "Telefono / WhatsApp",
+      muro: "Voglio comparire nel muro dei 100 (solo nome e iniziale del cognome).",
       quartiere: "Quartiere o paese",
       gruppi: "Gruppi che ti interessano",
       messaggio: "Raccontaci qualcosa: un'idea, un problema del tuo quartiere, una storia…",
       privacy: "Acconsento al trattamento dei miei dati personali per essere ricontattato/a da Inséma.",
       bottone: "Invia",
-      grazie: "Grazie! Ti ricontattiamo presto. Inséma ✦",
+      grazie: "Benvenuto/a tra i fondatori! Ti scriviamo presto. ✦",
       grazieMail: "Si sta aprendo la tua app di posta con il messaggio già scritto: premi «Invia» e ci siamo.",
       errore: "Qualcosa non ha funzionato. Scrivici a",
     },
