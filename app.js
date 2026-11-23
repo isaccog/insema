@@ -609,6 +609,18 @@
         </div>
       </div>
     </section>
+    <section class="sec s-cream" id="gruppi">
+      <div class="wrap">
+        <h2 class="h2 h-navy">${A.gruppi.titolo}</h2>
+        <p class="intro">${md(A.gruppi.testo)}</p>
+        <div class="gruppi">${A.gruppi.lista.map((g, k) => `
+          <button type="button" class="gruppo" data-g="${g.nome}" aria-pressed="false" style="--r:${(k % 2 ? 1.5 : -1.5)}deg">
+            <span class="g-check" aria-hidden="true">✓</span><h3>${g.nome}</h3><p>${md(g.testo)}</p>
+          </button>`).join("")}
+        </div>
+      </div>
+    </section>
+
     <section class="sec s-blush" id="modulo">
       <div class="wrap form-wrap">
         <form class="form" id="join-form" novalidate>
@@ -653,18 +665,6 @@
             <p><a href="mailto:${S.email}">${S.email}</a><br><a href="${S.instagram}" target="_blank" rel="noopener">${S.instagramNome}</a></p>
           </div>
         </aside>
-      </div>
-    </section>
-
-    <section class="sec s-cream" id="gruppi">
-      <div class="wrap">
-        <h2 class="h2 h-navy">${A.gruppi.titolo}</h2>
-        <p class="intro">${md(A.gruppi.testo)}</p>
-        <div class="gruppi">${A.gruppi.lista.map((g, k) => `
-          <button type="button" class="gruppo" data-g="${g.nome}" aria-pressed="false" style="--r:${(k % 2 ? 1.5 : -1.5)}deg">
-            <span class="g-check" aria-hidden="true">✓</span><h3>${g.nome}</h3><p>${md(g.testo)}</p>
-          </button>`).join("")}
-        </div>
       </div>
     </section>
 
