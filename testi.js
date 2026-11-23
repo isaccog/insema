@@ -157,7 +157,7 @@ window.TESTI = {
     piano: {
       sopratitolo: "Il nostro piano",
       titolo: "100 → 1.000 → 15.000",
-      testo: "Senza giornali e TV si vince così: 100 pionieri, 1.000 esploratori, 15.000 voti. Un piccolo passo per un uomo, un grande passo per una città.",
+      testo: "100 pionieri, 1.000 esploratori, 15.000 voti. E una missione per te: trova 15 persone attorno a te e convincile.",
       link: { testo: "Scopri il piano →", link: "piano.html" },
     },
 
@@ -573,9 +573,23 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
       sopratitolo: "Il nostro piano · Missione Como 2027",
       titolo: "Un piccolo passo per un uomo.",
       titolo2: "Un grande passo per una città.",
-      testo: "Gli altri hanno giornali, TV e partiti. Noi abbiamo le persone. **100 pionieri, 1.000 esploratori, 15.000 voti**: ecco come si arriva sulla luna partendo da Como.",
-      bottone: { testo: "Parti con noi", link: "aiutaci.html#modulo" },
+      testo: "**100 pionieri, 1.000 esploratori, 15.000 voti**: ecco come si arriva sulla luna partendo da Como.",
+      bottone: { testo: "Accetta la missione", link: "#missione" },
       bottone2: { testo: "Come funziona", link: "#percorso" },
+    },
+
+    // Il «biglietto» della missione, subito sotto l'apertura
+    invito: {
+      etichetta: "La tua missione",
+      titolo: "Trova le 15 persone attorno a te.",
+      testo: "Quindici persone che conosci e che oggi non voterebbero Inséma. Il tuo compito è convincerle, una alla volta, da qui a maggio 2027.",
+      dettagli: [
+        ["Esploratore", "tu"],
+        ["Obiettivo", "15 persone"],
+        ["Scadenza", "maggio 2027"],
+      ],
+      bottone: "Accetto la missione",
+      accettata: "Missione accettata ✓",
     },
 
     percorso: {
@@ -632,9 +646,9 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
 
     missione: {
       sopratitolo: "La missione, se vuoi esplorare con noi",
-      titolo: "Convinci 15 persone attorno a te che oggi non voterebbero Inséma.",
+      titolo: "Trova le tue 15 persone. Poi convincile.",
       testo: "Non i tuoi amici che sono già d'accordo: quelli valgono, ma non spostano niente. Pensa a chi non vota più, a chi vota sempre uguale, a chi dice «tanto sono tutti uguali».",
-      istruzioni: "Tocca una persona quando l'hai convinta. La lista resta solo sul tuo telefono.",
+      istruzioni: "**Pensa a 15 nomi adesso.** Poi tocca una persona ogni volta che ne convinci una. La lista resta solo sul tuo telefono.",
       contatore: "convinte su 15",
       completata: "Missione compiuta. Un piccolo passo per te, un grande passo per Como. ✦",
       azzera: "Ricomincia",

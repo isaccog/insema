@@ -501,3 +501,20 @@ noscript { display: block; padding: 40px; text-align: center; }
   .moon-art { max-width: 420px; }
   .orbit { max-width: 360px; }
 }
+
+/* biglietto della missione */
+.invito-sec { padding: 70px 0; }
+.invito { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; background: var(--paper); border: 4px dashed var(--teal); border-radius: var(--r); padding: 44px; transform: rotate(-1deg); box-shadow: 8px 8px 0 var(--magenta); }
+.invito > * { min-width: 0; }
+.invito .h2 { margin-bottom: 0; color: var(--navy); }
+.invito .lead { margin: 18px 0 0; color: var(--navy); }
+.invito-tag { display: inline-block; background: var(--magenta); color: #fff; font-family: var(--f-title); text-transform: uppercase; font-size: 1.1rem; padding: 6px 16px; border-radius: 10px; transform: rotate(-3deg); margin-bottom: 18px; }
+.invito-side { display: grid; gap: 22px; }
+.invito-side dl { display: grid; gap: 10px; }
+.invito-side dl div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--teal); padding-bottom: 8px; color: var(--teal); }
+.invito-side dt { font-weight: 900; text-transform: uppercase; letter-spacing: .06em; font-size: .85rem; }
+.invito-side dd { font-family: var(--f-title); text-transform: uppercase; font-size: 1.2rem; color: var(--magenta); }
+.invito-side .btn { justify-self: start; font-size: 1.1rem; padding: 16px 34px; }
+@media (max-width: 820px) {
+  .invito { grid-template-columns: 1fr; padding: 28px; transform: none; }
+}

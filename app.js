@@ -509,6 +509,22 @@
       </div>
     </section>
 
+    <section class="sec s-yellow invito-sec">
+      <div class="wrap">
+        <div class="invito">
+          <div>
+            <p class="invito-tag">${P.invito.etichetta}</p>
+            <h2 class="h2">${P.invito.titolo}</h2>
+            <p class="lead">${md(P.invito.testo)}</p>
+          </div>
+          <div class="invito-side">
+            <dl>${P.invito.dettagli.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+            <a class="btn" id="accetta" href="#missione">${P.invito.bottone}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="sec s-cream" id="percorso">
       <div class="wrap">
         <div class="sec-head">${dial(P.percorso.dialetto)}<h2 class="h2">${P.percorso.titolo}</h2></div>
@@ -545,7 +561,7 @@
           <p class="kicker">${M.sopratitolo}</p>
           <h2 class="h2">${M.titolo}</h2>
           <p class="intro">${md(M.testo)}</p>
-          <p class="note">${M.istruzioni}</p>
+          <p class="note">${md(M.istruzioni)}</p>
           <p class="m-count"><strong id="m-n">0</strong> ${M.contatore} <button type="button" class="m-reset" id="m-reset">${M.azzera}</button></p>
           <p class="m-done" id="m-done" hidden>${M.completata}</p>
         </div>
@@ -740,6 +756,13 @@
     ob.addEventListener("keydown", (e) => { const g = e.target.closest(".p15"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); toggle(g); } });
     document.getElementById("m-reset").addEventListener("click", () => { st = []; draw(); });
     draw();
+  }
+  const acc = document.getElementById("accetta");
+  if (acc) {
+    const KA = "insema-missione-accettata";
+    const done = () => { acc.textContent = T.piano.invito.accettata; acc.classList.add("btn-navy"); };
+    try { if (localStorage.getItem(KA)) done(); } catch (_) {}
+    acc.addEventListener("click", () => { try { localStorage.setItem(KA, "1"); } catch (_) {} done(); });
   }
 
   /* ancore (#modulo ecc.) dopo il montaggio */
