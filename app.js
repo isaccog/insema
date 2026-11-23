@@ -243,7 +243,7 @@
 
     <section class="sec s-blush">
       <div class="wrap">
-        <div class="sec-head">${dial(C.persone.dialetto, "dial-lg")}<p class="note">${C.persone.nota}</p></div>
+        <div class="sec-head">${dial(C.persone.dialetto, "dial-lg")}${C.persone.nota ? `<p class="note">${C.persone.nota}</p>` : ""}</div>
         <div class="faces">${faces}</div>
       </div>
     </section>

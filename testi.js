@@ -212,7 +212,7 @@ window.TESTI = {
 
     persone: {
       dialetto: { frase: "Sem chì", traduzione: "siamo qui" },
-      nota: "In ordine sparso: ogni volta che apri la pagina, cambia.",
+      nota: "",
       // Per aggiungere una foto: mettete il file nella cartella img/persone/
       // e scrivete il percorso, es. foto: "img/persone/ilaria.jpg"
       lista: [
