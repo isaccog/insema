@@ -740,16 +740,14 @@
         d.getAll("quando").forEach((q) => p.append(c.quando, q));
         p.append(c.messaggio, d.get("messaggio") || ""); p.append(c.ponte, d.get("ponte"));
         p.append(c.privacy, F.privacy);
-        submit.disabled = true; submit.textContent = F.invio;
-        try {
-          // Google non permette di leggere la risposta (no-cors): se la rete funziona, l'invio è andato
-          await fetch(`https://docs.google.com/forms/d/e/${G.id}/formResponse`, { method: "POST", mode: "no-cors", body: p });
-          form.querySelectorAll("input, textarea, fieldset").forEach((el) => { if (el.tagName !== "FIELDSET") el.disabled = true; });
-          submit.hidden = true; show(F.grazie);
-        } catch (_) {
-          submit.disabled = false; submit.textContent = F.bottone;
-          show(`${F.errore} <a href="mailto:${S.email}">${S.email}</a>`, false);
-        }
+        const url = `https://docs.google.com/forms/d/e/${G.id}/formResponse`;
+        // sendBeacon spedisce i dati senza aspettare la risposta di Google
+        // (che non arriva mai in modo leggibile e lasciava il bottone bloccato)
+        let sent = false;
+        try { sent = navigator.sendBeacon && navigator.sendBeacon(url, p); } catch (_) { sent = false; }
+        if (!sent) fetch(url, { method: "POST", mode: "no-cors", body: p, keepalive: true }).catch(() => {});
+        form.querySelectorAll("input, textarea").forEach((el) => { el.disabled = true; });
+        submit.hidden = true; show(F.grazie);
       } else if (S.moduloEndpoint) {
         try {
           const r = await fetch(S.moduloEndpoint, { method: "POST", body: d, headers: { Accept: "application/json" } });
