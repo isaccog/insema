@@ -335,7 +335,8 @@
     if (e.isIntersecting) links.forEach((a) => {
       const on = a.getAttribute("href") === "#" + e.target.id;
       a.classList.toggle("on", on);
-      if (on) a.scrollIntoView({ block: "nearest", inline: "center" });
+      // sposta solo la barra dell'indice, mai la pagina
+      if (on) { const nav = a.parentNode; nav.scrollTo({ left: a.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2, behavior: "smooth" }); }
     });
   }), { rootMargin: "-45% 0px -50% 0px" });
   $$(".g-sec").forEach((s) => obs.observe(s));
