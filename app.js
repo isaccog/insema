@@ -505,7 +505,7 @@
           <p class="lead">${md(P.hero.testo)}</p>
           <div class="ctas">${btn(P.hero.bottone)}${btn(P.hero.bottone2, "btn-ghost")}</div>
         </div>
-        ${moonArt()}
+        <img class="hero-illo piano-illo" src="img/ill/luna-perla.webp" alt="La luna con la bandiera di Inséma sopra Brunate, la funicolare e il lago di Como">
       </div>
     </section>
 

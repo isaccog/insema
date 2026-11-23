@@ -531,3 +531,4 @@ noscript { display: block; padding: 40px; text-align: center; }
 .form-alt { font-size: .8rem; opacity: .75; }
 .form-alt a { color: var(--blush); }
 .form .btn[disabled] { opacity: .6; cursor: wait; }
+.page-hero .piano-illo { max-width: 600px; width: 100%; }
