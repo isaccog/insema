@@ -430,7 +430,7 @@ noscript { display: block; padding: 40px; text-align: center; }
 .moon-art { width: 100%; max-width: 560px; justify-self: center; display: block; }
 .piano-hero .h-hero { font-size: clamp(2.2rem, 5vw, 4.4rem); }
 .piano-hero .h-hero + .h-hero { margin-top: 6px; }
-.piano-hero .btn-ghost { color: var(--cream); }
+.piano-hero .btn-ghost { color: var(--plum); }
 
 .tappe { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; position: relative; align-items: end; }
 .tappe::before { content: ""; position: absolute; left: 8%; right: 8%; top: 46%; border-top: 4px dashed var(--sky); z-index: 0; }

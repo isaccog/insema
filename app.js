@@ -496,16 +496,16 @@
     const P = T.piano, M = P.missione;
     const pct = Math.min(100, FO.attuali / FO.obiettivo * 100);
     return `
-    <section class="page-hero s-navy piano-hero">
+    <section class="page-hero s-cream piano-hero">
       <div class="wrap hero-grid">
         <div>
           <p class="kicker">${P.hero.sopratitolo}</p>
-          <h1 class="h-hero h-cream">${P.hero.titolo}</h1>
+          <h1 class="h-hero">${P.hero.titolo}</h1>
           <p class="h-hero pink">${P.hero.titolo2}</p>
           <p class="lead">${md(P.hero.testo)}</p>
           <div class="ctas">${btn(P.hero.bottone)}${btn(P.hero.bottone2, "btn-ghost")}</div>
         </div>
-        <img class="hero-illo piano-illo" src="img/ill/luna-perla.webp" alt="La luna con la bandiera di Inséma sopra Brunate, la funicolare e il lago di Como">
+        <img class="hero-illo piano-illo" src="img/ill/luna-vino.webp?v=202611231934" alt="La luna con la bandiera di Inséma sopra Brunate, la funicolare e il lago di Como">
       </div>
     </section>
 
