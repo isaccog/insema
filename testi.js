@@ -608,7 +608,7 @@ Per noi ogni proposta deve dire quanto costa, da dove arrivano i soldi e quando 
 
     fondi: {
       titolo: "Sostienici",
-      testo: "Non prendiamo soldi da grandi gruppi, alberghi, immobiliari, costruttori o da chi lavora con il Comune. Ogni donazione sarà pubblicata online.",
+      testo: "Non abbiamo grandi finanziamenti, ogni euro conta.",
       bottone: "Dona",
       senzaLink: "Le donazioni apriranno presto. Se vuoi contribuire già ora, scrivici.",
     },
