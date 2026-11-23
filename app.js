@@ -613,23 +613,34 @@
       <div class="wrap form-wrap">
         <form class="form" id="join-form" novalidate>
           <h2>${F.titolo}</h2>
+          <p class="form-sub">${md(F.sottotitolo)}</p>
           <div class="form-row">
-            <input type="text" name="nome" placeholder="${F.nome}" required>
-            <input type="email" name="email" placeholder="${F.email}" required>
+            <input type="text" name="nome" placeholder="${F.nome}" aria-label="${F.nome}" autocomplete="name" required>
+            <input type="tel" name="telefono" placeholder="${F.telefono}" aria-label="${F.telefono}" autocomplete="tel" required>
           </div>
           <div class="form-row">
-            <input type="tel" name="telefono" placeholder="${F.telefono}" required>
-            <input type="text" name="quartiere" placeholder="${F.quartiere}">
+            <input type="email" name="email" placeholder="${F.email}" aria-label="${F.email}" autocomplete="email">
+            <input type="text" name="quartiere" placeholder="${F.quartiere}" aria-label="${F.quartiere}" required>
           </div>
+          <fieldset><legend>${F.esserci.domanda}</legend>
+            <div class="radios">${F.esserci.opzioni.map((o, k) => `<label class="radio"><input type="radio" name="esserci" value="${o}"${k === 0 ? " checked" : ""} required><span>${o}</span></label>`).join("")}</div>
+          </fieldset>
           <fieldset><legend>${F.gruppi}</legend>
             <div class="chips">${A.gruppi.lista.map((g) => `<label class="chip"><input type="checkbox" name="gruppi" value="${g.nome}"><span>${g.nome}</span></label>`).join("")}</div>
           </fieldset>
-          <textarea name="messaggio" rows="4" placeholder="${F.messaggio}"></textarea>
-          <label class="check"><input type="checkbox" name="muro" value="sì"> <span>${F.muro}</span></label>
+          <fieldset><legend>${F.quando.domanda}</legend>
+            <div class="chips">${F.quando.opzioni.map((o) => `<label class="chip"><input type="checkbox" name="quando" value="${o}"><span>${o}</span></label>`).join("")}</div>
+          </fieldset>
+          <input type="text" name="fonte" placeholder="${F.fonte}" aria-label="${F.fonte}">
+          <textarea name="messaggio" rows="4" placeholder="${F.messaggio}" aria-label="${F.messaggio}"></textarea>
+          <fieldset><legend>${F.ponte.domanda}</legend>
+            <div class="radios radios-row">${F.ponte.opzioni.map((o) => `<label class="radio"><input type="radio" name="ponte" value="${o}" required><span>${o}</span></label>`).join("")}</div>
+          </fieldset>
           <label class="check"><input type="checkbox" name="privacy" required> <span>${F.privacy}</span></label>
           <button type="submit" class="btn">${F.bottone}</button>
           <p class="form-msg" role="status" hidden></p>
           <div class="after" hidden>${share()}</div>
+          ${F.linkGoogle ? `<p class="form-alt">${md(F.linkGoogle).replace("<a ", '<a target="_blank" rel="noopener" ')}</p>` : ""}
         </form>
         <aside class="side-cards">
           <div class="side-card">
@@ -717,8 +728,29 @@
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       const d = new FormData(form);
-      const gruppi = d.getAll("gruppi").join(", ");
-      if (S.moduloEndpoint) {
+      const gruppi = d.getAll("gruppi");
+      const G = S.googleForm;
+      const submit = form.querySelector('button[type="submit"]');
+      if (G && G.id) {
+        const c = G.campi, p = new URLSearchParams();
+        p.append(c.nome, d.get("nome")); p.append(c.telefono, d.get("telefono"));
+        p.append(c.email, d.get("email") || ""); p.append(c.quartiere, d.get("quartiere"));
+        p.append(c.esserci, d.get("esserci")); p.append(c.fonte, d.get("fonte") || "");
+        gruppi.forEach((g) => p.append(c.gruppi, F.gruppiForm.find((o) => o.startsWith(g + ":")) || g));
+        d.getAll("quando").forEach((q) => p.append(c.quando, q));
+        p.append(c.messaggio, d.get("messaggio") || ""); p.append(c.ponte, d.get("ponte"));
+        p.append(c.privacy, F.privacy);
+        submit.disabled = true; submit.textContent = F.invio;
+        try {
+          // Google non permette di leggere la risposta (no-cors): se la rete funziona, l'invio è andato
+          await fetch(`https://docs.google.com/forms/d/e/${G.id}/formResponse`, { method: "POST", mode: "no-cors", body: p });
+          form.querySelectorAll("input, textarea, fieldset").forEach((el) => { if (el.tagName !== "FIELDSET") el.disabled = true; });
+          submit.hidden = true; show(F.grazie);
+        } catch (_) {
+          submit.disabled = false; submit.textContent = F.bottone;
+          show(`${F.errore} <a href="mailto:${S.email}">${S.email}</a>`, false);
+        }
+      } else if (S.moduloEndpoint) {
         try {
           const r = await fetch(S.moduloEndpoint, { method: "POST", body: d, headers: { Accept: "application/json" } });
           if (!r.ok) throw new Error();
@@ -726,10 +758,10 @@
         } catch (_) { show(`${F.errore} <a href="mailto:${S.email}">${S.email}</a>`, false); }
       } else {
         const lines = [
-          `Nome: ${d.get("nome")}`, `Email: ${d.get("email")}`, `Telefono: ${d.get("telefono")}`,
-          d.get("quartiere") ? `Quartiere: ${d.get("quartiere")}` : null,
-          gruppi ? `Gruppi: ${gruppi}` : null,
-          `Ponte dei 100: ${d.get("muro") ? "sì" : "no"}`,
+          `Nome: ${d.get("nome")}`, `Telefono: ${d.get("telefono")}`, d.get("email") ? `Email: ${d.get("email")}` : null,
+          `Quartiere: ${d.get("quartiere")}`, `Come: ${d.get("esserci")}`,
+          gruppi.length ? `Gruppi: ${gruppi.join(", ")}` : null,
+          `Ponte dei 100: ${d.get("ponte")}`,
           d.get("messaggio") ? `\n${d.get("messaggio")}` : null,
         ].filter((x) => x !== null).join("\n");
         location.href = `mailto:${S.email}?subject=${encodeURIComponent("Voglio essere uno dei 100 fondatori di Inséma")}&body=${encodeURIComponent(lines)}`;

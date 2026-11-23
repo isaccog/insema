@@ -40,6 +40,28 @@ window.TESTI = {
     // "Aiutaci" apre una mail già scritta verso l'indirizzo qui sopra.
     moduloEndpoint: "",
 
+    // GOOGLE FORM collegato al modulo «Diventa uno dei 100».
+    // Le risposte arrivano nel Google Form (e nel suo Foglio Google).
+    // ATTENZIONE: se cambiate domande o opzioni nel Google Form, i codici
+    // "entry.…" e i testi delle opzioni qui e in aiutaci.modulo devono
+    // restare IDENTICI a quelli del Form, altrimenti la risposta si perde.
+    googleForm: {
+      id: "1FAIpQLSd6VHLFVD1uKX4RG5EZM5__KqEbWXgp0ICdydTYcFML3_R7hA",
+      campi: {
+        nome: "entry.655481339",
+        telefono: "entry.1542789564",
+        email: "entry.1906687804",
+        quartiere: "entry.2854663",
+        esserci: "entry.1649077035",
+        fonte: "entry.2120908882",
+        gruppi: "entry.361267388",
+        quando: "entry.357270019",
+        messaggio: "entry.460660161",
+        ponte: "entry.2050639174",
+        privacy: "entry.629200317",
+      },
+    },
+
     // Link alla pagina per le donazioni. Se vuoto, il bottone non compare.
     linkDonazioni: "",
 
@@ -723,16 +745,45 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
 
     modulo: {
       titolo: "Diventa uno dei 100",
-      nome: "Nome e cognome",
+      sottotitolo: "Ci vogliono due minuti. Entro 48 ore ti scriviamo su WhatsApp per conoscerci.",
+      nome: "Nome e cognome *",
       email: "Email",
-      telefono: "Telefono / WhatsApp",
-      muro: "Voglio comparire nel ponte dei 100 (solo nome e iniziale del cognome).",
-      quartiere: "Quartiere o paese",
-      gruppi: "Gruppi che ti interessano",
+      telefono: "Telefono / WhatsApp *",
+      quartiere: "Quartiere o paese *",
+      fonte: "Chi ti ha parlato di Inséma?",
       messaggio: "Raccontaci qualcosa: un'idea, un problema del tuo quartiere, una storia…",
+      // I testi delle opzioni qui sotto devono essere IDENTICI al Google Form
+      esserci: {
+        domanda: "Come vuoi esserci? *",
+        opzioni: [
+          "Ci sto: voglio essere uno dei 100 fondatori",
+          "Tienimi dentro: per ora voglio solo restare aggiornato/a",
+        ],
+      },
+      gruppi: "Dove ti piacerebbe dare una mano?",
+      // opzioni del Google Form per i gruppi (devono iniziare con il nome del gruppo)
+      gruppiForm: [
+        "Strada: volantinaggio, banchetti in piazza",
+        "Eventi: organizzare gli incontri dal vivo",
+        "Territorio: associazioni, problemi e spazi dei quartieri",
+        "Social: video e contenuti",
+        "Strategia: comunicazione e rapporti con la stampa",
+        "Programma: scrivere le proposte",
+        "Fondi: raccolta fondi",
+      ],
+      quando: {
+        domanda: "Quando ti possiamo sentire più facilmente?",
+        opzioni: ["Mattina", "Pausa pranzo", "Pomeriggio", "Sera", "Weekend"],
+      },
+      ponte: {
+        domanda: "Vuoi comparire nel ponte dei 100 sul sito? *",
+        opzioni: ["Sì", "No, preferisco di no"],
+      },
       privacy: "Acconsento al trattamento dei miei dati personali per essere ricontattato/a da Inséma.",
       bottone: "Invia",
-      grazie: "Benvenuto/a tra i fondatori! Ti scriviamo presto. ✦",
+      invio: "Invio in corso…",
+      grazie: "Ci sei! Entro 48 ore ti scriviamo su WhatsApp. Benvenuto/a in Inséma. ✦",
+      linkGoogle: "Problemi con il modulo? [Compilalo su Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd6VHLFVD1uKX4RG5EZM5__KqEbWXgp0ICdydTYcFML3_R7hA/viewform)",
       grazieMail: "Si sta aprendo la tua app di posta con il messaggio già scritto: premi «Invia» e ci siamo.",
       errore: "Qualcosa non ha funzionato. Scrivici a",
     },

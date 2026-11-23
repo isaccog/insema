@@ -518,3 +518,16 @@ noscript { display: block; padding: 40px; text-align: center; }
 @media (max-width: 820px) {
   .invito { grid-template-columns: 1fr; padding: 28px; transform: none; }
 }
+
+/* modulo collegato al Google Form */
+.form-sub { margin: -4px 0 8px; opacity: .9; }
+.form > input[type=text] { width: 100%; }
+.radios { display: grid; gap: 8px; }
+.radios-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.radio input { position: absolute; opacity: 0; pointer-events: none; }
+.radio span { display: block; padding: 11px 16px; border-radius: 14px; border: 2px solid var(--cream); font-weight: 700; font-size: .95rem; cursor: pointer; }
+.radio input:checked + span { background: var(--magenta); border-color: var(--magenta); color: #fff; }
+.radio input:focus-visible + span { outline: 3px solid var(--blush); outline-offset: 2px; }
+.form-alt { font-size: .8rem; opacity: .75; }
+.form-alt a { color: var(--blush); }
+.form .btn[disabled] { opacity: .6; cursor: wait; }
