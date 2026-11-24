@@ -147,7 +147,7 @@
 
   /* ---------- scelta della zona (Strada e Dati) ---------- */
   let onSelect = () => {};
-  function select(id, scroll) {
+  function select(id, scroll, keepUrl) {
     if (!zona(id)) return;
     current = id; remember(id);
     $$(".zcard").forEach((c) => { c.hidden = c.dataset.z !== id; });
@@ -155,7 +155,7 @@
     $$(".g-zlist button").forEach((b) => b.classList.toggle("on", b.dataset.z === id));
     const h = $("#zhint"); if (h) h.hidden = true;
     $$(".g-tabs a").forEach((a) => { if (a.dataset.tab !== "benvenuto") a.setAttribute("href", `${a.dataset.tab}.html#zona-${id}`); });
-    history.replaceState(null, "", "#zona-" + id);
+    if (!keepUrl) history.replaceState(null, "", "#zona-" + id);
     onSelect(id);
     if (scroll) document.getElementById("zona-" + id).scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -260,6 +260,9 @@
       <ul class="g-avoid">${T.manifesto.no.lista.map((x) => `<li><strong>${x}</strong>${CP.evitare[x] ? ` <span>${md(CP.evitare[x])}</span>` : ""}</li>`).join("")}</ul>
       <p class="g-rule">${md(CP.regolaNumeri)}</p>
       <p class="g-lead">Cosa rispondere a chi ti fa domande lo trovi nella <a href="strada.html#faq">guida di strada</a>.</p>
+      ${PERS.length ? `<a class="g-card cv-promo" href="strada.html#convincere">
+        <span class="cv-mini">${PERS.slice(0, 3).map((p) => face(p)).join("")}</span>
+        <span><h3>${CV.titolo}${bozza(CV.introBozza)}</h3><p>${md(CV.promo)}</p></span><b aria-hidden="true">→</b></a>` : ""}
     </div></section>
 
     <section class="g-sec s-paper" id="zone"><div class="wrap">
@@ -303,13 +306,62 @@
     return `<svg class="minimap" viewBox="-10 -10 1020 ${H + 20}" role="img" aria-label="Mappa semplice delle 9 zone">${paths}<circle id="mm-me" r="14" style="display:none"/></svg>`;
   }
 
+  /* ---------- come convincere… (Strada; card in Benvenuto) ---------- */
+  const CV = G.convincere || { personaggi: [], gruppi: {} };
+  const PERS = CV.personaggi.filter((p) => p.attivo !== false);
+  const pers = (id) => PERS.find((p) => p.id === id);
+  const cvFromHash = (h) => { const m = (h || "").match(/^#convincere-([\w-]+)$/); return m && pers(m[1]) ? m[1] : null; };
+  const bozza = (on) => on ? ' <span class="badge">bozza</span>' : "";
+  const scrivi = (cosa, k) => todo(`Da scrivere: ${cosa}${CV.gruppi[k] ? ` (gruppo ${CV.gruppi[k]})` : ""}`);
+  // avatar provvisorio disegnato; l'immagine vera, se c'è, gli sta sopra
+  const face = (p, cls = "") => `<span class="cv-face ${cls}" style="--c:${p.colore}" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="55" r="29" fill="#fff" stroke="#274798" stroke-width="3.5"/><circle cx="40" cy="51" r="3.6" fill="#274798"/><circle cx="60" cy="51" r="3.6" fill="#274798"/></svg>
+    ${p.img ? `<img src="${p.img}" alt="" loading="lazy" onerror="this.remove()">` : ""}</span>`;
+
+  function cvScheda(p) {
+    const c = p.chiE || {}, dati = c.dati || [];
+    const list = (a, cosa, k) => a && a.length ? `<ul class="g-list">${a.map((x) => `<li>${md(x)}</li>`).join("")}</ul>` : scrivi(cosa, k);
+    const b = (titolo, html) => `<div class="cv-b"><h4>${titolo}</h4>${html}</div>`;
+    const altro = p.nome;
+    return `
+      <button type="button" class="btn btn-ghost btn-small cv-close" data-cv-close>← tutti</button>
+      <header class="cv-head">
+        ${face(p, "cv-face-lg")}
+        <div><h3 class="h2" id="cv-nome">${p.nome}</h3>
+        ${p.frase ? `<p class="cv-frase">«${md(p.frase)}»${bozza(p.bozza)}</p>` : scrivi("la frase tipica", "chiE")}</div>
+      </header>
+      ${b("Chi è", `${c.testo ? `<p>${md(c.testo)}</p>` : scrivi("due righe su chi è", "chiE")}
+        ${dati.map((d) => `<p class="cv-dato"><strong>${md(d.dato)}</strong>${src(d.fonte)}</p>`).join("")}`)}
+      ${b("Cosa gli sta a cuore", list(p.aCuore, "cosa gli sta a cuore", "aCuore"))}
+      ${b("Da dove partire", p.apertura ? `<p class="cv-apri">${md(p.apertura)}</p>` : scrivi("la domanda con cui aprire", "apertura"))}
+      ${b("Domande e risposte", p.domande && p.domande.length ? `<div class="g-faq">${p.domande.map((q) => `<details><summary>${q.d}${bozza(q.bozza)}</summary>
+        ${q.r ? `<p>${md(q.r)}</p>` : `<div class="cv-pad">${scrivi("la risposta", "risposte")}</div>`}</details>`).join("")}</div>` : scrivi("le domande che ti farà", "risposte"))}
+      ${b("Come va una conversazione", p.dialogo && p.dialogo.length ? `<ol class="cv-chat">${p.dialogo.map((m) => {
+        const tu = m.chi === "tu";
+        return `<li class="cv-msg ${tu ? "tu" : "lei"}" style="--c:${p.colore}"><small>${tu ? "Tu" : altro}</small>${m.testo ? `<p>${md(m.testo)}</p>` : `<p class="cv-vuoto">Da scrivere: battuta (gruppo ${CV.gruppi.dialogo})</p>`}</li>`;
+      }).join("")}</ol>` : scrivi("un piccolo dialogo", "dialogo"))}
+      ${b("Cosa evitare", p.evitare && p.evitare.length ? `<ul class="g-avoid">${p.evitare.map((x) => `<li>${md(x)}</li>`).join("")}</ul>` : scrivi("cosa evitare", "evitare"))}
+      ${b("Il capitolo del programma da far vedere", p.programma && p.programma.length ? `<div class="g-links">${p.programma.map((l) => `<a class="btn btn-navy" href="${l.link}">${l.testo} →</a>`).join("")}</div>` : scrivi("quale capitolo", "programma"))}
+      <p class="cv-foot"><button type="button" class="btn btn-ghost btn-small" data-cv-close>← tutti</button></p>`;
+  }
+
+  const sezConvincere = () => !PERS.length ? "" : `
+    <section class="g-sec s-cream" id="convincere"><div class="wrap">
+      <h2 class="h2">${CV.titolo}</h2>
+      <p class="g-lead">${md(CV.intro)}${bozza(CV.introBozza)}</p>
+      <ul class="cv-grid">${PERS.map((p) => `<li><button type="button" class="cv-av" data-cv="${p.id}" aria-controls="cv-scheda" aria-expanded="false">
+        ${face(p)}<span class="cv-nome">${p.nome}</span></button></li>`).join("")}</ul>
+      <div class="cv-veil" data-cv-close hidden></div>
+      <article class="cv-scheda" id="cv-scheda" tabindex="-1" aria-labelledby="cv-nome" hidden></article>
+    </div></section>`;
+
   function pageStrada() {
     const CP = G.comeParliamo, K = G.kit;
     const cl = (items, name) => `<ul class="g-checklist">${items.map((x, i) => `<li><label><input type="checkbox" name="${name}-${i}"> <span>${md(x)}</span></label></li>`).join("")}</ul>`;
     return `
     <section class="g-sec s-cream" id="dove-sei"><div class="wrap">
       ${intro(P.strada.titolo, "strada")}
-      ${jump([["zone", "La tua zona"], ["faq", "Cosa rispondo"], ["kit", "Kit di strada"]])}
+      ${jump([["zone", "La tua zona"], ["faq", "Cosa rispondo"], ...(PERS.length ? [["convincere", CV.titolo]] : []), ["kit", "Kit di strada"]])}
       <button type="button" class="btn btn-navy g-where" id="dove">📍 Dove sono?</button>
       <p class="g-geo" id="geo-msg" role="status" hidden></p>
       <div class="g-strada-pick" id="zone">
@@ -325,6 +377,7 @@
       <div class="g-faq">${CP.faq.map((f) => `<details><summary>${f.domanda}${f.bozza ? ' <span class="badge">bozza</span>' : ""}</summary>
         <p>${md(f.risposta)}</p><small class="src">Dai testi del sito: ${f.fonte}</small></details>`).join("")}</div>
     </div></section>
+    ${sezConvincere()}
 
     <section class="g-sec s-blush" id="kit"><div class="wrap">
       <h2 class="h2">${K.titolo}</h2>
@@ -459,7 +512,65 @@
       const c = $("#mm-me"); if (!c || !window.__mmPt) return;
       const [x, y] = window.__mmPt([lon, lat]); c.setAttribute("cx", x); c.setAttribute("cy", y); c.style.display = "";
     });
-    if (current) select(current, false);
+    // se il link punta a un personaggio, la zona ricordata non deve cambiare l'URL
+    if (current) select(current, false, !!cvFromHash(HASH0));
+    bindConvincere();
+  }
+
+  /* ---------- Strada: come convincere… ---------- */
+  function bindConvincere() {
+    const box = $("#cv-scheda"); if (!box) return;
+    const veil = $(".cv-veil"), wide = matchMedia("(min-width: 700px)"), still = matchMedia("(prefers-reduced-motion: reduce)");
+    let open = null, pushed = false;
+    const btn = (id) => $(`.cv-av[data-cv="${id}"]`);
+
+    function show(id, push) {
+      const p = pers(id); if (!p) return;
+      const was = open;
+      box.innerHTML = cvScheda(p); brand(box);
+      box.style.setProperty("--c", p.colore);
+      box.hidden = false; veil.hidden = false;
+      document.body.classList.add("cv-open");
+      $$(".cv-av").forEach((b) => { const on = b.dataset.cv === id; b.classList.toggle("on", on); b.setAttribute("aria-expanded", on); });
+      $$("[data-cv-close]", box).forEach((b) => b.addEventListener("click", () => hide()));
+      open = id;
+      if (push) {
+        // da una scheda all'altra non si allunga la cronologia: «indietro» torna sempre a tutti
+        if (was && pushed) history.replaceState({ cv: id }, "", "#convincere-" + id);
+        else { history.pushState({ cv: id }, "", "#convincere-" + id); pushed = true; }
+      }
+      box.focus({ preventScroll: true });
+      if (wide.matches) box.scrollIntoView({ behavior: still.matches ? "auto" : "smooth", block: "start" });
+      else box.scrollTop = 0;
+    }
+
+    function hide(fromHistory) {
+      if (!open) return;
+      const id = open; open = null;
+      box.hidden = true; veil.hidden = true; box.innerHTML = "";
+      document.body.classList.remove("cv-open");
+      $$(".cv-av").forEach((b) => { b.classList.remove("on"); b.setAttribute("aria-expanded", "false"); });
+      const b = btn(id); if (b) b.focus({ preventScroll: !wide.matches });
+      if (fromHistory) { pushed = false; return; }
+      if (pushed) { pushed = false; history.back(); }
+      else history.replaceState(null, "", "#convincere");
+    }
+
+    $$(".cv-av").forEach((b) => b.addEventListener("click", () => {
+      if (!still.matches) { b.classList.remove("cv-bounce"); void b.offsetWidth; b.classList.add("cv-bounce"); }
+      if (open === b.dataset.cv) hide(); else show(b.dataset.cv, true);
+    }));
+    $$(".cv-av").forEach((b) => b.addEventListener("animationend", () => b.classList.remove("cv-bounce")));
+    veil.addEventListener("click", () => hide());
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) hide(); });
+    window.addEventListener("popstate", () => {
+      const id = cvFromHash(location.hash);
+      if (id) show(id, false); else hide(true);
+    });
+
+    // link diretto: strada.html#convincere-nonna
+    const id0 = cvFromHash(HASH0);
+    if (id0) { $("#convincere").scrollIntoView(); show(id0, false); }
   }
 
   /* ---------- Dati: mappa Leaflet, indicatori, stampa ---------- */

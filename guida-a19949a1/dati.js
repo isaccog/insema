@@ -130,6 +130,193 @@ window.GUIDA = {
   },
 
   /* ------------------------------------------------------------------ */
+  /* PAGINA STRADA · come convincere… (sezione #convincere)             */
+  /* e una card che la presenta in Benvenuto → Come parliamo            */
+  /* ------------------------------------------------------------------ */
+  /*
+     Ogni personaggio è un avatar tondo; toccandolo si apre la sua scheda.
+     Il link diretto a una scheda è strada.html#convincere-ID
+     (es. strada.html#convincere-nonna): si può mandare nel gruppo WhatsApp.
+
+     Un campo lasciato vuoto ("" oppure [ ]) compare nella guida come
+     riquadro tratteggiato «Da scrivere: …» con il gruppo indicato
+     qui sotto in «gruppi». Quando lo scrivete, il riquadro sparisce.
+
+     COME AGGIUNGERE UN PERSONAGGIO
+     Copiate un personaggio intero, da { a }, e cambiate:
+       id      → corto, minuscolo, senza spazi né accenti (va nel link)
+       nome    → come compare sotto l'avatar
+       img     → "avatar/ID.webp" (vedi avatar/LEGGIMI.txt). Finché
+                 il file non c'è, si vede un avatar disegnato provvisorio.
+       colore  → sfondo dell'avatar, un colore della palette
+       attivo  → false per nasconderlo senza cancellarlo
+       bozza   → true finché la frase tipica è da rivedere
+
+     COME AGGIUNGERE UNA DOMANDA
+     Dentro domande: [ ] del personaggio:
+       { d: "La domanda che ti fanno", r: "La risposta", bozza: true },
+
+     COME AGGIUNGERE UN PEZZO DI DIALOGO
+     Dentro dialogo: [ ], una riga per battuta, nell'ordine:
+       { chi: "tu", testo: "Cosa dici tu" },
+       { chi: "lei", testo: "Cosa risponde" },
+     chi: "tu" va a destra; qualsiasi altro valore («lei», «lui»,
+     «loro») va a sinistra, con il nome del personaggio.
+
+     Dati e fonti di «chi è»: copiate il numero in «dato» e la fonte,
+     così com'è, in «fonte». Un personaggio può avere più dati.
+  */
+  convincere: {
+    titolo: "Come convincere…",
+    intro: "Non si tratta di vincere una discussione. Ascolta, fai domande, parti da un problema concreto della sua vita. Mai prendere in giro, mai alzare la voce.",
+    introBozza: true,
+    // testo della card in Benvenuto → Come parliamo
+    promo: "Tua nonna, i tuoi genitori, l'amico di destra: per ognuno, da dove partire, cosa ti chiederà e cosa rispondere.",
+    // chi scrive ogni parte della scheda (compare nei riquadri «Da scrivere»)
+    gruppi: {
+      chiE: "Strategia", aCuore: "Strategia", apertura: "Strategia",
+      risposte: "Programma", dialogo: "Strategia", evitare: "Strategia", programma: "Programma",
+    },
+    personaggi: [
+      {
+        id: "nonna", nome: "Tua nonna", img: "avatar/nonna.webp", colore: "#f6b8ca", attivo: true,
+        frase: "Ai miei tempi Como era un'altra cosa.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "Gli elettori over 75 a Como sono 11.963, il 62% donne.", fonte: "ISTAT via tuttitalia, 1/1/2025" },
+          { dato: "Il tg informa il 67,4% degli over 65.", fonte: "Censis 2026, dato nazionale" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "E chi mi aiuta se sto male?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Servizi", link: "../programma-servizi.html" }],
+      },
+      {
+        id: "genitori", nome: "I tuoi genitori", img: "avatar/genitori.webp", colore: "#a9cbdb", attivo: true,
+        frase: "La politica? Lasciala stare, pensa al lavoro.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "I 55-64enni sono la fascia più numerosa dell'elettorato: 11.488.", fonte: "ISTAT via tuttitalia, 1/1/2025" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Perché dovrei votare qualcuno che non conosco?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Casa", link: "../programma-casa.html" }, { testo: "Conti chiari", link: "../programma-conti.html" }],
+      },
+      {
+        id: "genitori-bimbi", nome: "Genitori con figli piccoli", img: "avatar/genitori-bimbi.webp", colore: "#fcdf6c", attivo: true,
+        frase: "Non abbiamo tempo nemmeno per dormire.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "A Como nascono 6,5 bambini ogni 1.000 abitanti e muoiono 11,1 persone.", fonte: "ISTAT, 2024" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Il nido gratis? E chi lo paga?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Servizi", link: "../programma-servizi.html" }],
+      },
+      {
+        id: "amico-destra", nome: "L'amico di destra", img: "avatar/amico-destra.webp", colore: "#fef0e7", attivo: true,
+        frase: "Voto chi fa le cose, non chi le promette.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "Alle comunali 2022 le liste civiche, senza simbolo di partito, hanno preso il 47,6%.", fonte: "risultati ufficiali" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Siete i soliti di sinistra con un altro nome?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Conti chiari", link: "../programma-conti.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
+      },
+      {
+        id: "amica-sinistra", nome: "L'amica di sinistra", img: "avatar/amica-sinistra.webp", colore: "#4bbecf", attivo: true,
+        frase: "Un'altra lista? Così dividete e basta.", bozza: true,
+        chiE: { testo: "", dati: [
+          // fonte: la stessa usata per questo numero in «Como in numeri» (pagina Dati)
+          { dato: "Al ballottaggio 2022 ha votato il 35,75% degli aventi diritto, il minimo di sempre per un sindaco di Como.", fonte: "Comunali 2022" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Perché non vi alleate con chi c'è già?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Casa", link: "../programma-casa.html" }, { testo: "Lavoro", link: "../programma-lavoro.html" }],
+      },
+
+      // ↓ proposte: da confermare (attivo: false per nasconderle)
+      {
+        id: "non-vota", nome: "Chi non vota mai", img: "avatar/non-vota.webp", colore: "#7ea3d6", attivo: true,
+        frase: "Tanto sono tutti uguali.", bozza: true,
+        chiE: { testo: "", dati: [
+          // fonte: la stessa usata per questo numero in «Como in numeri» (pagina Dati)
+          { dato: "Al ballottaggio 2022 ha votato il 35,75% degli aventi diritto: il sindaco l'ha scelto poco più di un elettore su tre.", fonte: "Comunali 2022" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Cosa cambia se voto?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Conti chiari", link: "../programma-conti.html" }],
+      },
+      {
+        id: "frontaliere", nome: "Chi lavora in Svizzera", img: "avatar/frontaliere.webp", colore: "#f8c8d7", attivo: true,
+        frase: "Como la vedo solo la sera, in coda.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "In provincia di Como i frontalieri sono 32.176, +23,6% in dieci anni.", fonte: "Il Giorno, aprile 2026" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "A me cosa interessa del Comune?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Servizi", link: "../programma-servizi.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
+      },
+      {
+        id: "turismo", nome: "Chi lavora nel turismo", img: "avatar/turismo.webp", colore: "#fcdf6c", attivo: true,
+        frase: "D'estate 12 ore al giorno, d'inverno niente.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "Nel turismo il reddito è più basso del 35% e la produttività del 30% rispetto alla media.", fonte: "Istat" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Il salario minimo non fa chiudere i ristoranti?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Lavoro", link: "../programma-lavoro.html" }],
+      },
+      {
+        id: "cerca-casa", nome: "Chi cerca casa", img: "avatar/cerca-casa.webp", colore: "#f6b8ca", attivo: true,
+        frase: "Con quello che pago d'affitto…", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "A Como un trilocale in affitto assorbe il 46% del reddito di una famiglia media.", fonte: "idealista, 2025" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Ma il Comune cosa può fare sugli affitti?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Casa", link: "../programma-casa.html" }],
+      },
+      {
+        id: "negozio", nome: "Chi ha un negozio", img: "avatar/negozio.webp", colore: "#a9cbdb", attivo: true,
+        frase: "Senza turisti chiudiamo.", bozza: true,
+        chiE: { testo: "", dati: [
+          { dato: "Il centro ha perso il 6,5% dei residenti dal 2019.", fonte: "anagrafe comunale, via La Provincia di Como, agosto 2026" },
+        ] },
+        aCuore: [],
+        apertura: "",
+        domande: [{ d: "Volete mandare via i turisti?", r: "", bozza: true }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        evitare: [],
+        programma: [{ testo: "Lavoro", link: "../programma-lavoro.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
   /* PAGINA BENVENUTO · la missione (contatore da testi.js → fondatori)        */
   /* ------------------------------------------------------------------ */
   missione: {
