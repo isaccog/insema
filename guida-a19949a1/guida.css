@@ -308,7 +308,7 @@ body.cv-open { overflow: hidden; }
 .cv-msg { max-width: 82%; border-radius: 18px; padding: 8px 14px 10px; }
 .cv-msg small { display: block; font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; opacity: .8; margin-bottom: 2px; }
 .cv-msg.tu { justify-self: end; background: var(--navy); color: #fff; border-bottom-right-radius: 4px; }
-.cv-msg.lei { justify-self: start; background: var(--c); color: var(--navy); border-bottom-left-radius: 4px; box-shadow: inset 0 0 0 2px var(--navy); }
+.cv-msg.altr { justify-self: start; background: var(--c); color: var(--navy); border-bottom-left-radius: 4px; box-shadow: inset 0 0 0 2px var(--navy); }
 .cv-vuoto { border: 2px dashed currentColor; border-radius: 10px; padding: 6px 10px; margin-top: 4px; font-weight: 700; opacity: .85; }
 .cv-b .g-avoid li { border-left-color: var(--red); }
 .cv-foot { margin-top: 24px; }

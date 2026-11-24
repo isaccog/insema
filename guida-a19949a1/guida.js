@@ -332,13 +332,13 @@
       </header>
       ${b("Chi è", `${c.testo ? `<p>${md(c.testo)}</p>` : scrivi("due righe su chi è", "chiE")}
         ${dati.map((d) => `<p class="cv-dato"><strong>${md(d.dato)}</strong>${src(d.fonte)}</p>`).join("")}`)}
-      ${b("Cosa gli sta a cuore", list(p.aCuore, "cosa gli sta a cuore", "aCuore"))}
+      ${b("Cosa ha a cuore", list(p.aCuore, "cosa ha a cuore", "aCuore"))}
       ${b("Da dove partire", p.apertura ? `<p class="cv-apri">${md(p.apertura)}</p>` : scrivi("la domanda con cui aprire", "apertura"))}
       ${b("Domande e risposte", p.domande && p.domande.length ? `<div class="g-faq">${p.domande.map((q) => `<details><summary>${q.d}${bozza(q.bozza)}</summary>
         ${q.r ? `<p>${md(q.r)}</p>` : `<div class="cv-pad">${scrivi("la risposta", "risposte")}</div>`}</details>`).join("")}</div>` : scrivi("le domande che ti farà", "risposte"))}
       ${b("Come va una conversazione", p.dialogo && p.dialogo.length ? `<ol class="cv-chat">${p.dialogo.map((m) => {
         const tu = m.chi === "tu";
-        return `<li class="cv-msg ${tu ? "tu" : "lei"}" style="--c:${p.colore}"><small>${tu ? "Tu" : altro}</small>${m.testo ? `<p>${md(m.testo)}</p>` : `<p class="cv-vuoto">Da scrivere: battuta (gruppo ${CV.gruppi.dialogo})</p>`}</li>`;
+        return `<li class="cv-msg ${tu ? "tu" : "altr"}" style="--c:${p.colore}"><small>${tu ? "Tu" : altro}</small>${m.testo ? `<p>${md(m.testo)}</p>` : `<p class="cv-vuoto">Da scrivere: battuta (gruppo ${CV.gruppi.dialogo})</p>`}</li>`;
       }).join("")}</ol>` : scrivi("un piccolo dialogo", "dialogo"))}
       ${b("Cosa evitare", p.evitare && p.evitare.length ? `<ul class="g-avoid">${p.evitare.map((x) => `<li>${md(x)}</li>`).join("")}</ul>` : scrivi("cosa evitare", "evitare"))}
       ${b("Il capitolo del programma da far vedere", p.programma && p.programma.length ? `<div class="g-links">${p.programma.map((l) => `<a class="btn btn-navy" href="${l.link}">${l.testo} →</a>`).join("")}</div>` : scrivi("quale capitolo", "programma"))}
@@ -568,7 +568,7 @@
       if (id) show(id, false); else hide(true);
     });
 
-    // link diretto: strada.html#convincere-nonna
+    // link diretto: strada.html#convincere-nonni
     const id0 = cvFromHash(HASH0);
     if (id0) { $("#convincere").scrollIntoView(); show(id0, false); }
   }

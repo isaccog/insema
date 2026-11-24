@@ -1,7 +1,7 @@
 IMMAGINI DEGLI AVATAR · «Come convincere…»
 
 Un file per personaggio, con lo stesso nome dell'id in dati.js:
-  nonna.webp, genitori.webp, genitori-bimbi.webp, amico-destra.webp, …
+  nonni.webp, genitori.webp, genitori-bimbi.webp, destra.webp, …
 
 Finché un file non c'è, la guida mostra un avatar disegnato provvisorio.
 Non serve toccare dati.js: basta mettere il file qui.

@@ -136,7 +136,7 @@ window.GUIDA = {
   /*
      Ogni personaggio è un avatar tondo; toccandolo si apre la sua scheda.
      Il link diretto a una scheda è strada.html#convincere-ID
-     (es. strada.html#convincere-nonna): si può mandare nel gruppo WhatsApp.
+     (es. strada.html#convincere-nonni): si può mandare nel gruppo WhatsApp.
 
      Un campo lasciato vuoto ("" oppure [ ]) compare nella guida come
      riquadro tratteggiato «Da scrivere: …» con il gruppo indicato
@@ -159,9 +159,9 @@ window.GUIDA = {
      COME AGGIUNGERE UN PEZZO DI DIALOGO
      Dentro dialogo: [ ], una riga per battuta, nell'ordine:
        { chi: "tu", testo: "Cosa dici tu" },
-       { chi: "lei", testo: "Cosa risponde" },
-     chi: "tu" va a destra; qualsiasi altro valore («lei», «lui»,
-     «loro») va a sinistra, con il nome del personaggio.
+       { chi: "loro", testo: "Cosa risponde" },
+     chi: "tu" va a destra; qualsiasi altro valore (di solito «loro»)
+     va a sinistra, con il nome del personaggio.
 
      Dati e fonti di «chi è»: copiate il numero in «dato» e la fonte,
      così com'è, in «fonte». Un personaggio può avere più dati.
@@ -171,7 +171,7 @@ window.GUIDA = {
     intro: "Non si tratta di vincere una discussione. Ascolta, fai domande, parti da un problema concreto della sua vita. Mai prendere in giro, mai alzare la voce.",
     introBozza: true,
     // testo della card in Benvenuto → Come parliamo
-    promo: "Tua nonna, i tuoi genitori, l'amico di destra: per ognuno, da dove partire, cosa ti chiederà e cosa rispondere.",
+    promo: "Tu* nonn*, i tuoi genitori, l'amic* di destra: per ognuno, da dove partire, cosa ti chiederà e cosa rispondere.",
     // chi scrive ogni parte della scheda (compare nei riquadri «Da scrivere»)
     gruppi: {
       chiE: "Strategia", aCuore: "Strategia", apertura: "Strategia",
@@ -179,7 +179,7 @@ window.GUIDA = {
     },
     personaggi: [
       {
-        id: "nonna", nome: "Tua nonna", img: "avatar/nonna.webp", colore: "#f6b8ca", attivo: true,
+        id: "nonni", nome: "Tu* nonn*", img: "avatar/nonni.webp", colore: "#f6b8ca", attivo: true,
         frase: "Ai miei tempi Como era un'altra cosa.", bozza: true,
         chiE: { testo: "", dati: [
           { dato: "Gli elettori over 75 a Como sono 11.963, il 62% donne.", fonte: "ISTAT via tuttitalia, 1/1/2025" },
@@ -188,7 +188,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "E chi mi aiuta se sto male?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Servizi", link: "../programma-servizi.html" }],
       },
@@ -206,7 +206,7 @@ window.GUIDA = {
         programma: [{ testo: "Casa", link: "../programma-casa.html" }, { testo: "Conti chiari", link: "../programma-conti.html" }],
       },
       {
-        id: "genitori-bimbi", nome: "Genitori con figli piccoli", img: "avatar/genitori-bimbi.webp", colore: "#fcdf6c", attivo: true,
+        id: "genitori-bimbi", nome: "Genitori con figl* piccol*", img: "avatar/genitori-bimbi.webp", colore: "#fcdf6c", attivo: true,
         frase: "Non abbiamo tempo nemmeno per dormire.", bozza: true,
         chiE: { testo: "", dati: [
           { dato: "A Como nascono 6,5 bambini ogni 1.000 abitanti e muoiono 11,1 persone.", fonte: "ISTAT, 2024" },
@@ -219,7 +219,7 @@ window.GUIDA = {
         programma: [{ testo: "Servizi", link: "../programma-servizi.html" }],
       },
       {
-        id: "amico-destra", nome: "L'amico di destra", img: "avatar/amico-destra.webp", colore: "#fef0e7", attivo: true,
+        id: "destra", nome: "L'amic* di destra", img: "avatar/destra.webp", colore: "#fef0e7", attivo: true,
         frase: "Voto chi fa le cose, non chi le promette.", bozza: true,
         chiE: { testo: "", dati: [
           { dato: "Alle comunali 2022 le liste civiche, senza simbolo di partito, hanno preso il 47,6%.", fonte: "risultati ufficiali" },
@@ -227,12 +227,12 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "Siete i soliti di sinistra con un altro nome?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Conti chiari", link: "../programma-conti.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
       },
       {
-        id: "amica-sinistra", nome: "L'amica di sinistra", img: "avatar/amica-sinistra.webp", colore: "#4bbecf", attivo: true,
+        id: "sinistra", nome: "L'amic* di sinistra", img: "avatar/sinistra.webp", colore: "#4bbecf", attivo: true,
         frase: "Un'altra lista? Così dividete e basta.", bozza: true,
         chiE: { testo: "", dati: [
           // fonte: la stessa usata per questo numero in «Como in numeri» (pagina Dati)
@@ -241,7 +241,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "Perché non vi alleate con chi c'è già?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Casa", link: "../programma-casa.html" }, { testo: "Lavoro", link: "../programma-lavoro.html" }],
       },
@@ -257,7 +257,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "Cosa cambia se voto?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Conti chiari", link: "../programma-conti.html" }],
       },
@@ -270,7 +270,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "A me cosa interessa del Comune?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Servizi", link: "../programma-servizi.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
       },
@@ -283,7 +283,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "Il salario minimo non fa chiudere i ristoranti?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Lavoro", link: "../programma-lavoro.html" }],
       },
@@ -296,7 +296,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "Ma il Comune cosa può fare sugli affitti?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lei", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Casa", link: "../programma-casa.html" }],
       },
@@ -309,7 +309,7 @@ window.GUIDA = {
         aCuore: [],
         apertura: "",
         domande: [{ d: "Volete mandare via i turisti?", r: "", bozza: true }],
-        dialogo: [{ chi: "tu", testo: "" }, { chi: "lui", testo: "" }],
+        dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Lavoro", link: "../programma-lavoro.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
       },
