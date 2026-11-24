@@ -1,0 +1,15 @@
+IMMAGINI DEGLI AVATAR · «Come convincere…»
+
+Un file per personaggio, con lo stesso nome dell'id in dati.js:
+  nonni.webp, genitori.webp, genitori-bimbi.webp, destra.webp, …
+
+Finché un file non c'è, la guida mostra un avatar disegnato provvisorio.
+Non serve toccare dati.js: basta mettere il file qui.
+
+Dai PNG 1024×1024 (sfondo pieno) ai WebP 512 px: aprite il Terminale
+in questa cartella, copiate qui i PNG e lanciate
+
+  for f in *.png; do cwebp -q 82 -resize 512 512 "$f" -o "${f%.png}.webp"; done
+
+(serve cwebp: brew install webp). Poi cancellate i PNG: nel sito
+vanno solo i .webp. Il ritaglio tondo lo fa la guida, non serve farlo.
