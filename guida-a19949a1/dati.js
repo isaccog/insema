@@ -21,12 +21,18 @@
    il link al gruppo WhatsApp di zona.
 
    COME AGGIUNGERE UN REFERENTE
-   (compare in tutte e tre le pagine: elenco zone in Benvenuto,
-   scheda di zona in Strada e in Dati)
-   Cercate la zona (es. id: "III"), poi il quartiere, e dentro
-   referenti: [ ] aggiungete una riga così:
+   (uno per zona; compare in tutte e tre le pagine: elenco zone in
+   Benvenuto, scheda di zona in Strada e in Dati)
+   Cercate la zona (es. nome: "Camerlata e Rebbio") e dentro
+   referenti: [ ] della zona (non dei quartieri) aggiungete:
      { nome: "Giulia R.", whatsapp: "https://chat.whatsapp.com/…", nota: "Sente bene la sera" },
-   Si possono mettere più referenti nello stesso quartiere.
+   Di solito uno per zona; se serve, se ne possono mettere due.
+
+   IL NOME DELLE ZONE
+   Ogni zona ha un «nome» breve (es. "Camerlata e Rebbio"): è quello
+   che si legge nei bottoni, sulle mappe e nei titoli. Il numero
+   romano (id) serve solo ai link (strada.html#zona-III): non cambiatelo.
+   «mappa» è il nome cortissimo scritto sulle mappe, dove lo spazio è poco.
 
    COME AGGIUNGERE UN LUOGO UTILE
    (compare nella scheda di zona in Strada e in Dati; se ha lat e lon,
@@ -72,6 +78,8 @@ window.GUIDA = {
   /* PAGINA BENVENUTO · accoglienza                                                       */
   /* ------------------------------------------------------------------ */
   benvenuto: {
+    // BENVENUTO · Gruppi: la missione di adesso, sopra il bottone «Parlane col tuo referente»
+    missioneOra: "La tua missione in questo momento: parlare con tutt* di inséma e trovare altr* pionier* con del tempo da dedicarci.",
     titolo: "Ciao, sei dei nostri.",
     righe: [
       "Questa guida serve a chi va per strada con inséma: volantinaggi, banchetti, incontri nei quartieri. Dove sei, chi ci abita, cosa dire, a chi rivolgerti.",
@@ -97,34 +105,135 @@ window.GUIDA = {
     },
     regolaNumeri: "In pubblico diamo **numeri sui problemi, non sulle soluzioni**. «Como è seconda in Lombardia per prezzo delle case» sì; «faremo 500 case» no.",
 
-    // FAQ. bozza: true = risposta scritta per la guida, da verificare
+    /* Dal documento di strategia di comunicazione (24/11/2026).
+       bozza: true finché il gruppo Strategia non li rivede.
+       Nella guida NON vanno nomi di avversari o di persone. */
+
+    // BENVENUTO · Come parliamo: dopo le 4 parole dello stile
+    regole: {
+      titolo: "Le nostre regole",
+      bozza: true,
+      fonte: "Strategia di comunicazione, 24/11/2026",
+      lista: [
+        "**Critichiamo le scelte, mai le persone.** Anche quando ci provocano.",
+        "**Ogni critica finisce con «cosa faremmo noi»:** una proposta, una domanda aperta, un invito a partecipare.",
+        "**Diciamo cosa è dato, cosa è stima e cosa è ancora da verificare.** «Su questo stiamo verificando con chi se ne intende» è una buona risposta, e vale più di una risposta inventata.",
+        "**Citiamo sempre la fonte** quando diamo un numero (Comune, ISTAT, bilancio, atti).",
+        "**Parliamo semplice:** niente burocratese. Norme e bilanci si traducono in cosa cambia nella vita delle persone.",
+        "**Parliamo al plurale e a tutte e tutti:** «noi», «la squadra», «le persone», «chi vive a Como». Ironia sì, con misura e soprattutto su noi stessi («siamo folli, non stupidi»), mai per prendere in giro qualcuno.",
+      ],
+    },
+
+    // BENVENUTO · Cosa evitiamo: voci in più, sotto le cinque di testi.js → manifesto.no
+    evitareAncora: [
+      { voce: "Dare per certo quello che è una stima", testo: "Cifre, tempi e fattibilità del programma sono in parte ancora da verificare: diciamolo.", bozza: true, fonte: "Strategia di comunicazione, 24/11/2026" },
+      { voce: "Il gergo", testo: "Se una frase si capisce solo in Comune, va riscritta.", bozza: true, fonte: "Strategia di comunicazione, 24/11/2026" },
+    ],
+
+    // BENVENUTO · Come parliamo (box) e STRADA · fondo del Kit di strada («breve»)
+    dueRegole: {
+      titolo: "Due regole che non si discutono",
+      bozza: true,
+      fonte: "Strategia di comunicazione, 24/11/2026",
+      lista: [
+        "**Stampa e pubblicazioni:** prima di parlare con un giornalista o pubblicare qualcosa a nome di inséma, passate dal gruppo Strategia.",
+        "**Bozze interne:** non girate file provvisori, come la bozza del programma, come se fossero definitivi.",
+      ],
+      breve: "**Due regole:** giornalisti e pubblicazioni a nome di inséma passano dal gruppo Strategia; le bozze interne non si girano come se fossero definitive.",
+    },
+
+    // STRADA · Cosa rispondo: riquadro prima delle FAQ
+    critiche: {
+      titolo: "Quando ti criticano: 4 passi",
+      bozza: true,
+      fonte: "Strategia di comunicazione, 24/11/2026",
+      passi: [
+        "**Riconosci la preoccupazione:** spesso è legittima. Non metterti sulla difensiva.",
+        "**Non giocare sul terreno dell'altro:** non serve dimostrare di essere «come chi c'è da anni». Sposta il discorso sul metodo e sulle regole che ci siamo dati.",
+        "**Ammetti quello che non sai:** «stiamo verificando» è serio, non debole.",
+        "**Chiudi con «cosa faremmo noi»** e con un modo per partecipare.",
+      ],
+    },
+
+    // STRADA · riquadro dentro la FAQ con garanzie: true; link diretto strada.html#garanzie
+    garanzie: {
+      titolo: "Le 4 garanzie",
+      bozza: true,
+      fonte: "Strategia di comunicazione, 24/11/2026; programma → Conti chiari. «Ogni tre mesi», «col semaforo», «errori ammessi», «entro 30 giorni» e «per tre anni dopo»: dal piano interno, da confermare",
+      link: { testo: "Il capitolo Conti chiari", link: "../programma-conti.html" },
+      lista: [
+        { titolo: "Riunioni pubbliche nei quartieri ogni tre mesi", testo: "Partendo da quelli dove si vota meno: stato dei progetti col semaforo, soldi spesi, errori ammessi, risposta scritta entro 30 giorni." },
+        { titolo: "Taglio delle indennità della Giunta", testo: "A scaglioni: chi prende di più dà di più. I risparmi vanno al welfare di quartiere." },
+        { titolo: "Patto di integrità", testo: "Niente donazioni da grandi gruppi, alberghi, immobiliari, costruttori o da chi lavora con il Comune; donazioni pubblicate online; nessun incarico nelle società del Comune durante il mandato e per tre anni dopo." },
+        { titolo: "Un metodo collettivo", testo: "Programma scritto con la città, gruppi di lavoro aperti, nessun vincolo di partito." },
+      ],
+    },
+
+    /* FAQ (pagina Strada → Cosa rispondo)
+       bozza: true = risposta scritta per la guida, da verificare
+       id         = per il link diretto: strada.html#faq-ID (si apre da sola)
+       varianti   = facoltativo: più versioni della stessa risposta, mostrate
+                    come schede dentro la domanda. tipo: "breve" (battuta
+                    veloce), "sostanza" (incontro, dibattito), "ironia" (solo
+                    se l'aria è giusta). Con le varianti, «risposta» non serve.
+       consiglio  = facoltativo: un suggerimento sotto le risposte
+       garanzie: true = mostra qui dentro il riquadro «Le 4 garanzie» */
     faq: [
       {
+        id: "destra-sinistra",
         domanda: "Siete di destra o di sinistra?",
-        risposta: "Siamo un movimento civico. Parliamo a tutte e a tutti, non solo a chi la pensa già come noi. Le città non si governano contro qualcuno, ma per qualcuno.",
-        fonte: "manifesto (Trasversale, chiusura)",
+        risposta: "Siamo un progetto di cittadinanza attiva, non un partito: alle comunali ci presentiamo con una lista civica. Siamo un movimento civico. Parliamo a tutte e a tutti, non solo a chi la pensa già come noi. Le città non si governano contro qualcuno, ma per qualcuno.",
+        fonte: "testi del sito: manifesto (Trasversale, chiusura); prima frase: Strategia di comunicazione, 24/11/2026",
         bozza: true,
       },
       {
+        id: "chi-paga",
         domanda: "Chi vi paga?",
         risposta: "Non abbiamo grandi finanziamenti, ogni euro conta. Abbiamo un patto di integrità: niente donazioni da grandi gruppi, alberghi, immobiliari, costruttori o da chi lavora con il Comune. Ogni donazione sarà pubblicata online.",
-        fonte: "aiutaci (Sostienici), programma → Conti chiari (Patto di integrità)",
+        fonte: "testi del sito: aiutaci (Sostienici), programma → Conti chiari (Patto di integrità)",
       },
       {
+        id: "casa",
         domanda: "Cosa fate per la casa?",
         risposta: "Oggi chi fa un lavoro normale non riesce più a comprare casa in città: Como è seconda in Lombardia per prezzo, dopo Milano. Vogliamo rimettere in uso le case comunali vuote, nuove case a prezzi accessibili, un fondo per le giovani famiglie, il Comune che fa da garante sugli affitti e tasse più giuste: chi tiene le case vuote paga di più, chi affitta a canone concordato paga di meno. Tutto il capitolo è su [programma-casa.html](../programma-casa.html).",
-        fonte: "programma → Casa",
+        fonte: "testi del sito: programma → Casa",
       },
       {
+        id: "fidarmi",
         domanda: "Perché dovrei fidarmi di voi?",
-        risposta: "Perché ogni euro pubblico deve essere chiaro a tutti, e vale anche per noi: ogni donazione sarà pubblica. Faremo riunioni pubbliche nei quartieri, partendo da quelli dove si vota meno, con risposta scritta a ogni domanda. E le nostre proposte non sono radicali: sono di buon senso.",
-        fonte: "manifesto (Trasparenza), programma → Conti chiari, home (Perché possiamo farcela)",
+        risposta: "Perché ogni euro pubblico deve essere chiaro a tutti, e vale anche per noi: ogni donazione sarà pubblica. Faremo riunioni pubbliche nei quartieri, partendo da quelli dove si vota meno, con risposta scritta a ogni domanda. E le nostre proposte non sono radicali: sono di buon senso.\n\nTutti i dettagli: [Le 4 garanzie](#garanzie).",
+        fonte: "testi del sito: manifesto (Trasparenza), programma → Conti chiari, home (Perché possiamo farcela)",
         bozza: true,
       },
       {
+        id: "esperienza",
+        domanda: "Non avete esperienza.",
+        varianti: [
+          { tipo: "breve", testo: "Non abbiamo tessere di partito né anni di poltrone alle spalle, è vero. Abbiamo però occhi nuovi, voglia di studiare i dossier sul serio e la libertà di dire come stanno le cose. A Como non serve solo chi c'è sempre stato: serve chi ha voglia di cambiare passo." },
+          { tipo: "sostanza", testo: "L'esperienza amministrativa è importante, ma conta come viene usata. Noi partiamo da una bozza di programma con numeri, fonti e verifiche già avviate, dall'avanzo di bilancio ai temi di casa, lavoro, servizi e quartieri. E stiamo costruendo una squadra che unisce cittadini, quartieri e competenze tecniche su bilanci, diritto, urbanistica e mobilità. Preferiamo una squadra nuova che studia e chiede aiuto dove serve." },
+          { tipo: "ironia", testo: "Se per esperienza si intende litigare sui social, sì, ci manca un po' di pratica. Se parliamo di ascoltare le persone, leggere le carte e mettere insieme idee concrete, ci stiamo già lavorando. E non siamo qui per improvvisare." },
+        ],
+        consiglio: "Racconta cosa stiamo già facendo: richieste di accesso agli atti, lettura del bilancio, incontri nei quartieri, confronto con professioniste e professionisti.",
+        fonte: "Strategia di comunicazione, 24/11/2026",
+        bozza: true,
+      },
+      {
+        id: "testa",
+        domanda: "E se poi, una volta eletti, vi monta la testa? Un altro uomo solo al comando?",
+        varianti: [
+          { tipo: "breve", testo: "Hai ragione a non fidarti sulla parola. Per questo inséma non è il progetto di una persona sola, ma una squadra che si dà regole precise prima del voto: riunioni pubbliche nei quartieri ogni tre mesi, con i conti aperti, e un patto di integrità firmato da tutte e tutti. Non chiediamo fiducia cieca: chiediamo di controllarci passo dopo passo." },
+          { tipo: "sostanza", testo: "È una preoccupazione legittima: quando il potere si concentra su una persona sola, senza contrappesi, il rischio di chiudersi nel palazzo c'è sempre. La nostra risposta non è «fidatevi di noi», ma paletti concreti fin dall'inizio. Ogni tre mesi la Giunta va nei quartieri a dire cosa è stato fatto, quanto è stato speso e cosa non ha funzionato, e risponde per iscritto alle domande entro 30 giorni. In più: taglio delle indennità della Giunta, patto di integrità, nessun incarico nelle società del Comune durante il mandato e per tre anni dopo. Il sindaco non deve essere un capo intoccabile, ma il portavoce di una comunità che resta vigile." },
+          { tipo: "ironia", testo: "Il vantaggio di costruire un movimento con decine di persone dei quartieri è che, se a qualcuno venisse la tentazione di fare il fenomeno, lo riportiamo subito coi piedi per terra. E abbiamo messo nero su bianco le riunioni pubbliche ogni tre mesi, così può farlo tutta la città." },
+        ],
+        garanzie: true,
+        fonte: "Strategia di comunicazione, 24/11/2026; «ogni tre mesi», «entro 30 giorni» e «per tre anni dopo»: dal piano interno, da confermare",
+        bozza: true,
+      },
+      {
+        id: "aiutare",
         domanda: "Come posso aiutare?",
         risposta: "Diventa uno dei 100 fondatori entro il 31 dicembre: due minuti sul [modulo](../aiutaci.html#modulo). Poi scegli uno dei sette gruppi di lavoro, oppure accetta la [missione delle 15 persone](../piano.html#missione).",
-        fonte: "fondatori, aiutaci, piano",
+        fonte: "testi del sito: fondatori, aiutaci, piano",
       },
     ],
   },
@@ -155,6 +264,9 @@ window.GUIDA = {
      COME AGGIUNGERE UNA DOMANDA
      Dentro domande: [ ] del personaggio:
        { d: "La domanda che ti fanno", r: "La risposta", bozza: true },
+     Se la stessa domanda ha già una risposta nelle FAQ di «Cosa rispondo»,
+     aggiungete vedi: "ID della FAQ" (es. vedi: "esperienza"): sotto la
+     risposta compare il link alla FAQ, senza copiarne il testo.
 
      COME AGGIUNGERE UN PEZZO DI DIALOGO
      Dentro dialogo: [ ], una riga per battuta, nell'ordine:
@@ -168,7 +280,8 @@ window.GUIDA = {
   */
   convincere: {
     titolo: "Come convincere…",
-    intro: "Non si tratta di vincere una discussione. Ascolta, fai domande, parti da un problema concreto della sua vita. Mai prendere in giro, mai alzare la voce.",
+    intro: "Non si tratta di vincere una discussione. Ascolta, fai domande, parti da un problema concreto della sua vita. Mai prendere in giro, mai alzare la voce. Chiudi sempre con una cosa concreta: una proposta, un incontro, il modulo.",
+    // ultima frase dell'intro: Strategia di comunicazione, 24/11/2026
     introBozza: true,
     // testo della card in Benvenuto → Come parliamo
     promo: "Tu* nonn*, i tuoi genitori, l'amic* di destra: per ognuno, da dove partire, cosa ti chiederà e cosa rispondere.",
@@ -200,7 +313,7 @@ window.GUIDA = {
         ] },
         aCuore: [],
         apertura: "",
-        domande: [{ d: "Perché dovrei votare qualcuno che non conosco?", r: "", bozza: true }],
+        domande: [{ d: "Perché dovrei votare qualcuno che non conosco?", r: "", bozza: true, vedi: "esperienza" }],
         dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Casa", link: "../programma-casa.html" }, { testo: "Conti chiari", link: "../programma-conti.html" }],
@@ -226,7 +339,7 @@ window.GUIDA = {
         ] },
         aCuore: [],
         apertura: "",
-        domande: [{ d: "Siete i soliti di sinistra con un altro nome?", r: "", bozza: true }],
+        domande: [{ d: "Siete i soliti di sinistra con un altro nome?", r: "", bozza: true, vedi: "destra-sinistra" }],
         dialogo: [{ chi: "tu", testo: "" }, { chi: "loro", testo: "" }],
         evitare: [],
         programma: [{ testo: "Conti chiari", link: "../programma-conti.html" }, { testo: "Sviluppo", link: "../programma-sviluppo.html" }],
@@ -374,16 +487,19 @@ window.GUIDA = {
   zone: [
     {
       id: "I",
+      nome: "Albate e Muggiò",
+      mappa: "Albate", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Albate", referenti: [] },
-        { nome: "Muggiò", referenti: [] },
+        { nome: "Albate" },
+        { nome: "Muggiò" },
       ],
       residenti: 8474, quota: "10,1%", var2019: "−210 (−2,4%)", var2019pct: -2.4,
       densita: "1.681", prezzo: "2.100-2.200", prezzoNum: 2150,
       immobiliare: ["Albate, Trecallo"],
       area: "sud",
       testo: "Albate, Muggiò, Lora, Camnago, Garzola, Civiglio: quartieri a bassa densità, ex comuni con identità propria, residenti in calo lieve.",
-      voto: { esito: "minghetti", testo: "Albate (sezioni 41-43): Minghetti, di misura (sezione 42: 198 a 197)." },
+      voto: { esito: "centrosinistra", testo: "Albate (sezioni 41-43): centrosinistra, di misura (sezione 42: 198 a 197)." },
       temi: [
         "Piscina di Muggiò ([Servizi](../programma-servizi.html)).",
         "Parco della Valle Cosia, che unisce Camerlata, Albate e Muggiò ([Sviluppo](../programma-sviluppo.html)).",
@@ -392,8 +508,11 @@ window.GUIDA = {
     },
     {
       id: "II",
+      nome: "Lora",
+      mappa: "Lora", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Lora", referenti: [] },
+        { nome: "Lora" },
       ],
       residenti: 2701, quota: "3,2%", var2019: "−92 (−3,3%)", var2019pct: -3.3,
       densita: "1.936", prezzo: "2.650", prezzoNum: 2650,
@@ -406,11 +525,14 @@ window.GUIDA = {
     },
     {
       id: "III",
+      nome: "Camerlata e Rebbio",
+      mappa: "Camerlata", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Camerlata", referenti: [] },
-        { nome: "Rebbio", referenti: [] },
-        { nome: "Breccia", referenti: [] },
-        { nome: "Prestino", referenti: [] },
+        { nome: "Camerlata" },
+        { nome: "Rebbio" },
+        { nome: "Breccia" },
+        { nome: "Prestino" },
       ],
       residenti: 18960, quota: "22,5%", var2019: "+256 (+1,4%)", var2019pct: 1.4,
       densita: "2.185", prezzo: "2.100-2.300", prezzoNum: 2200,
@@ -421,7 +543,7 @@ window.GUIDA = {
         "Stranieri a Camerlata: 19,8% (2008, studio del Comune nel PGT, via La Provincia).",
         "Istituto comprensivo di Rebbio: 43% di alunni stranieri (La Provincia).",
       ],
-      voto: { esito: "minghetti", testo: "Camerlata (sezioni 51-53): Minghetti, di misura (sezione 51: 167 a 166)." },
+      voto: { esito: "centrosinistra", testo: "Camerlata (sezioni 51-53): centrosinistra, di misura (sezione 51: 167 a 166)." },
       temi: [
         "Parco della Valle Cosia, che unisce Camerlata, Albate e Muggiò ([Sviluppo](../programma-sviluppo.html)).",
       ],
@@ -429,8 +551,11 @@ window.GUIDA = {
     },
     {
       id: "IV",
+      nome: "Camnago Volta",
+      mappa: "Camnago", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Camnago Volta", referenti: [] },
+        { nome: "Camnago Volta" },
       ],
       residenti: 1475, quota: "1,7%", var2019: "−36 (−2,4%)", var2019pct: -2.4,
       densita: "1.075", prezzo: "2.650", prezzoNum: 2650,
@@ -443,23 +568,29 @@ window.GUIDA = {
     },
     {
       id: "V",
+      nome: "Como Nord ed Est",
+      mappa: "Como Nord", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Como Nord", referenti: [] },
-        { nome: "Como Est", referenti: [] },
+        { nome: "Como Nord" },
+        { nome: "Como Est" },
       ],
       residenti: 11924, quota: "14,1%", var2019: "−445 (−3,6%)", var2019pct: -3.6,
       densita: "4.638", prezzo: "3.900-4.300 (Valduce, via Milano)", prezzoNum: 4100,
       immobiliare: ["Prudenziana, Torno"],
       area: "nord",
       testo: "Nord ed Est (Valduce, via Milano): zona ricca e densa, in calo del 3,6%.",
-      voto: { esito: "rapinese", testo: "Convalle, Como Est e Ovest: Rapinese quasi ovunque; Minghetti solo nella sezione 15; sezione 18 (via Fiume) pari, 195 a 195." },
+      voto: { esito: "eletto", testo: "Convalle, Como Est e Ovest: il sindaco eletto quasi ovunque; centrosinistra solo nella sezione 15; sezione 18 (via Fiume) pari, 195 a 195." },
       temi: [],
       luoghi: [],
     },
     {
       id: "VI",
+      nome: "Borghi",
+      mappa: "Borghi", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Como Borghi", referenti: [] },
+        { nome: "Como Borghi" },
       ],
       residenti: 13590, quota: "16,1%", var2019: "−182 (−1,3%)", var2019pct: -1.3,
       densita: "6.743", prezzo: "3.250", prezzoNum: 3250,
@@ -469,22 +600,25 @@ window.GUIDA = {
       extra: [
         "Stranieri a Como Borghi: 16,5% (2008); Borghi ospitava da solo il 23,4% degli stranieri della città (studio del Comune nel PGT, via La Provincia).",
       ],
-      voto: { esito: "rapinese", testo: "Rapinese netto; Minghetti solo nella sezione 32." },
+      voto: { esito: "eletto", testo: "Il sindaco eletto, netto; centrosinistra solo nella sezione 32." },
       temi: [],
       luoghi: [],
     },
     {
       id: "VII",
+      nome: "Centro e Como Ovest",
+      mappa: "Centro", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Como Centro", referenti: [] },
-        { nome: "Como Ovest", referenti: [] },
+        { nome: "Como Centro" },
+        { nome: "Como Ovest" },
       ],
       residenti: 10881, quota: "12,9%", var2019: "−755 (−6,5%)", var2019pct: -6.5,
       densita: "3.512", prezzo: "4.400-5.100", prezzoNum: 4750,
       immobiliare: ["Centro", "Bignanico, Villa Olmo, Villa Aprica"],
       area: "centro",
       testo: "Centro e Ovest (città murata, lungolago, Villa Olmo): case più care, residenti in calo più rapido. La Provincia lega il calo a turismo e affitti brevi.",
-      voto: { esito: "rapinese", testo: "Convalle, Como Est e Ovest: Rapinese quasi ovunque; Minghetti solo nella sezione 15; sezione 18 (via Fiume) pari, 195 a 195." },
+      voto: { esito: "eletto", testo: "Convalle, Como Est e Ovest: il sindaco eletto quasi ovunque; centrosinistra solo nella sezione 15; sezione 18 (via Fiume) pari, 195 a 195." },
       temi: [
         "Politeama ([Sviluppo](../programma-sviluppo.html)).",
         "Residenti in calo legato a turismo e affitti brevi ([Casa](../programma-casa.html)).",
@@ -493,11 +627,14 @@ window.GUIDA = {
     },
     {
       id: "VIII",
+      nome: "Monte Olimpino",
+      mappa: "M. Olimpino", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Monte Olimpino", referenti: [] },
-        { nome: "Ponte Chiasso", referenti: [] },
-        { nome: "Sagnino", referenti: [] },
-        { nome: "Tavernola", referenti: [] },
+        { nome: "Monte Olimpino" },
+        { nome: "Ponte Chiasso" },
+        { nome: "Sagnino" },
+        { nome: "Tavernola" },
       ],
       residenti: 14804, quota: "17,6%", var2019: "−153 (−1,0%)", var2019pct: -1.0,
       densita: "2.204", prezzo: "2.150-2.400; Tavernola 3.550", prezzoNum: 2275,
@@ -507,7 +644,7 @@ window.GUIDA = {
       extra: [
         "Stranieri a Ponte Chiasso: 18,6% (2008, studio del Comune nel PGT, via La Provincia).",
       ],
-      voto: { esito: "rapinese", testo: "Monte Olimpino, Tavernola, Sagnino, Ponte Chiasso: Rapinese con distacchi netti." },
+      voto: { esito: "eletto", testo: "Monte Olimpino, Tavernola, Sagnino, Ponte Chiasso: il sindaco eletto, con distacchi netti." },
       temi: [
         "Frontalieri: traffico verso il confine, valichi.",
       ],
@@ -515,9 +652,12 @@ window.GUIDA = {
     },
     {
       id: "IX",
+      nome: "Garzola e Civiglio",
+      mappa: "Garzola", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Garzola", referenti: [] },
-        { nome: "Civiglio", referenti: [] },
+        { nome: "Garzola" },
+        { nome: "Civiglio" },
       ],
       residenti: 1478, quota: "1,8%", var2019: "−11 (−0,7%)", var2019pct: -0.7,
       densita: "388", prezzo: "3.650", prezzoNum: 3650,
@@ -532,10 +672,10 @@ window.GUIDA = {
 
   totale: { residenti: "84.287", var2019: "−1.628 (−1,9%)", prezzo: "media 3.475" },
 
-  voto2022nota: "Minghetti ha vinto solo 10 sezioni su 74, Rapinese il resto.",
+  voto2022nota: "Il centrosinistra ha vinto solo 10 sezioni su 74, il sindaco eletto il resto.",
   votoCategorie: {
-    rapinese: "Rapinese",
-    minghetti: "Minghetti, di misura (in parte della zona)",
+    eletto: "Sindaco eletto (lista civica)",
+    centrosinistra: "Centrosinistra, di misura (in parte della zona)",
     nd: "Dato da recuperare",
   },
 
@@ -575,7 +715,7 @@ window.GUIDA = {
 
   /* Sezioni elettorali: struttura pronta, da riempire.
      Esempio di riga:
-       { n: 42, zona: "I", vie: ["Via …", "Via …"], ballottaggio2022: { minghetti: 198, rapinese: 197 } },
+       { n: 42, zona: "I", vie: ["Via …", "Via …"], ballottaggio2022: { centrosinistra: 198, eletto: 197 } },
   */
   sezioni: [],
 
@@ -626,8 +766,8 @@ window.GUIDA = {
     {
       tema: "Voto",
       numeri: [
-        { valore: "44,33%", testo: "affluenza al primo turno 2022. Minghetti (centrosinistra) 39,40%, Rapinese 27,32%, Molteni (centrodestra) 26,99%, fuori dal ballottaggio per circa 100 voti.", fonte: "Comunali 2022" },
-        { valore: "35,75%", testo: "affluenza al ballottaggio, la più bassa mai registrata per un sindaco di Como. Rapinese 55,4%. Liste civiche al 47,6%.", fonte: "Comunali 2022" },
+        { valore: "44,33%", testo: "affluenza al primo turno 2022. Centrosinistra 39,40%, lista civica del sindaco poi eletto 27,32%, centrodestra 26,99%, fuori dal ballottaggio per circa 100 voti.", fonte: "Comunali 2022" },
+        { valore: "35,75%", testo: "affluenza al ballottaggio, la più bassa mai registrata per un sindaco di Como. Il sindaco eletto ha preso il 55,4%. Liste civiche al 47,6%.", fonte: "Comunali 2022" },
         { valore: "61,30%", testo: "affluenza al referendum sulla giustizia (marzo 2026): circa 5.500 votanti in più rispetto al primo turno delle comunali 2022.", fonte: "Referendum, marzo 2026" },
       ],
     },
@@ -656,11 +796,13 @@ window.GUIDA = {
       },
       {
         titolo: "Banchetto",
+        ghiaccio: true,
         portare: ["Permesso del Comune (stampato o sul telefono)", "Tavolino, tovaglia, materiali", "Un cartello grande con il logo", "Penne e fogli per i contatti", "Cartello «Diventa uno dei 100»"],
         fare: ["Almeno due persone sempre al banchetto", "Una sta davanti al tavolo, non dietro", "Fate una domanda: «Cosa non va a Como, per te?»", "Segnate i problemi raccolti: vanno al gruppo Territorio"],
       },
       {
         titolo: "Incontro di quartiere",
+        ghiaccio: true,
         portare: ["Due o tre numeri della zona (dalla scheda)", "Il capitolo del programma che c'entra", "Modo per raccogliere i contatti"],
         fare: ["Prima ascoltate, poi parlate", "Partite da un problema concreto del quartiere", "Chiudete con una proposta: un nuovo incontro, un gruppo WhatsApp, il modulo"],
       },
@@ -669,40 +811,18 @@ window.GUIDA = {
       titolo: "Come chiedere un contatto",
       testo: "Chiedete **nome e telefono**, e dite sempre a cosa servono: «Ti scriviamo su WhatsApp per i prossimi incontri, ti va?». Solo con il suo sì. Mai foto di fogli con i dati di altre persone nei gruppi.",
     },
+    // nelle liste con ghiaccio: true (Banchetto, Incontro di quartiere)
+    ghiaccio: {
+      titolo: "Domande per rompere il ghiaccio",
+      frasi: ["Torno a Como se…", "Di Como mi manca…", "A Como vorrei…"],
+      nota: "Fate completare la frase. Le risposte raccolte vanno al gruppo Territorio, come i problemi.",
+      bozza: true,
+      fonte: "Strategia di comunicazione, 24/11/2026",
+    },
     dopo: {
       titolo: "Dopo",
       testo: "Entro la sera inserite ogni contatto nel [modulo](../aiutaci.html#modulo) (uno per persona) e scrivete nel gruppo cosa avete sentito. Poi buttate o consegnate i fogli: i dati non restano nelle tasche di nessuno.",
     },
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* PAGINA BENVENUTO · materiali                                                       */
-  /* ------------------------------------------------------------------ */
-  materiali: {
-    loghi: [
-      { nome: "Logo magenta", file: "../img/logo/logo-magenta.svg" },
-      { nome: "Logo vino", file: "../img/logo/logo-vino.svg" },
-      { nome: "Logo blu", file: "../img/logo/logo-blu.svg" },
-      { nome: "Logo perla (per fondi scuri)", file: "../img/logo/logo-perla.svg", scuro: true },
-      { nome: "Logo esteso magenta", file: "../img/logo/logo-esteso-magenta.svg" },
-      { nome: "Logo esteso perla", file: "../img/logo/logo-esteso-perla.svg", scuro: true },
-      { nome: "Pittogramma", file: "../img/logo/pittogramma-blu.svg" },
-    ],
-    illustrazioni: [
-      { nome: "Città", file: "../img/ill/citta-vino.webp" },
-      { nome: "Città quadrata", file: "../img/ill/cittaq-vino.webp" },
-      { nome: "Luna e funicolare", file: "../img/ill/luna-vino.webp" },
-      { nome: "Mani", file: "../img/ill/mani-blu.webp" },
-      { nome: "Persone con la mappa", file: "../img/ill/persone-blu.webp" },
-      { nome: "Mercà", file: "../img/ill/merca-blu.webp" },
-      { nome: "Microfono e telefono", file: "../img/ill/media-perla.webp", scuro: true },
-    ],
-    palette: [
-      ["Magenta Power", "#e6007e"], ["Rosa Pesca", "#fef0e7"], ["Bianco Perla", "#fffdfb"],
-      ["Rosso Vino", "#6f0f38"], ["Rosso Ciliegia", "#d4004f"], ["Blu Reale", "#274798"],
-      ["Blu Cielo", "#7ea3d6"], ["Azzurro Polvere", "#a9cbdb"], ["Rosa Confetto", "#f6b8ca"],
-      ["Rosa Cipria", "#f8c8d7"], ["Giallo Acido", "#fcdf6c"], ["Blu Oceano", "#0b6780"], ["Turchese", "#4bbecf"],
-    ],
   },
 
   /* ------------------------------------------------------------------ */
