@@ -27,6 +27,7 @@
   const imm = (nome) => G.immobiliare.zone.find((x) => x.nome === nome);
   const zname = (z) => z.quartieri.map((q) => q.nome).join(", ");
   const P = G.pagine;
+  let closeCv = null; // chiude la scheda di «Come convincere…» (vedi bindConvincere)
 
   /* il nome si scrive sempre «inséma», tutto minuscolo, anche nei titoli in maiuscolo */
   const brand = (root) => {
@@ -256,8 +257,13 @@
     <section class="g-sec s-cream" id="parlare"><div class="wrap">
       <h2 class="h2">${CP.titolo}</h2>
       <div class="g-cards">${T.manifesto.stile.punti.map((x) => `<div class="g-card"><h3>${x.titolo}</h3><p>${md(x.testo)}</p></div>`).join("")}</div>
+      ${CP.regole ? `<h3 class="h3 g-h3" id="regole">${CP.regole.titolo}${bozza(CP.regole.bozza)}</h3>
+      <ol class="g-regole">${CP.regole.lista.map((x) => `<li>${md(x)}</li>`).join("")}</ol>${src(CP.regole.fonte)}` : ""}
       <h3 class="h3 g-h3">Cosa evitiamo <span class="badge">spiegazioni in bozza</span></h3>
       <ul class="g-avoid">${T.manifesto.no.lista.map((x) => `<li><strong>${x}</strong>${CP.evitare[x] ? ` <span>${md(CP.evitare[x])}</span>` : ""}</li>`).join("")}</ul>
+      ${(CP.evitareAncora || []).length ? `<ul class="g-avoid g-avoid-2">${CP.evitareAncora.map((x) => `<li><strong>${x.voce}${bozza(x.bozza)}</strong> <span>${md(x.testo)}</span>${src(x.fonte)}</li>`).join("")}</ul>` : ""}
+      ${CP.dueRegole ? `<div class="g-rule g-rule-box" id="due-regole"><h3>${CP.dueRegole.titolo}${bozza(CP.dueRegole.bozza)}</h3>
+        <ul>${CP.dueRegole.lista.map((x) => `<li>${md(x)}</li>`).join("")}</ul>${src(CP.dueRegole.fonte)}</div>` : ""}
       <p class="g-rule">${md(CP.regolaNumeri)}</p>
       <p class="g-lead">Cosa rispondere a chi ti fa domande lo trovi nella <a href="strada.html#faq">guida di strada</a>.</p>
       ${PERS.length ? `<a class="g-card cv-promo" href="strada.html#convincere">
@@ -335,7 +341,8 @@
       ${b("Cosa ha a cuore", list(p.aCuore, "cosa ha a cuore", "aCuore"))}
       ${b("Da dove partire", p.apertura ? `<p class="cv-apri">${md(p.apertura)}</p>` : scrivi("la domanda con cui aprire", "apertura"))}
       ${b("Domande e risposte", p.domande && p.domande.length ? `<div class="g-faq">${p.domande.map((q) => `<details><summary>${q.d}${bozza(q.bozza)}</summary>
-        ${q.r ? `<p>${md(q.r)}</p>` : `<div class="cv-pad">${scrivi("la risposta", "risposte")}</div>`}</details>`).join("")}</div>` : scrivi("le domande che ti farà", "risposte"))}
+        ${q.r ? `<p>${md(q.r)}</p>` : `<div class="cv-pad">${scrivi("la risposta", "risposte")}</div>`}
+        ${q.vedi && faqById(q.vedi) ? `<p class="cv-vedi"><a href="#faq-${q.vedi}">Vedi anche in «Cosa rispondo»: ${faqById(q.vedi).domanda} →</a></p>` : ""}</details>`).join("")}</div>` : scrivi("le domande che ti farà", "risposte"))}
       ${b("Come va una conversazione", p.dialogo && p.dialogo.length ? `<ol class="cv-chat">${p.dialogo.map((m) => {
         const tu = m.chi === "tu";
         return `<li class="cv-msg ${tu ? "tu" : "altr"}" style="--c:${p.colore}"><small>${tu ? "Tu" : altro}</small>${m.testo ? `<p>${md(m.testo)}</p>` : `<p class="cv-vuoto">Da scrivere: battuta (gruppo ${CV.gruppi.dialogo})</p>`}</li>`;
@@ -354,6 +361,30 @@
       <div class="cv-veil" data-cv-close hidden></div>
       <article class="cv-scheda" id="cv-scheda" tabindex="-1" aria-labelledby="cv-nome" hidden></article>
     </div></section>`;
+
+  /* ---------- FAQ di «Cosa rispondo»: risposta semplice o a più versioni ---------- */
+  const paras = (s) => String(s).split(/\n\s*\n/).map((x) => `<p>${md(x.trim())}</p>`).join("");
+  const faqById = (id) => (G.comeParliamo.faq || []).find((f) => f.id === id);
+  const TIPI = { breve: ["Breve", "Per una battuta veloce o un commento."], sostanza: ["Di sostanza", "Per un incontro o un dibattito."], ironia: ["Con ironia", "Solo se l'aria è giusta."] };
+  function garanzieBox() {
+    const GA = G.comeParliamo.garanzie; if (!GA) return "";
+    return `<div class="g-garanzie" id="garanzie">
+      <h4>${GA.titolo}${bozza(GA.bozza)}</h4>
+      <ol class="g-gar">${GA.lista.map((x) => `<li><h5>${x.titolo}</h5><p>${md(x.testo)}</p></li>`).join("")}</ol>
+      ${GA.link ? `<p><a class="btn btn-navy btn-small" href="${GA.link.link}">${GA.link.testo} →</a></p>` : ""}${src(GA.fonte)}
+    </div>`;
+  }
+  function faqItem(f, n) {
+    const v = f.varianti || [];
+    const tabs = !v.length ? "" : `<div class="g-var" data-var>
+      <div class="g-var-tabs" role="tablist" aria-label="Versioni della risposta">${v.map((x, i) => `<button type="button" role="tab" id="v${n}-${i}-t" aria-controls="v${n}-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${(TIPI[x.tipo] || [x.tipo])[0]}</button>`).join("")}</div>
+      ${v.map((x, i) => `<div class="g-var-p" role="tabpanel" id="v${n}-${i}" aria-labelledby="v${n}-${i}-t"${i ? " hidden" : ""}><p class="g-var-nota">${(TIPI[x.tipo] || ["", ""])[1]}</p>${paras(x.testo)}</div>`).join("")}
+    </div>`;
+    return `<details${f.id ? ` id="faq-${f.id}"` : ""}><summary>${f.domanda}${bozza(f.bozza)}</summary>
+      <div class="g-faq-b">${f.risposta ? paras(f.risposta) : ""}${tabs}
+      ${f.consiglio ? `<p class="g-tip"><strong>Consiglio:</strong> ${md(f.consiglio)}</p>` : ""}
+      ${f.garanzie ? garanzieBox() : ""}${src(f.fonte)}</div></details>`;
+  }
 
   function pageStrada() {
     const CP = G.comeParliamo, K = G.kit;
@@ -374,8 +405,9 @@
     <section class="g-sec s-paper" id="faq"><div class="wrap">
       <h2 class="h2 h-navy">Cosa rispondo se mi chiedono…</h2>
       <p class="g-rule">${md(CP.regolaNumeri)}</p>
-      <div class="g-faq">${CP.faq.map((f) => `<details><summary>${f.domanda}${f.bozza ? ' <span class="badge">bozza</span>' : ""}</summary>
-        <p>${md(f.risposta)}</p><small class="src">Dai testi del sito: ${f.fonte}</small></details>`).join("")}</div>
+      ${CP.critiche ? `<div class="g-passi-box" id="critiche"><h3 class="g-sub">${CP.critiche.titolo}${bozza(CP.critiche.bozza)}</h3>
+        <ol class="g-passi">${CP.critiche.passi.map((x) => `<li>${md(x)}</li>`).join("")}</ol>${src(CP.critiche.fonte)}</div>` : ""}
+      <div class="g-faq">${CP.faq.map(faqItem).join("")}</div>
     </div></section>
     ${sezConvincere()}
 
@@ -384,11 +416,14 @@
       <p class="badge badge-lg">${K.bozza}</p>
       <p class="g-warn">⚠️ ${md(K.avviso)}</p>
       <div class="g-kits">${K.liste.map((l, k) => `<details class="g-card g-kit"${k === 0 ? " open" : ""}><summary><h3>${l.titolo}</h3></summary>
-        <h4>Cosa portare</h4>${cl(l.portare, `k${k}p`)}<h4>Come fare</h4>${cl(l.fare, `k${k}f`)}</details>`).join("")}</div>
+        <h4>Cosa portare</h4>${cl(l.portare, `k${k}p`)}<h4>Come fare</h4>${cl(l.fare, `k${k}f`)}
+        ${l.ghiaccio && K.ghiaccio ? `<h4>${K.ghiaccio.titolo}${bozza(K.ghiaccio.bozza)}</h4>
+          <ul class="g-ghiaccio">${K.ghiaccio.frasi.map((x) => `<li>«${x}»</li>`).join("")}</ul><p class="g-note-s">${md(K.ghiaccio.nota)}</p>` : ""}</details>`).join("")}</div>
       <div class="g-kits g-kits-2">
         <div class="g-card"><h3>${K.contatto.titolo}</h3><p>${md(K.contatto.testo)}</p></div>
         <div class="g-card"><h3>${K.dopo.titolo}</h3><p>${md(K.dopo.testo)}</p></div>
       </div>
+      ${CP.dueRegole ? `<p class="g-rule g-rule-1">${md(CP.dueRegole.breve)}${bozza(CP.dueRegole.bozza)}</p>` : ""}
     </div></section>`;
   }
 
@@ -408,7 +443,7 @@
   };
   const SEQ = ["#fef0e7", "#f8c8d7", "#f6b8ca", "#e6007e", "#6f0f38"];
   const DIV = ["#274798", "#7ea3d6", "#a9cbdb", "#fef0e7", "#f6b8ca", "#e6007e", "#6f0f38"];
-  const CAT = { rapinese: "#274798", minghetti: "#4bbecf", nd: "#ffffff" };
+  const CAT = { eletto: "#274798", centrosinistra: "#4bbecf", nd: "#ffffff" };
   function scale(ind) {
     const kind = IND[ind].scala;
     const vals = G.zone.map((z) => value(ind, z).v);
@@ -513,8 +548,49 @@
       const [x, y] = window.__mmPt([lon, lat]); c.setAttribute("cx", x); c.setAttribute("cy", y); c.style.display = "";
     });
     // se il link punta a un personaggio, la zona ricordata non deve cambiare l'URL
-    if (current) select(current, false, !!cvFromHash(HASH0));
+    if (current) select(current, false, !!cvFromHash(HASH0) || /^#(faq-|garanzie|critiche)/.test(HASH0));
     bindConvincere();
+    bindVarianti();
+    bindReveal();
+  }
+
+  /* ---------- link a una FAQ o a un riquadro dentro una FAQ: la apre ---------- */
+  function reveal(hash, smooth) {
+    let el; try { el = document.querySelector(hash); } catch (_) { return false; }
+    if (!el) return false;
+    for (let d = el.closest("details"); d; d = d.parentElement ? d.parentElement.closest("details") : null) d.open = true;
+    el.scrollIntoView({ behavior: smooth && !matchMedia("(prefers-reduced-motion: reduce)").matches ? "smooth" : "auto", block: "start" });
+    return true;
+  }
+  function bindReveal() {
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href^="#"]'); if (!a) return;
+      const h = a.getAttribute("href"); let el;
+      try { el = document.querySelector(h); } catch (_) { return; }
+      if (!el || !el.closest("details")) return;
+      e.preventDefault();
+      if (a.closest("#cv-scheda") && closeCv) closeCv();
+      history.replaceState(null, "", h);
+      setTimeout(() => reveal(h, true), 30);
+    });
+  }
+  // versioni della risposta: schede con frecce da tastiera
+  function bindVarianti() {
+    $$("[data-var]").forEach((box) => {
+      const tabs = $$('[role="tab"]', box);
+      const pick = (t, focus) => {
+        tabs.forEach((x) => { const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+        if (focus) t.focus();
+      };
+      tabs.forEach((t, i) => {
+        t.addEventListener("click", () => pick(t));
+        t.addEventListener("keydown", (e) => {
+          const go = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+          if (go === undefined) return;
+          e.preventDefault(); pick(tabs[(go + tabs.length) % tabs.length], true);
+        });
+      });
+    });
   }
 
   /* ---------- Strada: come convincere… ---------- */
@@ -522,6 +598,7 @@
     const box = $("#cv-scheda"); if (!box) return;
     const veil = $(".cv-veil"), wide = matchMedia("(min-width: 700px)"), still = matchMedia("(prefers-reduced-motion: reduce)");
     let open = null, pushed = false;
+    closeCv = () => hide(true); // chiude senza toccare la cronologia
     const btn = (id) => $(`.cv-av[data-cv="${id}"]`);
 
     function show(id, push) {
@@ -647,5 +724,5 @@
   }
 
   // salto a un'ancora dopo il montaggio
-  if (HASH0 && /^#[\w-]+$/.test(HASH0)) { const el = document.querySelector(HASH0); if (el) setTimeout(() => el.scrollIntoView(), 80); }
+  if (HASH0 && /^#[\w-]+$/.test(HASH0)) setTimeout(() => reveal(HASH0), 80);
 })();

@@ -344,3 +344,54 @@ body.cv-open { overflow: hidden; }
   .cv-av:hover .cv-face { box-shadow: 0 0 0 3px var(--navy), 0 0 0 7px var(--blush); }
 }
 @media print { #convincere { display: none; } }
+
+/* ---------- regole di comunicazione (Benvenuto) ---------- */
+.g-regole { counter-reset: r; display: grid; gap: 10px; list-style: none; padding: 0; margin-top: 6px; max-width: 860px; }
+.g-regole li { counter-increment: r; position: relative; background: var(--paper); color: var(--navy); border-radius: 16px; padding: 14px 16px 14px 58px; }
+.g-regole li::before { content: counter(r); position: absolute; left: 16px; top: 10px; font-family: var(--f-title); font-size: 1.7rem; line-height: 1; color: var(--magenta); }
+.g-avoid-2 { margin-top: 10px; }
+.g-avoid .src { margin-top: 2px; }
+.g-rule-box h3 { font-family: var(--f-title); font-weight: var(--w-title); text-transform: uppercase; font-size: 1.25rem; margin-bottom: 10px; }
+.g-rule-box ul { display: grid; gap: 8px; padding-left: 1.1em; list-style: disc; }
+.g-rule-box .src { opacity: .8; }
+.g-rule-1 { font-size: 1rem; }
+
+/* ---------- quando ti criticano (Strada) ---------- */
+.g-passi-box { margin: 26px 0 22px; }
+.g-passi-box .g-sub { margin-top: 0; }
+.g-passi { counter-reset: p; display: grid; gap: 10px; list-style: none; padding: 0; }
+.g-passi li { counter-increment: p; position: relative; background: var(--cream); color: var(--navy); border-radius: 16px; padding: 14px 16px 14px 58px; }
+.g-passi li::before { content: counter(p); position: absolute; left: 14px; top: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--magenta); color: #fff; font-weight: 900; display: grid; place-items: center; }
+
+/* ---------- FAQ con più versioni della risposta ---------- */
+.g-faq-b { padding: 0 20px 18px; }
+.g-faq .g-faq-b p, .g-faq .g-faq-b small { padding: 0; }
+.g-faq-b > p + p, .g-var-p p + p { margin-top: 8px; }
+.g-var-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 10px; }
+.g-var-tabs button { font: inherit; font-size: .85rem; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; color: var(--navy); background: var(--paper); border: 2px solid var(--navy); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+.g-var-tabs button[aria-selected="true"] { background: var(--navy); color: #fff; }
+.g-var-tabs button:focus-visible { outline: 3px solid var(--magenta); outline-offset: 2px; }
+.g-var-p { background: var(--paper); border-radius: 14px; padding: 14px 16px; }
+.g-faq .g-var-p .g-var-nota { font-size: .8rem; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; color: var(--magenta); margin-bottom: 6px; }
+.g-tip { margin-top: 12px; border-left: 5px solid var(--yellow); padding-left: 12px !important; }
+.g-garanzie { margin-top: 16px; background: var(--paper); border: 3px solid var(--navy); border-radius: 16px; padding: 16px; scroll-margin-top: 80px; }
+.g-garanzie h4 { font-family: var(--f-title); font-weight: var(--w-title); text-transform: uppercase; font-size: 1.25rem; margin-bottom: 10px; }
+.g-gar { counter-reset: g; display: grid; gap: 10px; list-style: none; padding: 0; margin-bottom: 12px; }
+.g-gar li { counter-increment: g; background: var(--cream); border-radius: 12px; padding: 12px 14px; }
+.g-gar h5 { font-size: 1rem; font-weight: 900; margin-bottom: 4px; }
+.g-gar h5::before { content: counter(g) " · "; color: var(--magenta); }
+.g-faq details { scroll-margin-top: 80px; }
+
+/* ---------- kit: domande per rompere il ghiaccio ---------- */
+.g-ghiaccio { display: grid; gap: 6px; list-style: none; padding: 0; }
+.g-ghiaccio li { background: var(--yellow); color: var(--navy); font-weight: 900; font-style: italic; border-radius: 12px 12px 12px 4px; padding: 8px 12px; }
+.g-note-s { font-size: .9rem; margin-top: 8px; }
+
+/* ---------- come convincere: link alla FAQ ---------- */
+.cv-vedi { padding: 0 20px 16px; font-weight: 700; }
+
+@media (min-width: 760px) {
+  .g-passi { grid-template-columns: repeat(2, 1fr); }
+  .g-gar { grid-template-columns: repeat(2, 1fr); }
+}
+@media print { .g-var-tabs { display: none; } .g-var-p[hidden] { display: block !important; } }
