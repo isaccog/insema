@@ -21,12 +21,18 @@
    il link al gruppo WhatsApp di zona.
 
    COME AGGIUNGERE UN REFERENTE
-   (compare in tutte e tre le pagine: elenco zone in Benvenuto,
-   scheda di zona in Strada e in Dati)
-   Cercate la zona (es. id: "III"), poi il quartiere, e dentro
-   referenti: [ ] aggiungete una riga così:
+   (uno per zona; compare in tutte e tre le pagine: elenco zone in
+   Benvenuto, scheda di zona in Strada e in Dati)
+   Cercate la zona (es. nome: "Camerlata e Rebbio") e dentro
+   referenti: [ ] della zona (non dei quartieri) aggiungete:
      { nome: "Giulia R.", whatsapp: "https://chat.whatsapp.com/…", nota: "Sente bene la sera" },
-   Si possono mettere più referenti nello stesso quartiere.
+   Di solito uno per zona; se serve, se ne possono mettere due.
+
+   IL NOME DELLE ZONE
+   Ogni zona ha un «nome» breve (es. "Camerlata e Rebbio"): è quello
+   che si legge nei bottoni, sulle mappe e nei titoli. Il numero
+   romano (id) serve solo ai link (strada.html#zona-III): non cambiatelo.
+   «mappa» è il nome cortissimo scritto sulle mappe, dove lo spazio è poco.
 
    COME AGGIUNGERE UN LUOGO UTILE
    (compare nella scheda di zona in Strada e in Dati; se ha lat e lon,
@@ -72,6 +78,8 @@ window.GUIDA = {
   /* PAGINA BENVENUTO · accoglienza                                                       */
   /* ------------------------------------------------------------------ */
   benvenuto: {
+    // BENVENUTO · Gruppi: la missione di adesso, sopra il bottone «Parlane col tuo referente»
+    missioneOra: "La tua missione in questo momento: parlare con tutt* di inséma e trovare altr* pionier* con del tempo da dedicarci.",
     titolo: "Ciao, sei dei nostri.",
     righe: [
       "Questa guida serve a chi va per strada con inséma: volantinaggi, banchetti, incontri nei quartieri. Dove sei, chi ci abita, cosa dire, a chi rivolgerti.",
@@ -479,9 +487,12 @@ window.GUIDA = {
   zone: [
     {
       id: "I",
+      nome: "Albate e Muggiò",
+      mappa: "Albate", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Albate", referenti: [] },
-        { nome: "Muggiò", referenti: [] },
+        { nome: "Albate" },
+        { nome: "Muggiò" },
       ],
       residenti: 8474, quota: "10,1%", var2019: "−210 (−2,4%)", var2019pct: -2.4,
       densita: "1.681", prezzo: "2.100-2.200", prezzoNum: 2150,
@@ -497,8 +508,11 @@ window.GUIDA = {
     },
     {
       id: "II",
+      nome: "Lora",
+      mappa: "Lora", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Lora", referenti: [] },
+        { nome: "Lora" },
       ],
       residenti: 2701, quota: "3,2%", var2019: "−92 (−3,3%)", var2019pct: -3.3,
       densita: "1.936", prezzo: "2.650", prezzoNum: 2650,
@@ -511,11 +525,14 @@ window.GUIDA = {
     },
     {
       id: "III",
+      nome: "Camerlata e Rebbio",
+      mappa: "Camerlata", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Camerlata", referenti: [] },
-        { nome: "Rebbio", referenti: [] },
-        { nome: "Breccia", referenti: [] },
-        { nome: "Prestino", referenti: [] },
+        { nome: "Camerlata" },
+        { nome: "Rebbio" },
+        { nome: "Breccia" },
+        { nome: "Prestino" },
       ],
       residenti: 18960, quota: "22,5%", var2019: "+256 (+1,4%)", var2019pct: 1.4,
       densita: "2.185", prezzo: "2.100-2.300", prezzoNum: 2200,
@@ -534,8 +551,11 @@ window.GUIDA = {
     },
     {
       id: "IV",
+      nome: "Camnago Volta",
+      mappa: "Camnago", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Camnago Volta", referenti: [] },
+        { nome: "Camnago Volta" },
       ],
       residenti: 1475, quota: "1,7%", var2019: "−36 (−2,4%)", var2019pct: -2.4,
       densita: "1.075", prezzo: "2.650", prezzoNum: 2650,
@@ -548,9 +568,12 @@ window.GUIDA = {
     },
     {
       id: "V",
+      nome: "Como Nord ed Est",
+      mappa: "Como Nord", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Como Nord", referenti: [] },
-        { nome: "Como Est", referenti: [] },
+        { nome: "Como Nord" },
+        { nome: "Como Est" },
       ],
       residenti: 11924, quota: "14,1%", var2019: "−445 (−3,6%)", var2019pct: -3.6,
       densita: "4.638", prezzo: "3.900-4.300 (Valduce, via Milano)", prezzoNum: 4100,
@@ -563,8 +586,11 @@ window.GUIDA = {
     },
     {
       id: "VI",
+      nome: "Borghi",
+      mappa: "Borghi", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Como Borghi", referenti: [] },
+        { nome: "Como Borghi" },
       ],
       residenti: 13590, quota: "16,1%", var2019: "−182 (−1,3%)", var2019pct: -1.3,
       densita: "6.743", prezzo: "3.250", prezzoNum: 3250,
@@ -580,9 +606,12 @@ window.GUIDA = {
     },
     {
       id: "VII",
+      nome: "Centro e Como Ovest",
+      mappa: "Centro", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Como Centro", referenti: [] },
-        { nome: "Como Ovest", referenti: [] },
+        { nome: "Como Centro" },
+        { nome: "Como Ovest" },
       ],
       residenti: 10881, quota: "12,9%", var2019: "−755 (−6,5%)", var2019pct: -6.5,
       densita: "3.512", prezzo: "4.400-5.100", prezzoNum: 4750,
@@ -598,11 +627,14 @@ window.GUIDA = {
     },
     {
       id: "VIII",
+      nome: "Monte Olimpino",
+      mappa: "M. Olimpino", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Monte Olimpino", referenti: [] },
-        { nome: "Ponte Chiasso", referenti: [] },
-        { nome: "Sagnino", referenti: [] },
-        { nome: "Tavernola", referenti: [] },
+        { nome: "Monte Olimpino" },
+        { nome: "Ponte Chiasso" },
+        { nome: "Sagnino" },
+        { nome: "Tavernola" },
       ],
       residenti: 14804, quota: "17,6%", var2019: "−153 (−1,0%)", var2019pct: -1.0,
       densita: "2.204", prezzo: "2.150-2.400; Tavernola 3.550", prezzoNum: 2275,
@@ -620,9 +652,12 @@ window.GUIDA = {
     },
     {
       id: "IX",
+      nome: "Garzola e Civiglio",
+      mappa: "Garzola", // nome corto per le mappe
+      referenti: [],
       quartieri: [
-        { nome: "Garzola", referenti: [] },
-        { nome: "Civiglio", referenti: [] },
+        { nome: "Garzola" },
+        { nome: "Civiglio" },
       ],
       residenti: 1478, quota: "1,8%", var2019: "−11 (−0,7%)", var2019pct: -0.7,
       densita: "388", prezzo: "3.650", prezzoNum: 3650,
@@ -788,36 +823,6 @@ window.GUIDA = {
       titolo: "Dopo",
       testo: "Entro la sera inserite ogni contatto nel [modulo](../aiutaci.html#modulo) (uno per persona) e scrivete nel gruppo cosa avete sentito. Poi buttate o consegnate i fogli: i dati non restano nelle tasche di nessuno.",
     },
-  },
-
-  /* ------------------------------------------------------------------ */
-  /* PAGINA BENVENUTO · materiali                                                       */
-  /* ------------------------------------------------------------------ */
-  materiali: {
-    loghi: [
-      { nome: "Logo magenta", file: "../img/logo/logo-magenta.svg" },
-      { nome: "Logo vino", file: "../img/logo/logo-vino.svg" },
-      { nome: "Logo blu", file: "../img/logo/logo-blu.svg" },
-      { nome: "Logo perla (per fondi scuri)", file: "../img/logo/logo-perla.svg", scuro: true },
-      { nome: "Logo esteso magenta", file: "../img/logo/logo-esteso-magenta.svg" },
-      { nome: "Logo esteso perla", file: "../img/logo/logo-esteso-perla.svg", scuro: true },
-      { nome: "Pittogramma", file: "../img/logo/pittogramma-blu.svg" },
-    ],
-    illustrazioni: [
-      { nome: "Città", file: "../img/ill/citta-vino.webp" },
-      { nome: "Città quadrata", file: "../img/ill/cittaq-vino.webp" },
-      { nome: "Luna e funicolare", file: "../img/ill/luna-vino.webp" },
-      { nome: "Mani", file: "../img/ill/mani-blu.webp" },
-      { nome: "Persone con la mappa", file: "../img/ill/persone-blu.webp" },
-      { nome: "Mercà", file: "../img/ill/merca-blu.webp" },
-      { nome: "Microfono e telefono", file: "../img/ill/media-perla.webp", scuro: true },
-    ],
-    palette: [
-      ["Magenta Power", "#e6007e"], ["Rosa Pesca", "#fef0e7"], ["Bianco Perla", "#fffdfb"],
-      ["Rosso Vino", "#6f0f38"], ["Rosso Ciliegia", "#d4004f"], ["Blu Reale", "#274798"],
-      ["Blu Cielo", "#7ea3d6"], ["Azzurro Polvere", "#a9cbdb"], ["Rosa Confetto", "#f6b8ca"],
-      ["Rosa Cipria", "#f8c8d7"], ["Giallo Acido", "#fcdf6c"], ["Blu Oceano", "#0b6780"], ["Turchese", "#4bbecf"],
-    ],
   },
 
   /* ------------------------------------------------------------------ */

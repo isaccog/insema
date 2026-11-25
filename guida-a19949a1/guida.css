@@ -395,3 +395,19 @@ body.cv-open { overflow: hidden; }
   .g-gar { grid-template-columns: repeat(2, 1fr); }
 }
 @media print { .g-var-tabs { display: none; } .g-var-p[hidden] { display: block !important; } }
+
+/* ---------- zone con il nome, non il numero ---------- */
+.g-zpick { grid-template-columns: repeat(2, 1fr); }
+.g-zpick button { font-family: var(--f-body); font-weight: 900; font-size: .95rem; line-height: 1.2; padding: 12px 8px; min-height: 52px; }
+.zq { font-size: .92rem; margin-top: 4px; opacity: .85; }
+.g-zone-n { font-family: var(--f-title); font-weight: var(--w-title); text-transform: uppercase; font-size: 1.15rem; line-height: 1.1; color: var(--plum); }
+.g-zone .zq { margin: -4px 0 0; }
+.g-zlist button { grid-template-columns: 1fr auto; row-gap: 2px; }
+.g-zlist button b { grid-column: 1; font-family: var(--f-body); font-weight: 900; font-size: 1.02rem; color: var(--plum); }
+.g-zlist button span { grid-column: 1; font-size: .85rem; }
+.g-zlist button em { grid-column: 2; grid-row: 1 / span 2; }
+.mm-z text { font-family: var(--f-body); font-weight: 900; font-size: 25px; }
+.g-mission { margin: 22px 0 14px; background: var(--yellow); color: var(--navy); border-radius: var(--r); padding: 18px 20px; font-size: 1.15rem; font-weight: 900; max-width: 760px; }
+@media (min-width: 760px) { .g-zpick { grid-template-columns: repeat(3, 1fr); } }
+.mm-t { font-family: var(--f-body); font-weight: 900; font-size: 25px; fill: var(--plum); text-anchor: middle; dominant-baseline: middle; pointer-events: none; paint-order: stroke; stroke: var(--paper); stroke-width: 6px; stroke-linejoin: round; }
+.mm-t.on { fill: #fff; stroke: var(--magenta); }

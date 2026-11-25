@@ -67,14 +67,14 @@
   const intro = (titolo, k) => `<h1 class="h2">${titolo}</h1><p class="g-why">${P[k].aCosaServe}</p>`;
   const jump = (list) => `<nav class="g-jump" aria-label="In questa pagina">${list.map(([id, t]) => `<a href="#${id}">${t}</a>`).join("")}</nav>`;
 
+  // un referente per zona (non per quartiere)
   function referenti(z, compact) {
-    return z.quartieri.map((q) => {
-      const ask = `<a class="btn btn-small" href="mailto:${G.email}?subject=${encodeURIComponent("Voglio essere referente per " + q.nome)}">Vuoi farlo tu?</a>`;
-      const list = q.referenti.length
-        ? q.referenti.map((r) => `<div class="ref-p"><strong>${r.nome}</strong>${r.nota && !compact ? ` <span>${md(r.nota)}</span>` : ""}${r.whatsapp ? ` <a class="btn btn-small btn-wa" href="${r.whatsapp}" target="_blank" rel="noopener">Gruppo WhatsApp</a>` : ""}</div>`).join("")
-        : `<span class="ref-none">Referente: da trovare</span>`;
-      return `<li class="ref"><h4>${q.nome}</h4>${list}${q.referenti.length ? "" : ask}</li>`;
-    }).join("");
+    const rs = z.referenti || [];
+    const ask = `<a class="btn btn-small" href="mailto:${G.email}?subject=${encodeURIComponent("Voglio essere referente per la zona " + z.nome)}">Vuoi farlo tu?</a>`;
+    const list = rs.length
+      ? rs.map((r) => `<div class="ref-p"><strong>${r.nome}</strong>${r.nota && !compact ? ` <span>${md(r.nota)}</span>` : ""}${r.whatsapp ? ` <a class="btn btn-small btn-wa" href="${r.whatsapp}" target="_blank" rel="noopener">Gruppo WhatsApp</a>` : ""}</div>`).join("")
+      : `<span class="ref-none">Referente: da trovare</span>${ask}`;
+    return `<li class="ref">${list}</li>`;
   }
   const luoghi = (z) => z.luoghi.length
     ? `<ul class="g-places">${z.luoghi.map((l) => `<li><strong>${l.tipo ? l.tipo + ": " : ""}${l.nome}</strong>${l.indirizzo ? `<br>${l.indirizzo}` : ""}${l.nota ? `<br><span>${md(l.nota)}</span>` : ""}</li>`).join("")}</ul>`
@@ -82,7 +82,7 @@
   const temi = (z) => `${z.temi.length ? `<ul class="g-list">${z.temi.map((t) => `<li>${md(t)}</li>`).join("")}</ul>` : todo("Da completare (gruppo Programma).")}
     <p class="g-sub2">Per tutte le zone:</p>
     <ul class="g-list">${G.temiTutte.map((t) => `<li>${md(t)}</li>`).join("")}</ul>`;
-  const zpick = () => `<div class="g-zpick noprint" role="tablist" aria-label="Scegli la zona">${G.zone.map((z) => `<button type="button" role="tab" data-z="${z.id}" aria-selected="false" title="${zname(z)}">${z.id}</button>`).join("")}</div>
+  const zpick = () => `<div class="g-zpick noprint" role="tablist" aria-label="Scegli la zona">${G.zone.map((z) => `<button type="button" role="tab" data-z="${z.id}" aria-selected="false" title="${zname(z)}">${z.nome}</button>`).join("")}</div>
     <p class="g-zhint noprint" id="zhint">Scegli una zona qui sopra${PAGE === "dati" ? " o sulla mappa" : ""}.</p>`;
 
   /* ---------- scheda di zona COMPLETA (pagina Dati) ---------- */
@@ -92,12 +92,13 @@
     const immo = z.immobiliare.map(imm).map((x) => `<li><strong>${x.nome}</strong>: vendita ${x.vendita} €/m² (${x.varVendita} in 12 mesi), affitto ${x.affitto} €/m² al mese (${x.varAffitto})</li>`).join("");
     return `<article class="zcard" id="zona-${z.id}" data-z="${z.id}" hidden>
       <header class="zhead">
-        <p class="kicker">Zona ${z.id} · ex circoscrizione</p>
-        <h3 class="h2">${zname(z)}</h3>
+        <p class="kicker">Zona · ex circoscrizione ${z.id}</p>
+        <h3 class="h2">${z.nome}</h3>
+        <p class="zq">Quartieri: ${zname(z)}</p>
         <p class="src">Elenco dei quartieri da verificare con chi abita lì.</p>
         <p class="noprint"><a class="g-switch" href="strada.html#zona-${z.id}">Versione per la strada →</a></p>
       </header>
-      <div class="zblock"><h4>Referenti</h4><ul class="refs">${referenti(z)}</ul><p class="note">${G.cosaFaReferente}</p></div>
+      <div class="zblock"><h4>Referente di zona</h4><ul class="refs">${referenti(z)}</ul><p class="note">${G.cosaFaReferente}</p></div>
       <div class="zblock"><h4>Numeri chiave</h4>
         <div class="kpis">
           ${k(num(z.residenti), `residenti, il ${z.quota} della città`, G.fonti.residenti)}
@@ -131,10 +132,11 @@
     ];
     return `<article class="zcard zcard-s" id="zona-${z.id}" data-z="${z.id}" hidden>
       <header class="zhead">
-        <p class="kicker">Zona ${z.id}</p>
-        <h3 class="h2">${zname(z)}</h3>
+        <p class="kicker">Zona</p>
+        <h3 class="h2">${z.nome}</h3>
+        <p class="zq">Quartieri: ${zname(z)}</p>
       </header>
-      <div class="zblock"><h4>Referente</h4><ul class="refs">${referenti(z, true)}</ul></div>
+      <div class="zblock"><h4>Referente di zona</h4><ul class="refs">${referenti(z, true)}</ul></div>
       <div class="zblock"><h4>Numeri da dire</h4>
         <ul class="g-say">${say.map(([v, t]) => `<li><strong>${v}</strong><span>${t}</span></li>`).join("")}</ul>
         <small class="src">Fonti: mercato-immobiliare.info (nov. 2026), immobiliare.it (ott. 2026), anagrafe (ago. 2026).</small>
@@ -188,7 +190,7 @@
         onPos(lat, lon);
         if (!z) return say("Sembra che tu non sia dentro il Comune di Como.");
         const zz = zona(z.zona);
-        say(`Sei nella zona ${zz.id}: ${zname(zz)}.`);
+        say(`Sei nella zona ${zz.nome} (${zname(zz)}).`);
         select(zz.id, true);
       }, () => say("Non riesco a trovare la posizione: controlla di aver dato il permesso al browser."), { enableHighAccuracy: true, timeout: 10000 });
     });
@@ -199,7 +201,7 @@
      ================================================================= */
   function pageIngresso() {
     // i vecchi link alla guida a pagina unica portano alla pagina giusta
-    const old = { benvenuto: "benvenuto", parlare: "benvenuto", missione: "benvenuto", gruppi: "benvenuto", materiali: "benvenuto",
+    const old = { benvenuto: "benvenuto", parlare: "benvenuto", missione: "benvenuto", gruppi: "benvenuto", materiali: "benvenuto", // materiali: sezione tolta
       kit: "strada", mappa: "dati", zone: "dati", numeri: "dati", mancanti: "dati" };
     const h = location.hash.slice(1);
     if (fromHash()) { location.replace("strada.html" + location.hash); return ""; }
@@ -217,13 +219,12 @@
      BENVENUTO
      ================================================================= */
   function pageBenvenuto() {
-    const B = G.benvenuto, CP = G.comeParliamo, M = G.missione, FO = T.fondatori, A = T.aiutaci, MT = G.materiali;
+    const B = G.benvenuto, CP = G.comeParliamo, M = G.missione, FO = T.fondatori, A = T.aiutaci;
     const p = Math.min(100, FO.attuali / FO.obiettivo * 100);
-    const tile = (x) => `<a class="g-tile${x.scuro ? " dark" : ""}" href="${x.file}" download><img src="${x.file}" alt="" loading="lazy"><span>${x.nome} ↓</span></a>`;
     return `
     <section class="g-sec s-cream" id="benvenuto"><div class="wrap">
       ${intro(B.titolo, "benvenuto")}
-      ${jump([["cose", "Cos'è inséma"], ["missione", "Missione"], ["gruppi", "Gruppi"], ["parlare", "Come parliamo"], ["zone", "Le zone"], ["materiali", "Materiali"]])}
+      ${jump([["cose", "Cos'è inséma"], ["missione", "Missione"], ["gruppi", "Gruppi"], ["parlare", "Come parliamo"], ["zone", "Le zone"]])}
       ${B.righe.map((r) => `<p class="g-lead">${md(r)}</p>`).join("")}
     </div></section>
 
@@ -249,7 +250,8 @@
     <section class="g-sec s-paper" id="gruppi"><div class="wrap">
       <h2 class="h2 h-navy">${A.gruppi.titolo}</h2>
       <ul class="g-groups">${A.gruppi.lista.map((g) => `<li><strong>${g.nome}</strong> ${md(g.testo)}</li>`).join("")}</ul>
-      <p><a class="btn" href="../aiutaci.html#modulo">Scegli il tuo gruppo nel modulo</a></p>
+      ${B.missioneOra ? `<p class="g-mission">${B.missioneOra}</p>` : ""}
+      <p><a class="btn" href="#zone">Parlane col tuo referente</a></p>
       <h3 class="g-sub">${A.appuntamenti.titolo}</h3>
       <ol class="timeline">${A.appuntamenti.lista.map((x) => `<li><h3>${x.quando}</h3><p>${md(x.cosa)}</p></li>`).join("")}</ol>
     </div></section>
@@ -275,19 +277,11 @@
       <h2 class="h2 h-navy">Le 9 zone e chi le segue</h2>
       <p class="g-lead">${G.cosaFaReferente}</p>
       <div class="g-zones">${G.zone.map((z) => `<div class="g-zone">
-        <p class="kicker">Zona ${z.id}</p>
+        <h3 class="g-zone-n">${z.nome}</h3>
+        <p class="zq">Quartieri: ${zname(z)}</p>
         <ul class="refs">${referenti(z, true)}</ul>
         <a class="g-switch" href="strada.html#zona-${z.id}">Scheda di strada →</a>
       </div>`).join("")}</div>
-    </div></section>
-
-    <section class="g-sec s-cream" id="materiali"><div class="wrap">
-      <h2 class="h2">Materiali</h2>
-      <h3 class="g-sub">Loghi</h3><div class="g-tiles">${MT.loghi.map(tile).join("")}</div>
-      <h3 class="g-sub">Illustrazioni</h3><div class="g-tiles">${MT.illustrazioni.map(tile).join("")}</div>
-      <h3 class="g-sub">Palette <small>(tocca per copiare il codice)</small></h3>
-      <div class="g-palette">${MT.palette.map(([n, h]) => `<button type="button" data-hex="${h}"><i style="background:${h}"></i><span>${n}<br><code>${h}</code></span></button>`).join("")}</div>
-      <p class="g-lead"><a href="${T.sito.instagram}" target="_blank" rel="noopener">Instagram ${T.sito.instagramNome}</a></p>
     </div></section>`;
   }
 
@@ -302,14 +296,18 @@
     const x0 = Math.min(...xs), y0 = Math.min(...ys), w = Math.max(...xs) - x0, h = Math.max(...ys) - y0;
     const S = 1000 / w, H = Math.round(h * S);
     const pt = ([lon, lat]) => [((lon * kx - x0) * S).toFixed(1), ((-lat - y0) * S).toFixed(1)];
+    const labels = [];
     const paths = GEO.features.map((f) => {
       const d = rings(f).map((r) => "M" + r.map((p) => pt(p).join(" ")).join("L") + "Z").join("");
       const c = rings(f)[0].reduce((a, p) => [a[0] + p[0] / rings(f)[0].length, a[1] + p[1] / rings(f)[0].length], [0, 0]);
       const [cx, cy] = pt(c);
-      return `<g class="mm-z" data-z="${f.properties.zona}" tabindex="-1"><path d="${d}"/><text x="${cx}" y="${cy}">${f.properties.zona}</text></g>`;
+      const z = zona(f.properties.zona) || {};
+      // le scritte vanno sopra tutte le zone, così una zona non copre il nome della vicina
+      labels.push(`<text class="mm-t" data-z="${f.properties.zona}" x="${cx}" y="${cy}">${z.mappa || z.nome || f.properties.zona}</text>`);
+      return `<g class="mm-z" data-z="${f.properties.zona}" tabindex="-1"><title>${z.nome || ""}</title><path d="${d}"/></g>`;
     }).join("");
     window.__mmPt = pt;
-    return `<svg class="minimap" viewBox="-10 -10 1020 ${H + 20}" role="img" aria-label="Mappa semplice delle 9 zone">${paths}<circle id="mm-me" r="14" style="display:none"/></svg>`;
+    return `<svg class="minimap" viewBox="-10 -10 1020 ${H + 20}" role="img" aria-label="Mappa semplice delle 9 zone">${paths}<g class="mm-labels" aria-hidden="true">${labels.join("")}</g><circle id="mm-me" r="14" style="display:none"/></svg>`;
   }
 
   /* ---------- come convincere… (Strada; card in Benvenuto) ---------- */
@@ -531,18 +529,11 @@
   document.getElementById("app").innerHTML = header() + "<main>" + body + "</main>" + footer();
   brand(document.getElementById("app"));
 
-  // palette: copia
-  $$(".g-palette button").forEach((b) => b.addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText(b.dataset.hex); } catch (_) {}
-    const s = b.querySelector("code"); const old = s.textContent; s.textContent = "copiato!";
-    setTimeout(() => { s.textContent = old; }, 1200);
-  }));
-
   /* ---------- Strada: mappa semplice + dove sono ---------- */
   if (PAGE === "strada") {
     bindPick();
     $$(".mm-z").forEach((g) => g.addEventListener("click", () => select(g.dataset.z, true)));
-    onSelect = (id) => $$(".mm-z").forEach((g) => g.classList.toggle("on", g.dataset.z === id));
+    onSelect = (id) => $$(".mm-z, .mm-t").forEach((g) => g.classList.toggle("on", g.dataset.z === id));
     bindWhere((lat, lon) => {
       const c = $("#mm-me"); if (!c || !window.__mmPt) return;
       const [x, y] = window.__mmPt([lon, lat]); c.setAttribute("cx", x); c.setAttribute("cy", y); c.style.display = "";
@@ -668,7 +659,7 @@
     const zlist = $("#zlist");
     let layer = null, map = null, ind = "residenti", me = null;
     const drawList = () => {
-      zlist.innerHTML = G.zone.map((z) => `<button type="button" data-z="${z.id}" class="${z.id === current ? "on" : ""}"><b>${z.id}</b><span>${zname(z)}</span><em>${value(ind, z).l}</em></button>`).join("");
+      zlist.innerHTML = G.zone.map((z) => `<button type="button" data-z="${z.id}" class="${z.id === current ? "on" : ""}"><b>${z.nome}</b><span>${zname(z)}</span><em>${value(ind, z).l}</em></button>`).join("");
       $$("button", zlist).forEach((b) => b.addEventListener("click", () => select(b.dataset.z, true)));
     };
     const highlight = () => {
@@ -684,7 +675,7 @@
       if (layer) layer.eachLayer((l) => {
         const z = zona(l.feature.properties.zona), v = value(ind, z);
         l.setStyle({ fillColor: sc.color(v.v), fillOpacity: .78 });
-        l.setTooltipContent(`<b>${z.id}</b><br>${v.l}`);
+        l.setTooltipContent(`<b>${z.mappa || z.nome}</b><br>${v.l}`);
       });
       highlight();
       $("#legend").innerHTML = `<p class="g-legend-t">${IND[ind].nome}</p><ul>${sc.legend.map(([c, t]) => `<li><i style="background:${c}"></i>${t}</li>`).join("")}</ul>${src(IND[ind].fonte)}`;
