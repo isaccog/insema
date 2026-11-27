@@ -116,7 +116,7 @@ window.TESTI = {
     domanda: "",
     testo: "Non vogliamo decidere il futuro di Como, vogliamo costruirlo assieme. Agiamo, convinciamo chi ci sta attorno, riappropriamoci della nostra città.",
     bottone: { testo: "Sì, ci sto", link: "aiutaci.html#modulo" },
-    bottone2: { testo: "Prima voglio capire", link: "programma.html" },
+    bottone2: { testo: "Prima voglio capire", link: "manifesto.html" }, // era programma.html
 
     contatore: "fondatori su",       // es. «5 fondatori su 100»
     giorni: "giorni alla fine dell'anno",
@@ -172,7 +172,7 @@ window.TESTI = {
       sottotitolo: "*senza lasciare indietro nessuno",
       testo: "Siamo comaschi che hanno smesso di aspettare. Partiamo dai dati, ascoltiamo le persone e costruiamo proposte di buon senso. ==inséma==.",
       bottone1: { testo: "Unisciti a noi", link: "aiutaci.html" },
-      bottone2: { testo: "Leggi il programma", link: "programma.html" },
+      bottone2: { testo: "Leggi il manifesto", link: "manifesto.html" }, // era «Leggi il programma»
     },
 
     // fascia che rimanda alla pagina «Il nostro piano»
@@ -192,7 +192,7 @@ window.TESTI = {
         { valore: "39 milioni", testo: "di avanzo libero nel bilancio del Comune. Soldi che ci sono, ma restano fermi.", fonte: "Comune di Como, rendiconto 2025" },
         { valore: "44 anni", testo: "che l'area Ticosa aspetta di tornare alla città.", fonte: "" },
       ],
-      link: { testo: "Da qui parte il nostro programma →", link: "programma.html" },
+      link: null, // era «Da qui parte il nostro programma →»: torna quando il programma è pubblicato
     },
 
     valori: {
@@ -345,6 +345,17 @@ Noi non ci rassegniamo. Un mese dopo il primo post ci siamo trovati per la prima
   /* ------------------------------------------------------------------ */
   programma: {
     titoloPagina: "Programma · inséma",
+
+    // false = il programma non si vede: la pagina Programma e le pagine dei
+    // capitoli mostrano «Uscirà a breve», e in home non ci sono le schede.
+    // Quando è pronto, scrivete true. I testi qui sotto restano dove sono.
+    pubblicato: false,
+    prossimamente: {
+      sopratitolo: "Il programma",
+      titolo: "Uscirà a breve.",
+      testo: "A dicembre facciamo il primo evento dal vivo: ognuno costruisce il suo programma per Como, poi ne discutiamo inséma.",
+      bottone: { testo: "Voglio esserci", link: "aiutaci.html#modulo" },
+    },
 
     hero: {
       sopratitolo: "Il programma",
@@ -691,7 +702,7 @@ La maggioranza della città non sceglie nessuno. È lì che possiamo fare la dif
         titolo: "Come si fa",
         passi: [
           { titolo: "Ascolta", testo: "Prima di parlare, chiedi: cosa non va a Como, per te?" },
-          { titolo: "Parla di cose vere", testo: "Casa, bus, lavoro, soldi del Comune. Usa il [programma](programma.html), non gli slogan." },
+          { titolo: "Parla di cose vere", testo: "Casa, bus, lavoro, soldi del Comune. Parti dai numeri, non dagli slogan." /* era: «Usa il [programma](programma.html), non gli slogan.» */ },
           { titolo: "Portala dal vivo", testo: "A un evento, a un incontro di quartiere, a un caffè con noi. Di persona si convince." },
         ],
         regola: "Una regola: mai litigare. Le città non si governano contro qualcuno, ma per qualcuno.",

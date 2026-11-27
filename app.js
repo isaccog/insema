@@ -281,9 +281,9 @@
     <section class="sec s-blush">
       <div class="wrap">
         <h2 class="h2">${H.programma.titolo}</h2>
-        <p class="intro">${md(H.programma.testo)}</p>
+        ${T.programma.pubblicato !== false ? `<p class="intro">${md(H.programma.testo)}</p>
         <div class="tcards">${T.programma.temi.map(tcard).join("")}</div>
-        ${more(H.programma.link)}
+        ${more(H.programma.link)}` : `<p class="h-hero h-plum prog-presto-home">Il programma ${T.programma.prossimamente.titolo.charAt(0).toLowerCase()}${T.programma.prossimamente.titolo.slice(1)}</p>`}
       </div>
     </section>
 
@@ -409,8 +409,26 @@
   };
 
   /* ---------------- PROGRAMMA ---------------- */
+  // finché T.programma.pubblicato è false: pagina «Uscirà a breve»
+  // (anche per i link alle pagine dei capitoli, che così continuano a funzionare)
+  const progPubblicato = () => T.programma.pubblicato !== false;
+  function progPresto() {
+    const X = T.programma.prossimamente;
+    document.title = T.programma.titoloPagina;
+    return `
+    <section class="page-hero s-blush prog-hero prog-presto">
+      <div class="wrap center">
+        <p class="kicker kicker-navy">${X.sopratitolo}</p>
+        <h1 class="h-mega white-out">${X.titolo}</h1>
+        <p class="lead narrow">${md(X.testo)}</p>
+        <p>${btn(X.bottone)}</p>
+      </div>
+    </section>`;
+  }
+
   pages.programma = () => {
     const P = T.programma;
+    if (!progPubblicato()) return progPresto();
     return `
     <section class="page-hero s-blush prog-hero">
       <div class="wrap center">
@@ -450,6 +468,7 @@
   /* ---------------- SINGOLO CAPITOLO ---------------- */
   pages.tema = () => {
     const P = T.programma, E = P.etichette;
+    if (!progPubblicato()) return progPresto();
     const i = P.temi.findIndex((t) => t.id === body.dataset.tema);
     const t = P.temi[i], next = P.temi[(i + 1) % P.temi.length];
     const probBg = t.colore === "bianco" ? "s-blush" : "s-paper";
